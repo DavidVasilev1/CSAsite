@@ -6,11 +6,10 @@
 #   url: {homepage_of_author}
 # -------------------------------------
 
-alex:
-  name: Alexander Lu
-  # twitter: 
-  url: https://github.com/YLu-1258/
+david:
+  name: David Vasilev
+  url: https://github.com/DavidVasilev1/
 
-mortensen:
+mort:
   name: John Mortensen
   url: https://github.com/jm1021
