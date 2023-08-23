@@ -4,36 +4,23 @@ icon: fas fa-info-circle
 order: 4
 ---
 
-# Hello There!
-My name is **Alexander Lu**, currently a **Senior** at **Del Norte High School** taking the **APCSA** course, I hope to major in computer science in the future and also pursue it as a prospective carreer path in the future
+# Summary
+My name is David Vasilev and I am currently a senior at Del Norte High School, taking the AP CSA class. I am hoping to major in Physics and pursue a career path that is focused on physics, either as an engineer or a researcher.
 
-![Freeform Image](/assets/img/partner_drawing.png){: width="700" height="auto" }
+## Hobbies
 
-## My Hobbies 🎾
+Some things that I like to do outside of school include:
 
-I have many hobbies that I do to pass my time, here are just a few of them:
+- Photography
+- Music Production
+- Mountain Biking
+- Video Games
+- Web Development
 
-> Reading
-{: .prompt-tip }
-> Programming
-{: .prompt-tip }
-> Playing tennis
-{: .prompt-tip }
-> Playing video games
-{: .prompt-tip }
-> Watching youtube videos
-{: .prompt-tip }
-> And many more!
-{: .prompt-tip }
+## Interests
+I have many interests including:
 
-
-## My Interests 🔬:
-I am interested in anything related to computers, I am currently working on various projects centered around:
-> **Machine Learning** 🤖  
-{: .prompt-info }
-> **Image processing** 🖼️
-{: .prompt-info }  
-> **Webscraping**      🌐
-{: .prompt-info }  
-> **Cyber Security**   🕵️
-{: .prompt-info }  
+- Physics
+- Biology
+- Computer Science
+- Mathematics
