@@ -1,7 +1,7 @@
 ---
 title: Getting Started
 author: cotes
-date: 2019-08-09 20:55:00 +0800
+date: 2019-08-09 20:55:00 +0000
 categories: [Page Setup]
 tags: [Blogging, Demo]
 ---

@@ -3,6 +3,7 @@ title: Java Hello
 author: mort
 categories: ['Lesson']
 tags: ['Java']
+week: 1
 description: A progressive journey through Java basics starting with the classic "Hello, World!" example.
 toc: True
 comments: True

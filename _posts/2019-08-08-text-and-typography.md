@@ -1,7 +1,7 @@
 ---
 title: Text and Typography
 author: cotes
-date: 2019-08-08 11:33:00 +0800
+date: 2019-08-08 11:33:00 +0000
 categories: [Page Setup]
 tags: [Blogging, Demo]
 math: true

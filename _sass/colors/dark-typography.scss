@@ -4,8 +4,8 @@
 
 @mixin dark-scheme {
   /* Framework color */
-  --main-bg: rgb(16, 16, 26);
-  --mask-bg: rgb(144, 139, 222);
+  --main-bg: #130f21;
+  --mask-bg: #2f2944;
   --main-border-color: rgb(44, 45, 45);
 
   /* Common color */
@@ -36,10 +36,10 @@
   /* Sidebar */
   --site-title-color: #717070;
   --site-subtitle-color: #6d6c6b;
-  --sidebar-bg: radial-gradient(circle, #14161d 0%, #10101a 100%);
-  --sidebar-muted-color: #6d6c6b;
-  --sidebar-active-color: rgb(255, 255, 255, 0.95);
-  --sidebar-hover-bg: rgb(54, 54, 54, 0.33);
+  --sidebar-bg: radial-gradient(circle, #1d1730 0%, #130f21 100%);
+  --sidebar-muted-color: #615a69;
+  --sidebar-active-color: rgba(205, 174, 255, 0.95);
+  --sidebar-hover-bg: rgba(162, 136, 177, 0.33);
   --sidebar-btn-bg: rgb(84, 83, 83, 0.3);
   --sidebar-btn-color: #787878;
   --avatar-border-color: rgb(206, 206, 206, 0.9);
