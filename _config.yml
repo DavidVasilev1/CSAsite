@@ -92,7 +92,7 @@ comments:
     issue_term: # < url | pathname | title | ...>
   # Giscus options › https://giscus.app
   giscus:
-    repo: "DavidVasilev1/CSApages" # <gh-username>/<repo>
+    repo: "DavidVasilev1/CSAsite" # <gh-username>/<repo>
     repo_id: "R_kgDOKKTbvg"
     category: "Comments"
     category_id: "DIC_kwDOKKTbvs4CYy2d"
