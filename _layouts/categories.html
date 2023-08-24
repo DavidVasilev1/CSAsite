@@ -29,7 +29,7 @@ layout: page
         aria-expanded="false"
       >
         <span class="ms-2">
-          <i class="far fa-folder{% if top_posts_size > 0 %}-open{% endif %} fa-fw"></i>
+          <i class="far fa-folder{% if top_posts_size > 0 %}{% endif %} fa-fw"></i>
 
           {% capture _category_url %}/categories/{{ category_name | slugify | url_encode }}/{% endcapture %}
           <a href="{{ _category_url | relative_url }}" class="mx-2">{{ category_name }}</a>
@@ -66,7 +66,7 @@ layout: page
       <!-- .card-header -->
 
       <!-- Posts of the Category -->
-      <div id="{{ LIST_PREFIX }}{{ group_index }}" class="collapse show" aria-expanded="true">
+      <div id="{{ LIST_PREFIX }}{{ group_index }}" class="collapse" aria-expanded="true">
         <ul class="list-group">
           {% for post in posts_of_category %}
             <li class="list-group-item">
