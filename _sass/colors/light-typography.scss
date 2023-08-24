@@ -4,9 +4,9 @@
 
 @mixin light-scheme {
   /* Framework color */
-  --main-bg: white;
-  --mask-bg: #c1c3c5;
-  --main-border-color: #f3f3f3;
+  --main-bg: #e7dcff;
+  --mask-bg: #f4efff;
+  --main-border-color: #a7a7a7;
 
   /* Common color */
   --text-color: #34343c;
@@ -15,15 +15,15 @@
   --label-color: #4d4d5b;
   --blockquote-border-color: #eeeeee;
   --blockquote-text-color: #757575;
-  --link-color: #0153ab;
+  --link-color: #8772ef;
   --link-underline-color: #dee2e6;
   --button-bg: #ffffff;
-  --btn-border-color: #e9ecef;
+  --btn-border-color: #a0a0a0;
   --btn-backtotop-color: #686868;
   --btn-backtotop-border-color: #f1f1f1;
   --btn-box-shadow: #eaeaea;
   --checkbox-color: #c5c5c5;
-  --checkbox-checked-color: #07a8f7;
+  --checkbox-checked-color: #8772ef;
   --img-bg: radial-gradient(
     circle,
     rgb(255, 255, 255) 0%,
@@ -39,18 +39,18 @@
   /* Sidebar */
   --site-title-color: rgb(113, 113, 113);
   --site-subtitle-color: #717171;
-  --sidebar-bg: #f6f8fa;
-  --sidebar-muted-color: #545454;
-  --sidebar-active-color: #1d1d1d;
+  --sidebar-bg: #d8c5ff  ;
+  --sidebar-muted-color: #615a69;
+  --sidebar-active-color: #8772ef;
   --sidebar-hover-bg: rgb(223, 233, 241, 0.64);
   --sidebar-btn-bg: white;
   --sidebar-btn-color: #8e8e8e;
   --avatar-border-color: white;
 
   /* Topbar */
-  --topbar-bg: rgb(255, 255, 255, 0.7);
+  --topbar-bg: #e7dcff 70%;
   --topbar-text-color: rgb(78, 78, 78);
-  --search-wrapper-border-color: rgb(240, 240, 240);
+  --search-wrapper-border-color: dimgray;
   --search-tag-bg: #f8f9fa;
   --search-icon-color: #c2c6cc;
   --input-focus-border-color: #b8b8b8;
@@ -63,18 +63,18 @@
   --btn-text-color: #676666;
 
   /* Posts */
-  --toc-highlight: #47566c;
+  --toc-highlight: #433977;
   --btn-share-hover-color: var(--link-color);
-  --card-bg: white;
-  --card-hovor-bg: #e2e2e2;
+  --card-bg: #dbcbff;
+  --card-hovor-bg: #b1a5cc;
   --card-shadow: rgb(104, 104, 104, 0.05) 0 2px 6px 0,
     rgba(211, 209, 209, 0.15) 0 0 0 1px;
   --footnote-target-bg: lightcyan;
-  --tag-border: #dee2e6;
+  --tag-border: #a0a0a0;
   --tag-shadow: var(--btn-border-color);
-  --tag-hover: rgb(222, 226, 230);
-  --tb-odd-bg: #fbfcfd;
-  --tb-border-color: #eaeaea;
+  --tag-hover: #cdb5ff;
+  --tb-odd-bg: #e2d4ff;
+  --tb-border-color: silver;
   --dash-color: silver;
   --kbd-wrap-color: #bdbdbd;
   --kbd-text-color: var(--text-color);

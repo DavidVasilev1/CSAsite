@@ -45,7 +45,7 @@
   --avatar-border-color: rgb(206, 206, 206, 0.9);
 
   /* Topbar */
-  --topbar-bg: rgb(16, 16, 26);
+  --topbar-bg: #130f21;
   --topbar-text-color: var(--text-color);
   --search-wrapper-border-color: rgb(55, 55, 55);
   --search-icon-color: rgb(100, 102, 105);
@@ -134,11 +134,11 @@
   #archives li:nth-child(odd) {
     background-image: linear-gradient(
       to left,
-      rgb(26, 26, 30),
-      rgb(39, 39, 45),
-      rgb(39, 39, 45),
-      rgb(39, 39, 45),
-      rgb(26, 26, 30)
+      #130f21,
+      #1c182b,
+      #211c30,
+      #1c182b,
+      #130f21
     );
   }
 
