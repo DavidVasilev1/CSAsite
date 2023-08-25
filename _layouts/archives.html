@@ -10,26 +10,30 @@ layout: page
 
 <div id="archives" class="pl-xl-3">
 
+{% assign last_week = "" %}
+
 {% for post in site.posts %}
   {% capture cur_week %}{{ post.week }}{% endcapture %}
 
-  {% if cur_week != last_week %}
-    {% unless forloop.first %}</ul>{% endunless %}
-    <div class="week lead">Week: {{ cur_week }}</div>
-    <ul class="list-unstyled">
-    {% assign last_week = cur_week %}
+  {% if cur_week != "" %}
+    {% if cur_week != last_week %}
+      {% unless forloop.first %}</ul>{% endunless %}
+      <div class="h2 week">Week: {{ cur_week }}</div>
+      <ul class="list-unstyled">
+      {% assign last_week = cur_week %}
+    {% endif %}
+
+    <li>
+      {% assign ts = post.date | date: '%s' %}
+      <span class="date day" data-ts="{{ ts }}" data-df="DD">{{ post.date | date: "%d" }}</span>
+      <span class="date month small text-muted ms-1" data-ts="{{ ts }}" data-df="{{ df_dayjs_m }}">
+        {{ post.date | date: df_strftime_m }}
+      </span>
+      <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+    </li>
+
+    {% if forloop.last %}</ul>{% endif %}
   {% endif %}
-
-  <li>
-  {% assign ts = post.date | date: '%s' %}
-    <span class="date day" data-ts="{{ ts }}" data-df="DD">{{ post.date | date: "%d" }}</span>
-    <span class="date month small text-muted ms-1" data-ts="{{ ts }}" data-df="{{ df_dayjs_m }}">
-      {{ post.date | date: df_strftime_m }}
-    </span>
-    <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-  </li>
-
-  {% if forloop.last %}</ul>{% endif %}
 
 {% endfor %}
 

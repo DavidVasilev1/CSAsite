@@ -12,7 +12,26 @@ date: 2023-08-23 12:00:00 +0000
 
 ## Linux Shell Hacks and Notes
 
+- commands are just what is used to navigate linux terminal
+- ```echo``` - prints statements
+- ```apt``` - "advanced package tool" used to install various files that are online
+- ```if/else``` - these statements can be used in terminal too, to check if something is fulfilled
+- ```-v/-version/--version``` - can be used to check the versions of what is installed, useful for debugging
+- ```git``` - universal for any commands used for doing things with github
+- ```gem``` - universal for install dependencies that are used by ruby
 
+### Making Script File
+
+Scripts can be made in order to install different things and also manipulate different things that are in Linux through the terminal. In order to make an executable script you can run:
+
+- ```nano <filename>.sh``` - makes the file and allows you to add the code into that script, once done you can exit
+  - ```ctrl+x``` - used to exit the nano file and allows you to save it
+
+At this point your file is made but not executable so in order to make it executable you can:
+- ```chmod +x <filename>.sh``` - this changes the permissions of the file in order to make it executable
+
+After doing this you can run the file by running:
+- ```./<filename>.sh``` - this basically open the file, however instead of entering the file, it runs the code inside the file
 
 
 ```python
@@ -130,7 +149,6 @@ echo
     
 
 
+## Java Hello
 
-```python
 
-```

@@ -39,9 +39,6 @@ public class HelloStatic {
 HelloStatic.main(null);   // Class prefix allows reference of Static Method
 ```
 
-    Hello World!
-
-
 ### Dynamic Example
 This example starts to use Java in its natural manner, using an object within the main method. This example is a very basic illustration of Object Oriente Programming (OOP). The main method is now used as a driver/tester, by making an instance of the class.  Thus, it creates an Object using the HelloObject() constructor.  Also, this Class contains a getter method called getHello() which returns the value with the "String hello".
 
@@ -71,9 +68,6 @@ public class HelloObject {
 // IJava activation
 HelloObject.main(null);
 ```
-
-    Hello, World!
-
 
 ### Dynamic Example with two constructors
 This last example adds to the basics of the Java anatomy.  The Class now contains two constructors and a setter to go with the getter.  Also, observe the driver/tester now contains two objects that are initialized differently, 0 and 1 argument constructor.  Look at the usage of the "this" prefix.  The "this" keyword helps in clarification between instance and local variable.
@@ -123,26 +117,28 @@ public class HelloDynamic { // name the first letter of class as capitalized, no
 HelloDynamic.main(null);
 ```
 
-    Hello, World!
-    Hello, Nighthawk Coding Society!
-
-
 ## Hacks
 Build your own Jupyter Notebook meeting these College Board and CTE competencies.  It is critical to understand Static versus Instance Now, this is College Board requirement!!!
-- Explain Anatomy of a Class in comments of program (Diagram key parts of the class).
+- Explain [Anatomy of a Class](https://runestone.academy/ns/books/published/csawesome/Unit5-Writing-Classes/topic-5-1-parts-of-class.html) in comments of program (Diagram key parts of the class).
 - Comment in code where there is a definition of a Class and an instance of a Class (ie object)
 - Comment in code where there are constructors and highlight the signature difference in the signature
 - Call an object method with parameter (ie setters).
 
 
 Additional requirements (Pick something)
-1. Go through code progression of understanding Class usage and generating an Instance of a Class (Object). 
+1. Go through code progression of understanding Class usage and generating an Instance of a Class (Object).
+
     a. Build a purposeful dynamic Class, using an Object, generate multiple instances: 
         - Person: Name and Age
         - Dessert: Type and Cost
         - Location: City, State, Zip
+
     b. Create a static void main tester method to generate objects of the class.
+
     c. In tester method, show how setters/mutators can be used to make the data in the Object dynamically change
+
 3. Go through progression of understanding a Static Class.  Build a purposeful static Class, no Objects.
+
     - Calculate common operations on a Date field, age since date, older of two dates, number of seconds since date
+    
     - Calculate stats functions on an array of values: mean, median, mode.
