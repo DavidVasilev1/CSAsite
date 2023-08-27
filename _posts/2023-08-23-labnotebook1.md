@@ -2,7 +2,7 @@
 title: Lab Notebook 1
 author: david
 categories: ['Lab Notebook']
-tags: ['Linux', 'Bash']
+tags: ['Linux', 'Bash', 'Web Dev']
 week: 1
 description: Week 1 lab work.
 toc: True
@@ -99,9 +99,9 @@ echo
 
 
     Distributor ID:	Ubuntu
-    Description:	Ubuntu 22.04.3 LTS
-    Release:	22.04
-    Codename:	jammy
+    Description:	Ubuntu 20.04.6 LTS
+    Release:	20.04
+    Codename:	focal
     
     Getting Github Info:
     DavidVasilev1
@@ -109,43 +109,36 @@ echo
     
     Testing Python:
     Python is already installed.
-    Python 3.11.4
+    Python 3.9.12
     
     Testing Ruby:
     Ruby is already installed.
-    ruby 3.0.2p107 (2021-07-07 revision 0db68f0233) [x86_64-linux-gnu]
+    ruby 3.0.5p211 (2022-11-24 revision ba5cf0f7c5) [x86_64-linux]
     
     Testing Jupyter:
     Jupyter is already installed.
     Selected Jupyter core packages...
-    IPython          : 8.12.0
-    ipykernel        : 6.19.2
-    ipywidgets       : 8.0.4
-    jupyter_client   : 7.4.9
-    jupyter_core     : 5.3.0
-    jupyter_server   : 1.23.4
-    jupyterlab       : 3.6.3
+    IPython          : 8.2.0
+    ipykernel        : 6.9.1
+    ipywidgets       : 7.6.5
+    jupyter_client   : 6.1.12
+    jupyter_core     : 4.9.2
+    jupyter_server   : 1.13.5
+    jupyterlab       : 3.3.2
     nbclient         : 0.5.13
-    nbconvert        : 6.5.4
-    nbformat         : 5.7.0
-    notebook         : 6.5.4
-    qtconsole        : 5.4.2
-    traitlets        : 5.7.1
-
-
-    0.00s - Debugger warning: It seems that frozen modules are being used, which may
-    0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
-    0.00s - to python to disable frozen modules.
-    0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
-
-
+    nbconvert        : 6.4.4
+    nbformat         : 5.3.0
+    notebook         : 6.4.8
+    qtconsole        : 5.3.0
+    traitlets        : 5.1.1
     Available kernels:
-      java       /home/david/.local/share/jupyter/kernels/java
-      python3    /home/david/anaconda3/share/jupyter/kernels/python3
+      bash          /home/davidv/.local/share/jupyter/kernels/bash
+      javascript    /home/davidv/.local/share/jupyter/kernels/javascript
+      python3       /home/davidv/.local/share/jupyter/kernels/python3
     
     Testing Bundler:
     Bundler is already installed.
-    Bundler version 2.4.19
+    Bundler version 2.2.33
     
 
 

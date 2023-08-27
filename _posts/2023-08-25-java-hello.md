@@ -39,6 +39,9 @@ public class HelloStatic {
 HelloStatic.main(null);   // Class prefix allows reference of Static Method
 ```
 
+    Hello World!
+
+
 ### Dynamic Example
 This example starts to use Java in its natural manner, using an object within the main method. This example is a very basic illustration of Object Oriente Programming (OOP). The main method is now used as a driver/tester, by making an instance of the class.  Thus, it creates an Object using the HelloObject() constructor.  Also, this Class contains a getter method called getHello() which returns the value with the "String hello".
 
