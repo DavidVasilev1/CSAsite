@@ -26,7 +26,7 @@ There are many tools that are used in CSA, however there are some major tools th
 
 ### WSL - Windows Subsystems for Linux
 
-this is essentially a virtual machine that is run in windows that is used to host a linux environment which can be accessed through powershell. this is what we use to access vscode and where we install python and other important tools because of the simplicity of ubuntu linux. in order to access wsl, you can type ```wsl``` in powershell after you have installed it in order to start the server.
+This is essentially a virtual machine that is run in Windows that is used to host a Linux environment which can be accessed through powershell. This is what we use to access VSCode and where we install python and other important tools because of the simplicity of Ubuntu Linux. In order to access WSL, you can type wsl in powershell after you have installed it in order to start the server.
 
 ### VSCode - Coding Program
 
