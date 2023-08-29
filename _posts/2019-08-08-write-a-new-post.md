@@ -2,7 +2,7 @@
 title: Writing a New Post
 author: cotes
 date: 2019-08-08 14:10:00 +0000
-categories: [Page Setup]
+categories: []
 tags: [Blogging, Demo]
 render_with_liquid: false
 ---
