@@ -3,7 +3,8 @@ title: Anatomy of GitHub Pages
 author: mort
 categories: ['Lesson']
 tags: ['Web Dev']
-week: 1
+type: hacks
+week: 0
 description: Learn the Files and development work flow of GitHub Pages.  This includes working with you home page, theme, markdown, and more.
 toc: True
 comments: True

@@ -3,7 +3,7 @@ title: Lab Notebook 0
 author: david
 categories: ['Lab Notebook']
 tags: ['Linux', 'Bash']
-type: Tangibles
+type: tangibles
 week: 0
 description: Week 0 lab work.
 toc: True

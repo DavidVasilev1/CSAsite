@@ -13,14 +13,12 @@ layout: page
 
 {% assign posts = null | compact %}
 {% assign posts = posts | concat:site.posts | concat:site.pages %}
-<div id="archives" class="pl-xl-3">
+<div id="" class="pl-xl-3">
 
   {% for unit in units %}
   {% assign unitData = sprints[unit] %}
-  <blockquote class="prompt-info">
-    <h2>SPRINT {{ unit }}: {{ unitData.title }}</h2>
-  </blockquote>
-  <blockquote class="prompt-tip">  {{ unitData.description }} </blockquote>
+  <h2>SPRINT {{ unit }}: {{ unitData.title }}</h2>
+  <blockquote>  {{ unitData.description }} </blockquote>
   
   
   
@@ -35,7 +33,7 @@ layout: page
     <tr>
       <th style="padding: 6.4px 16px;">Week</th>
       <th style="padding: 6.4px 16px;">Plans</th>
-      <th style="padding: 6.4px 16px;">Hacks(Todo)</th>
+      <th style="padding: 6.4px 16px;">Hacks</th>
       <th style="padding: 6.4px 16px;">Tangibles</th>
     </tr>
   

@@ -3,8 +3,8 @@ title: Linux Shell and Bash
 author: mort
 categories: ['Lesson']
 tags: ['Linux', 'Bash']
-type: plans
-week: 1
+type: hacks
+week: 0
 description: A Tech Talk on Linux and the Bash shell.
 toc: True
 comments: True

@@ -3,7 +3,8 @@ title: Lab Notebook 2
 author: david
 categories: ['Lab Notebook']
 tags: ['Java']
-week: 1
+type: tangibles
+week: 2
 description: Week 1 lab work.
 toc: True
 comments: True

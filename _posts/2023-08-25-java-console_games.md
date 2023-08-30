@@ -3,6 +3,7 @@ title: Java Console Games
 author: mort
 categories: ['Lesson']
 tags: ['Java']
+type: hacks
 week: 1
 description: These console games show many elements from College Board's Units.
 toc: True

@@ -3,6 +3,7 @@ title: Lab Notebook 1
 author: david
 categories: ['Lab Notebook']
 tags: ['Linux', 'Bash', 'Web Dev']
+type: tangibles
 week: 1
 description: Week 1 lab work.
 toc: True
