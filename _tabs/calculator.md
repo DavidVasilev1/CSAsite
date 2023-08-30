@@ -1,7 +1,7 @@
 ---
 layout: page
 icon: fas fa-circle
-order: 2
+order: 6
 ---
 <style>
     .calc {

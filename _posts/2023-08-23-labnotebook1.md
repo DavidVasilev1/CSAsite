@@ -142,6 +142,125 @@ echo
     
 
 
-## Java Hello
+## Github Pages and Chirpy
+
+I chose to use the Github Pages Chirpy Theme for my blog, as the interface of it is really nice for blogging and the organization is really good. I customized the Archives tab and the Categories tab in order to organize my posts better. Below are how I changed the code.
+
+### Modifying Archives
+
+In here, all I did was change the year to week, and in each post I added a week variable in the front matter. This allows me to organize my posts based on week so that when I go to the archives tab, I can see the posts and then the week they are under. I also changes the CSS to the year class in order to remove the open dot that denotes a main category and then I also improved the spacing between the timeline line and then week heading in order to make it more visually appealing.
+
+![arch](/assets/img/post_images/arch_liquid.png)
+
+### Modifying Categories
+
+In here I changed the sub-categories to posts in order to organize the posts under the categories instead of organizing subcategories under the categories. This allows me to have all of my posts organized in one place and they will render as I update the site, so that if I need to find my Lab Notebooks or if I need to find a Lesson, I can look at it under the  categories page.
+
+![cat](/assets/img/post_images/cat_liquid.png)
+
+### Modifying Theme
+
+In order to modify the theme, I changed the variables of the light and dark mode files. This was done by selecting a color that I liked and then changing the shade of the color in order to get the desired results.
 
 
+```python
+@mixin dark-scheme {
+  /* Framework color */
+  --main-bg: #130f21;
+  --mask-bg: #2f2944;
+  --main-border-color: rgb(44, 45, 45);
+
+  /* Common color */
+  --text-color: rgb(175, 176, 177);
+  --text-muted-color: rgb(125, 136, 146);
+  --heading-color: #cccccc;
+  --label-color: #a4a4c2;
+  --blockquote-border-color: rgb(66, 66, 66);
+  --blockquote-text-color: #868686;
+  --link-color: #908bde;
+  --link-underline-color: rgb(82, 108, 150);
+  --button-bg: rgb(39, 40, 43);
+  --btn-border-color: rgb(63, 65, 68);
+  --btn-backtotop-color: var(--text-color);
+  --btn-backtotop-border-color: var(--btn-border-color);
+```
+
+i also learned about ```::before``` and ```::after``` in css, which allow for styling elements to be inserted before and after the content they are addressed to. this allows for changing styles for buttons and other things. children in css are elements that are addressed to one class and generated as more are needed. this allows for less code and faster processing with iteration.
+
+
+```python
+.year {
+  height: 3.5rem;
+  font-size: 1.5rem;
+  position: relative;
+  left: -16px;
+  margin-left: -$timeline-width;
+
+  &::before {
+    @extend %timeline;
+
+    height: 72px;
+    left: 97px;
+    bottom: 16px;
+  }
+
+  &:first-child::before {
+    @extend %timeline;
+
+    height: 32px;
+    top: 24px;
+  }
+
+  /* Year dot */
+  // &::after {
+  //   content: '';
+  //   display: inline-block;
+  //   position: relative;
+  //   border-radius: 50%;
+  //   width: 12px;
+  //   height: 12px;
+  //   left: 21.5px;
+  //   border: 3px solid;
+  //   background-color: var(--timeline-year-dot-color);
+  //   border-color: var(--timeline-node-bg);
+  //   box-shadow: 0 0 2px 0 #c2c6cc;
+  //   z-index: 1;
+  // }
+}
+```
+
+### Rendering IPYNB Notebooks
+
+in order to render the ipynb notebooks, a python script can be used in order to convert the notebooks into ```.md``` files which can be then rendered onto the final website. this is done with a function that reads through the notebook and using predefined variables and functions that read through the file and convert everything to markdown or code segments. front matter is also converted in order to give the necessary variable to jekyll to render the page. the converted ```.md``` file is then sent to the ```_posts``` directory.
+
+
+```python
+def convert_notebook_to_markdown_with_front_matter(notebook_file):
+    # Load the notebook file
+    with open(notebook_file, 'r', encoding='utf-8') as file:
+        notebook = nbformat.read(file, as_version=nbformat.NO_CONVERT)
+        
+        # Extract front matter from the first cell
+        front_matter = extract_front_matter(notebook_file, notebook.cells[0])
+        
+        # Remove the first cell from the notebook
+        notebook.cells.pop(0)
+        
+        # Convert the notebook to Markdown
+        exporter = MarkdownExporter()
+        markdown, _ = exporter.from_notebook_node(notebook)
+        
+        # Prepend the front matter to the Markdown content
+        front_matter_content = "---\n" + "\n".join(f"{key}: {value}" for i in range(len(front_matter)) for key, value in front_matter[i].items()) + "\n---\n\n"
+        markdown_with_front_matter = front_matter_content + markdown
+        
+        # Generate the destination Markdown file name by replacing the extension
+        destination_file = os.path.basename(notebook_file).replace(".ipynb", ".md")
+
+        # Generate the destination path
+        destination_path = os.path.join(destination_directory, destination_file)
+        
+        # Write the converted Markdown file
+        with open(destination_path, "w", encoding="utf-8") as file:
+            file.write(markdown_with_front_matter)
+```

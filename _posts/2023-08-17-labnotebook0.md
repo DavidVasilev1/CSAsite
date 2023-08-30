@@ -3,6 +3,7 @@ title: Lab Notebook 0
 author: david
 categories: ['Lab Notebook']
 tags: ['Linux', 'Bash']
+type: Tangibles
 week: 0
 description: Week 0 lab work.
 toc: True
@@ -204,19 +205,3 @@ Github is where all of the projects that you work on are placed. This is how you
 ## Local Servers vs Remote Servers
 
 A local server can only be accessed by you and no one else, unless you use a tool such as ngrok to route it through an open port in your network. This type of server is mainly used for development and updates as you edit the code. A remote server includes Github pages or AWS, where code is hosted and routed to the rest of the internet to be constantly run. This is usually used to show off the final product to the internet, where anyone from anywhere can type in the URL of your site and access it.
-
-## Github Pages and Chirpy
-
-I chose to use the Github Pages Chirpy Theme for my blog, as the interface of it is really nice for blogging and the organization is really good. I customized the Archives tab and the Categories tab in order to organize my posts better. Below are how I changed the code.
-
-### Modifying Archives
-
-In here, all I did was change the year to week, and in each post I added a week variable in the front matter. This allows me to organize my posts based on week so that when I go to the archives tab, I can see the posts and then the week they are under. I also changes the CSS to the year class in order to remove the open dot that denotes a main category and then I also improved the spacing between the timeline line and then week heading in order to make it more visually appealing.
-
-![arch](/assets/img/post_images/arch_liquid.png)
-
-### Modifying Categories
-
-In here I changed the sub-categories to posts in order to organize the posts under the categories instead of organizing subcategories under the categories. This allows me to have all of my posts organized in one place and they will render as I update the site, so that if I need to find my Lab Notebooks or if I need to find a Lesson, I can look at it under the  categories page.
-
-![cat](/assets/img/post_images/cat_liquid.png)
