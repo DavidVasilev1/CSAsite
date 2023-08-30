@@ -265,3 +265,160 @@ def convert_notebook_to_markdown_with_front_matter(notebook_file):
         with open(destination_path, "w", encoding="utf-8") as file:
             file.write(markdown_with_front_matter)
 ```
+
+## Calculator with HTML, CSS, and JS
+
+<style>
+    .calc {
+        border: 2px solid #333;
+        border-radius: 10px;
+        padding: 20px;
+        text-align: center;
+        background-color: #000000;
+        width: 300px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    #input {
+        width: 100%;
+        padding: 10px;
+        font-size: 18px;
+        border-radius: 5px;
+        background-color: #414141;
+    }
+    .buttons {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+        margin-top: 10px;
+    }
+    button {
+        padding: 10px;
+        font-size: 16px;
+        background-color: #333;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .storage {
+        border: 2px solid #333;
+        border-radius: 10px;
+        padding: 20px;
+        text-align: center;
+        background-color: #000000;
+        width: 300px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+</style>
+
+<div class="calc">
+    <input type="text" id="input" disabled>
+    <div class="buttons">
+        <button onclick="appendToType('7')">7</button>
+        <button onclick="appendToType('8')">8</button>
+        <button onclick="appendToType('9')">9</button>
+        <button onclick="appendToType('/')">/</button>
+        <button onclick="appendToType('4')">4</button>
+        <button onclick="appendToType('5')">5</button>
+        <button onclick="appendToType('6')">6</button>
+        <button onclick="appendToType('*')">*</button>
+        <button onclick="appendToType('1')">1</button>
+        <button onclick="appendToType('2')">2</button>
+        <button onclick="appendToType('3')">3</button>
+        <button onclick="appendToType('-')">-</button>
+        <button onclick="appendToType('0')">0</button>
+        <button onclick="clearText()">AC</button>
+        <button onclick="calculate()">=</button>
+        <button onclick="appendToType('+')">+</button>
+    </div>
+</div>
+<br>
+<p style="text-align: center">Stored Data</p>
+<div id="storage" class="storage">
+    
+</div>
+
+<button onclick="clearSaves()">Clear Data</button>
+
+<script>
+    let clearCalc = false;
+
+    function appendToType(value) {
+    const input = document.getElementById('input');
+
+    if (clearCalc) {
+        input.value = value;
+        clearCalc = false;
+    } else {
+        input.value += value;
+    }
+
+    console.log(value);
+    }
+
+    function calculate() {
+    try {
+        const input = document.getElementById('input');
+        const result = eval(input.value);
+        input.value = result;
+        console.log(result);
+
+        const storage = document.getElementById('storage');
+        storage.innerHTML += '<p>' + result + '</p>';
+
+        clearCalc = true;
+
+        saveCalculation(result);
+    } catch (error) {
+        input.value = 'Error';
+    }
+    }
+
+    function saveCalculation(result) {
+    const saved = getSaved();
+    saved.push(result);
+    setCookie('results', JSON.stringify(saved));
+    }
+
+    function getSaved() {
+    const saved = getCookie('results');
+    return saved ? JSON.parse(saved) : [];
+    }
+
+    function setCookie(name, value) {
+    document.cookie = name + '=' + encodeURIComponent(value) + ';path=/';
+    }
+
+    function getCookie(name) {
+    const cookies = document.cookie.split(';');
+    for (const cookie of cookies) {
+        const parts = cookie.split('=');
+        if (parts[0].trim() === name) {
+        return decodeURIComponent(parts[1].trim());
+        }
+    }
+    return '';
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+    const saved = getSaved();
+    const storage = document.getElementById('storage');
+    for (const result of saved) {
+        storage.innerHTML += '<p>' + result + '</p>';
+    }
+    });
+
+    function clearSaves() {
+    document.getElementById('storage').innerHTML = '';
+    setCookie('results', '');
+    }
+
+    function clearText() {
+    const input = document.getElementById('input');
+    input.value = '';
+    }
+
+</script>
+
