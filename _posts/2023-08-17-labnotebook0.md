@@ -8,6 +8,7 @@ week: 0
 description: Week 0 lab work.
 toc: True
 comments: True
+pin: True
 date: 2023-08-18 12:00:00 +0000
 ---
 
