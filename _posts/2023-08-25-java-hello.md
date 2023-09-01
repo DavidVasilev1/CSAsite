@@ -8,7 +8,7 @@ week: 1
 description: A progressive journey through Java basics starting with the classic "Hello, World!" example.
 toc: True
 comments: True
-date: 2023-08-25 12:00:00 +0000
+date: 2023-08-24 12:00:00 +0000
 ---
 
 ## Hello, World!

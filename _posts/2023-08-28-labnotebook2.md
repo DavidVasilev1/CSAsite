@@ -5,10 +5,10 @@ categories: ['Lab Notebook']
 tags: ['Java']
 type: tangibles
 week: 2
-description: Week 1 lab work.
+description: Week 2 lab work.
 toc: True
 comments: True
-date: 2023-08-28 12:00:00 +0000
+date: 2023-08-31 12:00:00 +0000
 ---
 
 ## Java
@@ -512,7 +512,7 @@ MainDynamic.main(null);
 
 In here, I modified the Tic Tac Toe game to make it more efficient.
 
-i started with making the main game class. instead of creating the board with an array, i made it by counting to 9 with a loop. this is more efficient than typing out each number. after that i made the symbols in an array and i also make the ```quit``` variable so that the game runs.
+i started with making the main game class. instead of creating the board with an array, i made it by counting to 9 with a loop. this is more efficient than typing out each number. after that i made the symbols in an array and i also make the ```quit``` variable so that the game runs. in this section i cover unit 1 (using java components), unit 2 (using objects), unit 3 (booleans) unit 4 (iteration), unit 5 (classes), unit 6 (array with players), unit 8 (2d array), unit 10 (recursion with building board). recognizing the collegeboard units is important because it shows if i know the information needed for the ap exam. rebuilding the program helps me learn the structure of the code better.
 
 
 ```java
@@ -723,4 +723,440 @@ TicTacToeGame.main(null)
     4 | 5 | 6
     O | X | O
     Player 1 wins!
+
+
+#### Other Games
+
+Below are the other two games remade.
+
+##### Higher Or Lower
+
+
+```java
+import java.util.Random;
+import java.util.Scanner;
+
+public class HLGame {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    Random random = new Random();
+
+    int correctNum = random.nextInt(10) + 1;
+    int attempts = 0;
+
+    System.out.println("What number am I thinking of (1-10)?");
+
+    while (true) {
+      System.out.print("Guess: ");
+      int attemptNum = scanner.nextInt();
+      System.out.println(attemptNum);
+      attempts++;
+
+      if (attemptNum < correctNum) {
+        System.out.println("higher");
+      } else if (attemptNum > correctNum) {
+        System.out.println("lower");
+      } else {
+        System.out.println("Correct!");
+        break;
+      }
+    }
+    scanner.close();
+  }
+}
+
+HLGame.main(null)
+```
+
+    What number am I thinking of (1-10)?
+    Guess: 5
+    higher
+    Guess: 7
+    Correct!
+
+
+##### Rock Paper Scissors
+
+
+```java
+import java.util.Random;
+import java.util.Scanner;
+
+public class RPSGame {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    Random random = new Random();
+
+    System.out.println("Choose: 1 - Rock, 2 - Paper, 3 - Scissors");
+
+    int pChoice = scanner.nextInt();
+    int cChoice = random.nextInt(3) + 1;
+
+    String[] choices = {"Rock", "Paper", "Scissors"};
+
+    System.out.println("Computer: " + choices[cChoice - 1]);
+    System.out.println("Player: " + choices[pChoice - 1]);
+
+    int result = (pChoice - cChoice + 3) % 3;
+    if (result == 0) {
+      System.out.println("Tie");
+    } else if (result == 1) {
+      System.out.println("You win");
+    } else {
+      System.out.println("You lose");
+    }
+
+    scanner.close();
+  }
+}
+
+RPSGame.main(null)
+```
+
+    Choose: 1 - Rock, 2 - Paper, 3 - Scissors
+    Computer: Paper
+    Player: Rock
+    You lose
+
+
+#### Recursion Menu
+
+
+```java
+import java.util.Scanner;
+import java.lang.Math;
+import java.util.Random;
+
+public class ConsoleGame {
+  public final String DEFAULT = "\u001B[0m";  // Default Terminal Color
+    
+  public void start() {
+    Scanner sc = new Scanner(System.in);
+    
+    System.out.println("Welcome to the Console Game!");
+    boolean quit = false;
+    
+    while (!quit) {
+      menuString();
+      
+      try {
+        int choice = sc.nextInt();
+        System.out.println(choice + ": ");
+        
+        if (choice == 0) {
+          System.out.println("Goodbye, World!");
+          quit = true;
+        } else {
+          quit = action(choice);
+        }
+      } catch (Exception e) {
+        sc.nextLine();
+        System.out.println(e + ": Not a valid choice, try again.");
+      }
+    }
+    
+    sc.close();
+  }
+
+  public void menuString(){
+    String menuText = ""
+      + "\u001B[38;5;141m___________________________\n"  
+      + "|~~~~~~~~~~~~~~~~~~~~~~~~~|\n"
+      + "|\u001B[0m          Menu!          \u001B[38;5;141m|\n"
+      + "|~~~~~~~~~~~~~~~~~~~~~~~~~|\n"
+      + "| 0 - Exit                |\n"    
+      + "| 1 - Rock Paper Scissors |\n"
+      + "| 2 - Higher or Lower     |\n"
+      + "| 3 - Tic Tac Toe         |\n"
+      + "|_________________________|   \u001B[0m\n"
+      + "\n"
+      + "Choose an option.\n";
+    System.out.print(menuText);
+
+  }
+
+  private boolean action(int selection) {
+    boolean quit = false;
+    switch (selection) {
+      case 1:
+        rps();
+        break;
+      case 2:
+        horl();
+        break;
+      case 3:
+        ticTacToe();
+        break;
+      default:
+        System.out.println("Unexpected choice, try again.");
+    }
+    System.out.println(DEFAULT);
+    return quit;
+  }
+
+  public void rps() {
+    Scanner scRPS = new Scanner(System.in);
+    Random random = new Random();
+
+    System.out.println("Choose: 1 - Rock, 2 - Paper, 3 - Scissors");
+
+    int pChoice = scRPS.nextInt();
+    int cChoice = random.nextInt(3) + 1;
+
+    String[] choices = {"Rock", "Paper", "Scissors"};
+
+    System.out.println("Computer: " + choices[cChoice - 1]);
+    System.out.println("Player: " + choices[pChoice - 1]);
+
+    int result = (pChoice - cChoice + 3) % 3;
+    if (result == 0) {
+      System.out.println("Tie");
+    } else if (result == 1) {
+      System.out.println("You win");
+    } else {
+      System.out.println("You lose");
+    }
+
+    scRPS.close();
+  }
+
+  public void horl() {
+    Scanner scHRL = new Scanner(System.in);
+    Random random = new Random();
+
+    int correctNum = random.nextInt(10) + 1;
+    int attempts = 0;
+
+    System.out.println("What number am I thinking of (1-10)?");
+
+    while (true) {
+      System.out.print("Guess: ");
+      int attemptNum = scHRL.nextInt();
+      System.out.println(attemptNum);
+      attempts++;
+
+      if (attemptNum < correctNum) {
+        System.out.println("higher");
+      } else if (attemptNum > correctNum) {
+        System.out.println("lower");
+      } else {
+        System.out.println("Correct!");
+        break;
+      }
+    }
+    scHRL.close();
+  }
+
+  //player variables
+  private static final String PLAYER_X = "X";
+  private static final String PLAYER_O = "O";
+
+  public void ticTacToe() {
+      System.out.println("Tic Tac Toe");
+
+      Scanner scanner = new Scanner(System.in);
+      Random random = new Random();
+
+      // setting board length
+      String[] board = new String[9];
+      for (int i = 0; i < board.length; i++) {
+          board[i] = String.valueOf(i + 1);
+      }
+
+      String[] players = {PLAYER_X, PLAYER_O};
+      boolean quit = false;
+
+      // choosing game mode
+      System.out.println("Choose game mode: ");
+      System.out.println("1. Play against player");
+      System.out.println("2. Play against computer");
+      // sets gamemode
+      int gameMode = scanner.nextInt();
+      scanner.nextLine();
+
+      int currentPlayer = 0;
+      int turn = 0;
+
+      while (!quit) {
+          System.out.println("Player " + (currentPlayer + 1) + "'s turn (" + players[currentPlayer] + ")");
+          makeBoard(board);
+
+          int move;
+          // allows player to move when playing against pc or when playing against other player
+          if ((gameMode == 2 && currentPlayer == 1) || gameMode == 1) {
+              move = scanner.nextInt() - 1;
+              scanner.nextLine();
+              // checks if move is valid
+              if (move < 0 || move >= board.length || !board[move].equals(String.valueOf(move + 1))) {
+                  System.out.println("Invalid move, try again.");
+                  continue;
+              }
+          } else {
+              // computer moves if game mode is against player
+              move = computerMove(board, random);
+          }
+          // counts turns
+          board[move] = players[currentPlayer];
+          turn++;
+          // checks if game is won
+          if (checkWin(board, players[currentPlayer])) {
+              System.out.println("Player " + (currentPlayer + 1) + " wins!");
+              quit = true;
+          } else if (turn == 9) {
+              System.out.println("It's a tie!");
+              quit = true;
+          }
+          // checks which player is playing
+          currentPlayer = (currentPlayer + 1) % 2;
+      }
+
+      scanner.close();
+  }
+
+  // computer AI
+  private int computerMove(String[] board, Random random) {
+      int emptyCellCount = 0;
+      // counts number of empty cells
+      for (String cell : board) {
+          if (!cell.equals(PLAYER_X) && !cell.equals(PLAYER_O)) {
+              emptyCellCount++;
+          }
+      }
+      // sets valid moves
+      int[] availableMoves = new int[emptyCellCount];
+      int index = 0;
+      // creates id for each available move
+      for (int i = 0; i < board.length; i++) {
+          if (!board[i].equals(PLAYER_X) && !board[i].equals(PLAYER_O)) {
+              availableMoves[index++] = i;
+          }
+      }
+      // picks random move based on id number of valid cells
+      return availableMoves[random.nextInt(emptyCellCount)];
+  }
+
+  // makes the board using iteration
+  private void makeBoard(String[] board) {
+      for (int i = 0; i < 9; i += 3) {
+          System.out.println(board[i] + " | " + board[i + 1] + " | " + board[i + 2]);
+      }
+  }
+
+  // using arrays to check win patterns
+  // signature boolean sends whether win patterns are complete
+  private boolean checkWin(String[] board, String player) {
+      int[][] winPatterns = {
+              {0, 1, 2}, {3, 4, 5}, {6, 7, 8}, // rows
+              {0, 3, 6}, {1, 4, 7}, {2, 5, 8}, // columns
+              {0, 4, 8}, {2, 4, 6} // diagonals
+      };
+      // returns if win pattern is chosen
+      for (int[] pattern : winPatterns) {
+          if (board[pattern[0]].equals(player) && board[pattern[1]].equals(player) && board[pattern[2]].equals(player)) {
+              return true;
+          }
+      }
+      return false;
+  }
+
+  public static void main(String[] args) {
+    ConsoleGame game = new ConsoleGame();
+    game.start();
+  }
+}
+
+ConsoleGame.main(null)
+```
+
+    Welcome to the Console Game!
+    [38;5;141m___________________________
+    |~~~~~~~~~~~~~~~~~~~~~~~~~|
+    |[0m          Menu!          [38;5;141m|
+    |~~~~~~~~~~~~~~~~~~~~~~~~~|
+    | 0 - Exit                |
+    | 1 - Rock Paper Scissors |
+    | 2 - Higher or Lower     |
+    | 3 - Tic Tac Toe         |
+    |_________________________|   [0m
+    
+    Choose an option.
+    1: 
+    Choose: 1 - Rock, 2 - Paper, 3 - Scissors
+    Computer: Scissors
+    Player: Scissors
+    Tie
+    [0m
+    [38;5;141m___________________________
+    |~~~~~~~~~~~~~~~~~~~~~~~~~|
+    |[0m          Menu!          [38;5;141m|
+    |~~~~~~~~~~~~~~~~~~~~~~~~~|
+    | 0 - Exit                |
+    | 1 - Rock Paper Scissors |
+    | 2 - Higher or Lower     |
+    | 3 - Tic Tac Toe         |
+    |_________________________|   [0m
+    
+    Choose an option.
+    2: 
+    What number am I thinking of (1-10)?
+    Guess: 5
+    higher
+    Guess: 7
+    Correct!
+    [0m
+    [38;5;141m___________________________
+    |~~~~~~~~~~~~~~~~~~~~~~~~~|
+    |[0m          Menu!          [38;5;141m|
+    |~~~~~~~~~~~~~~~~~~~~~~~~~|
+    | 0 - Exit                |
+    | 1 - Rock Paper Scissors |
+    | 2 - Higher or Lower     |
+    | 3 - Tic Tac Toe         |
+    |_________________________|   [0m
+    
+    Choose an option.
+    3: 
+    Tic Tac Toe
+    Choose game mode: 
+    1. Play against player
+    2. Play against computer
+    Player 1's turn (X)
+    1 | 2 | 3
+    4 | 5 | 6
+    7 | 8 | 9
+    Player 2's turn (O)
+    1 | 2 | 3
+    4 | 5 | 6
+    7 | 8 | X
+    Player 1's turn (X)
+    1 | 2 | O
+    4 | 5 | 6
+    7 | 8 | X
+    Player 2's turn (O)
+    1 | 2 | O
+    4 | 5 | 6
+    7 | X | X
+    Player 1's turn (X)
+    1 | 2 | O
+    4 | 5 | 6
+    O | X | X
+    Player 2's turn (O)
+    1 | X | O
+    4 | 5 | 6
+    O | X | X
+    Player 2 wins!
+    [0m
+    [38;5;141m___________________________
+    |~~~~~~~~~~~~~~~~~~~~~~~~~|
+    |[0m          Menu!          [38;5;141m|
+    |~~~~~~~~~~~~~~~~~~~~~~~~~|
+    | 0 - Exit                |
+    | 1 - Rock Paper Scissors |
+    | 2 - Higher or Lower     |
+    | 3 - Tic Tac Toe         |
+    |_________________________|   [0m
+    
+    Choose an option.
+    0: 
+    Goodbye, World!
 

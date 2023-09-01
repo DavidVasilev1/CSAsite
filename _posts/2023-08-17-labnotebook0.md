@@ -8,7 +8,7 @@ week: 0
 description: Week 0 lab work.
 toc: True
 comments: True
-date: 2023-08-17 12:00:00 +0000
+date: 2023-08-18 12:00:00 +0000
 ---
 
 ## Main Tools

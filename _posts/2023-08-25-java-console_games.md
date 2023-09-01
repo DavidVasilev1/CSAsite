@@ -8,7 +8,7 @@ week: 1
 description: These console games show many elements from College Board's Units.
 toc: True
 comments: True
-date: 2023-08-25 12:00:00 +0000
+date: 2023-08-24 12:00:00 +0000
 ---
 
 ## Java Kernel for Jupyter Notebooks.

@@ -8,7 +8,7 @@ week: 1
 description: Week 1 lab work.
 toc: True
 comments: True
-date: 2023-08-23 12:00:00 +0000
+date: 2023-08-25 12:00:00 +0000
 ---
 
 ## Linux Shell Hacks and Notes

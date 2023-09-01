@@ -8,7 +8,7 @@ week: 0
 description: A Tech Talk on Linux and the Bash shell.
 toc: True
 comments: True
-date: 2023-08-21 12:00:00 +0000
+date: 2023-08-17 12:00:00 +0000
 ---
 
 ## Bash Tutorial

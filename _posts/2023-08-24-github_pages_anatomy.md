@@ -8,7 +8,7 @@ week: 0
 description: Learn the Files and development work flow of GitHub Pages.  This includes working with you home page, theme, markdown, and more.
 toc: True
 comments: True
-date: 2023-08-24 12:00:00 +0000
+date: 2023-08-17 12:00:00 +0000
 ---
 
 ## Overview of GitHub Pages files
