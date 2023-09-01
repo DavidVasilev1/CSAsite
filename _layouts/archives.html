@@ -14,7 +14,7 @@ layout: page
 
 {% for post in site.posts %}
   {% capture cur_week %}{{ post.week }}{% endcapture %}
-
+  <!-- render -->
   {% if cur_week != "" %}
     {% if cur_week != last_week %}
       {% unless forloop.first %}</ul>{% endunless %}
