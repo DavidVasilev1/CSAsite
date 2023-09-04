@@ -41,15 +41,15 @@
     .card-back {
         width: 100%;
         height: 100%;
-        background-image: url('/CSA/assets/img/post_images/cardBack.png'); /* Specify the path to your card back image */
+        background-image: url('/CSA/assets/img/post_images/cardBack.png');
         background-size: cover;
         position: absolute;
-        backface-visibility: hidden; /* Prevents the back from showing when flipped */
+        backface-visibility: hidden;
         transition: transform 0.5s ease;
     }
 
     .gameCard.flipped .card-back {
-        transform: rotateY(180deg); /* Rotate the card back when flipped */
+        transform: rotateY(180deg);
     }
   </style>
 
@@ -67,13 +67,13 @@
         const breeds = await fetchDogs();
         const images = [];
 
-        // Duplicate each image to create pairs
+
         breeds.forEach(breed => {
             images.push(breed.img);
             images.push(breed.img);
         });
 
-        images.sort(() => Math.random() - 0.5); // Shuffle the images
+        images.sort(() => Math.random() - 0.5); 
 
         let flippedCards = [];
         let moves = 0;
@@ -81,13 +81,11 @@
         let timerInterval;
         let startTime;
 
-        // create the game board
         images.forEach((img, index) => {
           const cardElement = document.createElement('div');
           cardElement.classList.add('gameCard');
           cardElement.dataset.cardIndex = index;
       
-          // Create a card back element and add the card back image
           const cardBack = document.createElement('div');
           cardBack.classList.add('card-back');
           cardElement.appendChild(cardBack);
@@ -99,8 +97,6 @@
           cardElement.addEventListener('click', flipCard);
           gameBoard.appendChild(cardElement);
         });
-
-        // pulling from rapidapi data
         function fetchDogs() {
             const url = 'https://dog-breeds2.p.rapidapi.com/dog_breeds';
             const options = {
@@ -114,8 +110,8 @@
             return fetch(url, options)
                 .then(response => response.json())
                 .then(data => {
-                  const shuffledBreeds = data.slice().sort(() => Math.random() - 0.5); // taking random dogs
-                  return shuffledBreeds.slice(0, 8); // sending data gathered to frontend
+                  const shuffledBreeds = data.slice().sort(() => Math.random() - 0.5);
+                  return shuffledBreeds.slice(0, 8);
                 });
         }
 
@@ -155,7 +151,7 @@
             timer.textContent = currentTime;
         }
 
-        // Start the timer
+
         startTime = Date.now();
         timerInterval = setInterval(updateTimer, 1000);
     });
