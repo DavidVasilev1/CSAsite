@@ -51,14 +51,14 @@
 
   <script>
   document.addEventListener('DOMContentLoaded', async () => {
-    let start = document.getElementById('startButton');
-    let gameContainer = document.querySelector('.game-container');
-    let gameBoard = document.getElementById('gameBoard');
-    let moveCount = document.getElementById('moveCount');
-    let timer = document.getElementById('timer');
-    let fastestTime = document.getElementById('fastestTime');
-    let leastMoves = document.getElementById('leastMoveCount');
-    let gameStarted = false;
+    const start = document.getElementById('startButton');
+    const gameContainer = document.querySelector('.game-container');
+    const gameBoard = document.getElementById('gameBoard');
+    const moveCount = document.getElementById('moveCount');
+    const timer = document.getElementById('timer');
+    const fastestTime = document.getElementById('fastestTime');
+    const leastMoves = document.getElementById('leastMoveCount');
+    const gameStarted = false;
 
 
     start.addEventListener('click', async () => {
