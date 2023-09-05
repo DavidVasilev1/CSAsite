@@ -110,25 +110,7 @@
     
         cardElement.addEventListener('click', flipCard)
         gameBoard.appendChild(cardElement)
-      });
-
-      function fetchDogs() {
-        const url = 'https://dog-breeds2.p.rapidapi.com/dog_breeds'
-        const options = {
-          method: 'GET',
-          headers: {
-            'X-RapidAPI-Key': '701410bf7emshbaf1fa99b2e4e5bp1c0ee6jsn8f8f51602e3f',
-            'X-RapidAPI-Host': 'dog-breeds2.p.rapidapi.com',
-          },
-        }
-
-        return fetch(url, options)
-          .then(response => response.json())
-          .then(data => {
-            const shuffledBreeds = data.slice().sort(() => Math.random() - 0.5)
-            return shuffledBreeds.slice(0, 8)
-          });
-      }
+      }); 
 
       function flipCard() {
         if (flippedCards.length < 2 && !this.classList.contains('flipped')) {
@@ -203,6 +185,25 @@
         return null
       }
     }
+
+    async function fetchDogs() {
+      const url = 'https://dog-breeds2.p.rapidapi.com/dog_breeds'
+      const options = {
+        method: 'GET',
+        headers: {
+          'X-RapidAPI-Key': '701410bf7emshbaf1fa99b2e4e5bp1c0ee6jsn8f8f51602e3f',
+          'X-RapidAPI-Host': 'dog-breeds2.p.rapidapi.com',
+        },
+      }
+
+      return fetch(url, options)
+        .then(response => response.json())
+        .then(data => {
+          const shuffledBreeds = data.slice().sort(() => Math.random() - 0.5)
+          return shuffledBreeds.slice(0, 8)
+        });
+    }
+
   })
   </script>
 </body>
