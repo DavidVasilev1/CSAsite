@@ -59,10 +59,7 @@
     let fastestTime = document.getElementById('fastestTime')
     let leastMoves = document.getElementById('leastMoveCount')
 
-    let move = document.getElementById('move')
-    let time = document.getElementById('time')
-    let lMove = document.getElementById('lMove')
-    let fTime = document.getElementById('fTime')
+    let move, time, lMove, fTime;
 
     let gameStarted = false
     
@@ -80,7 +77,7 @@
     async function startGame() {
       const breeds = await fetchDogs()
       const images = []
-      
+
       start = document.getElementById('startButton')
       gameContainer = document.querySelector('.game-container')
       gameBoard = document.getElementById('gameBoard')
