@@ -59,16 +59,7 @@
     let fastestTime = document.getElementById('fastestTime');
     let leastMoves = document.getElementById('leastMoveCount');
     let gameStarted = false;
-    let move;
-    let time;
-    let lMove;
-    let fTime;
 
-    start.style.display = 'none';
-    moveCount.style.display = 'none';
-    timer.style.display = 'none';
-    leastMoves.style.display = 'none';
-    fastestTime.style.display = 'none';
 
     start.addEventListener('click', async () => {
       if (!gameStarted) {
@@ -80,16 +71,7 @@
       const breeds = await fetchDogs();
       const images = [];
 
-      move = document.getElementById('move');
-      time = document.getElementById('time');
-      lMove = document.getElementById('lMove');
-      fTime = document.getElementById('fTime');
-
       start.style.display = 'none'
-      move.style.display = 'block'
-      time.style.display = 'block'
-      lMove.style.display = 'block'
-      fTime.style.display = 'block'
       gameContainer.style.display = 'block'
 
       function setData() {
