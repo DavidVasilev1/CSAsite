@@ -42,36 +42,37 @@
   <div class="game-container">
     <h1>Concentration Game</h1>
       <button id="startButton">Start</button>
-      <p id="move">Moves: <span id="moveCount">0</span></p>
-      <p id="time">Time: <span id="timer">0</span> seconds</p>
+      <p>Moves: <span id="moveCount">0</span></p>
+      <p>Time: <span id="timer">0</span> seconds</p>
     <div class="gameBoard" id="gameBoard"></div>
-      <p id="lMove">Least Moves: <span id="leastMoveCount">0</span></p>
-      <p id="fTime">Fastest Time: <span id="fastestTime">0</span> seconds</p>
+      <p>Least Moves: <span id="leastMoveCount">0</span></p>
+      <p>Fastest Time: <span id="fastestTime">0</span> seconds</p>
   </div>
-
+  
   <script>
   document.addEventListener('DOMContentLoaded', async () => {
-    const start = document.getElementById('startButton');
-    const gameContainer = document.querySelector('.game-container');
-    const gameBoard = document.getElementById('gameBoard');
-    const moveCount = document.getElementById('moveCount');
-    const timer = document.getElementById('timer');
-    const fastestTime = document.getElementById('fastestTime');
-    const leastMoves = document.getElementById('leastMoveCount');
-    const gameStarted = false;
+    const start = document.getElementById('startButton')
+    const gameContainer = document.querySelector('.game-container')
+    const gameBoard = document.getElementById('gameBoard')
+    const moveCount = document.getElementById('moveCount')
+    const timer = document.getElementById('timer')
+    const fastestTime = document.getElementById('fastestTime')
+    const leastMoves = document.getElementById('leastMoveCount')
 
+    let gameStarted = false
+    
 
     start.addEventListener('click', async () => {
       if (!gameStarted) {
-        await startGame();
+        await startGame()
       }
-    });
+    })
 
     async function startGame() {
-      const breeds = await fetchDogs();
-      const images = [];
+      const breeds = await fetchDogs()
+      const images = []
 
-      start.style.display = 'none'
+      startButton.style.display = 'none'
       gameContainer.style.display = 'block'
 
       function setData() {
