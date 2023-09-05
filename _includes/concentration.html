@@ -50,27 +50,25 @@
   </div>
   
   <script type="text/javascript">
-  document.addEventListener('DOMContentLoaded', async () => {
-    const start = document.getElementById('startButton')
-    const gameContainer = document.querySelector('.game-container')
-    const gameBoard = document.getElementById('gameBoard')
-    const moveCount = document.getElementById('moveCount')
-    const timer = document.getElementById('timer')
-    const fastestTime = document.getElementById('fastestTime')
-    const leastMoves = document.getElementById('leastMoveCount')
+    const start = document.getElementById('startButton');
+    const gameContainer = document.querySelector('.game-container');
+    const gameBoard = document.getElementById('gameBoard');
+    const moveCount = document.getElementById('moveCount');
+    const timer = document.getElementById('timer');
+    const fastestTime = document.getElementById('fastestTime');
+    const leastMoves = document.getElementById('leastMoveCount');
 
-    let gameStarted = false
-    
+    let gameStarted = false;
 
     start.addEventListener('click', async () => {
       if (!gameStarted) {
-        await startGame()
+        await startGame();
       }
-    })
+    });
 
     async function startGame() {
-      const breeds = await fetchDogs()
-      const images = []
+      const breeds = await fetchDogs();
+      const images = [];
 
       start.style.display = 'none'
       gameContainer.style.display = 'block'
@@ -187,23 +185,21 @@
     }
 
     async function fetchDogs() {
-      const url = 'https://dog-breeds2.p.rapidapi.com/dog_breeds'
+      const url = 'https://dog-breeds2.p.rapidapi.com/dog_breeds';
       const options = {
         method: 'GET',
         headers: {
           'X-RapidAPI-Key': '701410bf7emshbaf1fa99b2e4e5bp1c0ee6jsn8f8f51602e3f',
           'X-RapidAPI-Host': 'dog-breeds2.p.rapidapi.com',
         },
-      }
+      };
 
       return fetch(url, options)
         .then(response => response.json())
         .then(data => {
-          const shuffledBreeds = data.slice().sort(() => Math.random() - 0.5)
-          return shuffledBreeds.slice(0, 8)
+          const shuffledBreeds = data.slice().sort(() => Math.random() - 0.5);
+          return shuffledBreeds.slice(0, 8);
         });
     }
-
-  })
   </script>
 </body>
