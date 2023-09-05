@@ -59,6 +59,10 @@
     let fastestTime = document.getElementById('fastestTime');
     let leastMoves = document.getElementById('leastMoveCount');
     let gameStarted = false;
+    let move;
+    let time;
+    let lMove;
+    let fTime;
 
     start.style.display = 'none';
     moveCount.style.display = 'none';
@@ -76,10 +80,10 @@
       const breeds = await fetchDogs();
       const images = [];
 
-      let move = document.getElementById('move');
-      let time = document.getElementById('time');
-      let lMove = document.getElementById('lMove');
-      let fTime = document.getElementById('fTime');
+      move = document.getElementById('move');
+      time = document.getElementById('time');
+      lMove = document.getElementById('lMove');
+      fTime = document.getElementById('fTime');
 
       start.style.display = 'none'
       move.style.display = 'block'
