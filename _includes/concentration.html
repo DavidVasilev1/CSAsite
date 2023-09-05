@@ -51,47 +51,35 @@
 
   <script>
   document.addEventListener('DOMContentLoaded', async () => {
-    let move;
-    let time;
-    let lMove;
-    let fTime;
-    let start;
-    let gameContainer;
-    let gameBoard;
-    let moveCount;
-    let timer;
-    let fastestTime;
-    let leastMoves;
-    let gameStarted;
+    let start = document.getElementById('startButton');
+    let gameContainer = document.querySelector('.game-container');
+    let gameBoard = document.getElementById('gameBoard');
+    let moveCount = document.getElementById('moveCount');
+    let timer = document.getElementById('timer');
+    let fastestTime = document.getElementById('fastestTime');
+    let leastMoves = document.getElementById('leastMoveCount');
+    let gameStarted = false;
 
-    gameStarted = false
-    
-    move.style.display = 'none'
-    time.style.display = 'none'
-    lMove.style.display = 'none'
-    fTime.style.display = 'none'
+    start.style.display = 'none';
+    move.style.display = 'none';
+    time.style.display = 'none';
+    lMove.style.display = 'none';
+    fTime.style.display = 'none';
 
     start.addEventListener('click', async () => {
       if (!gameStarted) {
-        await startGame()
+        await startGame();
       }
-    })
+    });
 
     async function startGame() {
-      const breeds = await fetchDogs()
-      const images = []
+      const breeds = await fetchDogs();
+      const images = [];
 
-      start = document.getElementById('startButton')
-      gameContainer = document.querySelector('.game-container')
-      gameBoard = document.getElementById('gameBoard')
-      moveCount = document.getElementById('moveCount')
-      timer = document.getElementById('timer')
-      fastestTime = document.getElementById('fastestTime')
-      leastMoves = document.getElementById('leastMoveCount')
-      move = document.getElementById('move')
-      time = document.getElementById('time')
-      lMove = document.getElementById('lMove')
-      fTime = document.getElementById('fTime')
+      let move = document.getElementById('move');
+      let time = document.getElementById('time');
+      let lMove = document.getElementById('lMove');
+      let fTime = document.getElementById('fTime');
 
       startButton.style.display = 'none'
       move.style.display = 'block'
