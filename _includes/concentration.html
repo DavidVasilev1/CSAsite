@@ -61,10 +61,10 @@
     let gameStarted = false;
 
     start.style.display = 'none';
-    move.style.display = 'none';
-    time.style.display = 'none';
-    lMove.style.display = 'none';
-    fTime.style.display = 'none';
+    moveCount.style.display = 'none';
+    timer.style.display = 'none';
+    leastMoves.style.display = 'none';
+    fastestTime.style.display = 'none';
 
     start.addEventListener('click', async () => {
       if (!gameStarted) {
@@ -81,7 +81,7 @@
       let lMove = document.getElementById('lMove');
       let fTime = document.getElementById('fTime');
 
-      startButton.style.display = 'none'
+      start.style.display = 'none'
       move.style.display = 'block'
       time.style.display = 'block'
       lMove.style.display = 'block'
