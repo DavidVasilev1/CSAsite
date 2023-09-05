@@ -313,11 +313,11 @@ function clearCalc () { // clears calculator
 <!-- 
 Vanta animations just for fun, load JS onto the page
 -->
-<script src="/CSA/assets/js/pages/three.r119.min.js"></script>
-<script src="/CSA/assets/js/pages/vanta.halo.min.js"></script>
-<script src="/CSA/assets/js/pages/vanta.birds.min.js"></script>
-<script src="/CSA/assets/js/pages/vanta.net.min.js"></script>
-<script src="/CSA/assets/js/pages/vanta.rings.min.js"></script>
+<script src="{{ site.baseurl }}/assets/js/pages/three.r119.min.js"></script>
+<script src="{{ site.baseurl }}/assets/js/pages/vanta.halo.min.js"></script>
+<script src="{{ site.baseurl }}/assets/js/pages/vanta.birds.min.js"></script>
+<script src="{{ site.baseurl }}/assets/js/pages/vanta.net.min.js"></script>
+<script src="{{ site.baseurl }}/assets/js/pages/vanta.rings.min.js"></script>
 
 <script>
 // setup vanta scripts as functions
