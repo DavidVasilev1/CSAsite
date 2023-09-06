@@ -12,6 +12,6 @@ pin: True
 date: 2023-09-05 12:00:00 +0000
 ---
 
-```python
+## Pair Programming
 
-```
+For the pair programming project we decided to create a program that uses user inputs and outputs and also stores score and fastest time using cookies. It also pulls images from a RapidAPI to the game cards, which when matched stay flipped over.

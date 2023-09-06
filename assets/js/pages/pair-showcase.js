@@ -1,3 +1,4 @@
+// variables for game elements
 const start = document.getElementById('startButton');
 const gameContainer = document.querySelector('.game-container');
 const gameBoard = document.getElementById('gameBoard');
@@ -6,18 +7,26 @@ const timer = document.getElementById('timer');
 const fastestTime = document.getElementById('fastestTime');
 const leastMoves = document.getElementById('leastMoveCount');
 
+// starts with false to state game isn't started
 let gameStarted = false;
 
+// 
 start.addEventListener('click', async () => {
   if (!gameStarted) {
     await startGame();
   }
 });
 
+start.addEventListener("click", function(event){
+  this.remove();
+  document.querySelector('main').classList.remove('hidden')
+});
+
 async function startGame() {
   const breeds = await fetchDogs();
   const images = [];
 
+  document.getElementById('resetButton').addEventListener('click', resetGame);
   start.style.display = 'none'
   gameContainer.style.display = 'block'
 
@@ -56,7 +65,27 @@ async function startGame() {
 
     cardElement.addEventListener('click', flipCard)
     gameBoard.appendChild(cardElement)
-  }); 
+  });
+
+  function resetGame() {
+    const gameBoard = document.getElementById('gameBoard');
+      while (gameBoard.firstChild) {
+        gameBoard.removeChild(gameBoard.firstChild);
+      }
+      // Reset other game-related variables and elements
+      flippedCards = [];
+      moves = 0;
+      pairs = 0;
+      moveCount.textContent = moves;
+      timer.textContent = '0';
+      clearInterval(timerInterval);
+      // Start a new game by calling startGame()
+      startGame();
+      // Hide the congratulations message
+      document.getElementById('congratulations').classList.add('hidden');
+      // Show the main game container
+      document.querySelector('main').classList.remove('hidden');
+  }
 
   function flipCard() {
     if (flippedCards.length < 2 && !this.classList.contains('flipped')) {
@@ -98,9 +127,13 @@ async function startGame() {
           setCookie('fastestTime', timer.textContent)
         }
 
-        setTimeout(() => {
-          alert(`Congratulations! You won in ${moves} moves and ${timer.textContent} seconds.`)
-        }, 200)
+        const congratulations = document.getElementById('congratulations');
+        const winMoves = document.getElementById('winMoves');
+        const winTime = document.getElementById('winTime');
+        winMoves.textContent = moves;
+        winTime.textContent = timer.textContent;
+        congratulations.classList.remove('hidden');
+        document.querySelector('main').classList.add('hidden');
       }
     }
   }
