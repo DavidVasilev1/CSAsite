@@ -10,26 +10,31 @@ const leastMoves = document.getElementById('leastMoveCount');
 // starts with false to state game isn't started
 let gameStarted = false;
 
-// 
+// checks is game is started and starts game if start is clicked
 start.addEventListener('click', async () => {
   if (!gameStarted) {
     await startGame();
   }
 });
 
-start.addEventListener("click", function(event){
+// hides start button and shows game
+start.addEventListener("click", function() {
   this.remove();
   document.querySelector('main').classList.remove('hidden')
 });
 
+// starts and runs game
 async function startGame() {
+  // setting variables and fetching data
   const breeds = await fetchDogs();
   const images = [];
-
+  
+  // creates reset button
   document.getElementById('resetButton').addEventListener('click', resetGame);
   start.style.display = 'none'
   gameContainer.style.display = 'block'
 
+  // pulls data from cookies and displays on frontend
   function setData() {
     leastMoves.textContent = getCookie('leastMoves')
     fastestTime.textContent = getCookie('fastestTime')
@@ -37,71 +42,85 @@ async function startGame() {
 
   setData()
 
+  // take image for each breed twice to have matching breed
   breeds.forEach(breed => {
     images.push(breed.img)
     images.push(breed.img)
   })
 
+  // randomly sorts images in array
   images.sort(() => Math.random() - 0.5)
 
+  // sets variables for checking which cards are flipped, moves, pairs solved, and timer
   let flippedCards = []
   let moves = 0
   let pairs = 0
   let timerInterval
   let startTime
 
+  // creates game board
   images.forEach((img, index) => {
+    // creates from of card
     const cardElement = document.createElement('div')
     cardElement.classList.add('gameCard')
     cardElement.dataset.cardIndex = index
-
+    // creates back of card
     const cardBack = document.createElement('div')
     cardBack.classList.add('cardBack')
     cardElement.appendChild(cardBack)
-
+    // places image in front of card
     const cardImage = document.createElement('img')
     cardImage.src = img
     cardElement.appendChild(cardImage)
-
+    // checks if card is clicked to flip
     cardElement.addEventListener('click', flipCard)
     gameBoard.appendChild(cardElement)
   });
 
+  // function to reset game (clear board)
   function resetGame() {
     const gameBoard = document.getElementById('gameBoard');
       while (gameBoard.firstChild) {
         gameBoard.removeChild(gameBoard.firstChild);
       }
-      // Reset other game-related variables and elements
+      // reset other game-related variables and elements
       flippedCards = [];
       moves = 0;
       pairs = 0;
       moveCount.textContent = moves;
       timer.textContent = '0';
       clearInterval(timerInterval);
-      // Start a new game by calling startGame()
+      // start a new game by calling startGame()
       startGame();
-      // Hide the congratulations message
+      // hide the congratulations message
       document.getElementById('congratulations').classList.add('hidden');
-      // Show the main game container
+      // show the main game container
       document.querySelector('main').classList.remove('hidden');
   }
 
+  // checks for flipped cards and creates solved pairs
   function flipCard() {
+    // if 2 are flipped
     if (flippedCards.length < 2 && !this.classList.contains('flipped')) {
+      // sends signal that they are flipped
       this.classList.add('flipped')
       flippedCards.push(this)
+      // adds to moves
       moves++
       moveCount.textContent = moves
 
+      // when two are flipped, checks if match based on index
       if (flippedCards.length === 2) {
+        // sets vars for flipped cards
         const card1Index = flippedCards[0].dataset.cardIndex
         const card2Index = flippedCards[1].dataset.cardIndex
 
+        // checks if match, if so then add to pairs and add to flipped array
         if (images[card1Index] === images[card2Index]) {
           pairs++
           flippedCards = []
         } else {
+          // flip cards back over if not matched
           setTimeout(() => {
             flippedCards.forEach(card => card.classList.remove('flipped'))
             flippedCards = []
@@ -109,12 +128,16 @@ async function startGame() {
         }
       }
 
+      // checks for win
       if (pairs === 8) {
+        // stops timer
         clearInterval(timerInterval)
 
+        // gets cookies for compare
         const fastestTime = parseInt(getCookie('fastestTime')) || Infinity
         const leastMoves = parseInt(getCookie('leastMoves')) || Infinity
 
+        // checks if cookies are lower, if so set new high scores
         if (moves < leastMoves) {
           setCookie('leastMoves', moves)
         } else if (moves === 0) {
@@ -127,6 +150,7 @@ async function startGame() {
           setCookie('fastestTime', timer.textContent)
         }
 
+        // show game win screen
         const congratulations = document.getElementById('congratulations');
         const winMoves = document.getElementById('winMoves');
         const winTime = document.getElementById('winTime');
@@ -138,14 +162,17 @@ async function startGame() {
     }
   }
 
+  // sets var for timer
+  startTime = Date.now();
+  timerInterval = setInterval(updateTimer, 1000)
+
+  // timer in seconds
   function updateTimer() {
     const currentTime = Math.floor((Date.now() - startTime) / 1000)
     timer.textContent = currentTime
   }
 
-  startTime = Date.now();
-  timerInterval = setInterval(updateTimer, 1000)
-
+  // function to set cookie
   function setCookie(name, value, days) {
     const expires = new Date();
     expires.setTime(expires.getTime() + (days * 24 * 60 * 60 * 1000));
@@ -153,6 +180,7 @@ async function startGame() {
     console.log(document.cookie)
   }
 
+  // gets cookies from stored data
   function getCookie(name) {
     const cookies = document.cookie.split(';')
     for (let i = 0; i < cookies.length; i++) {
@@ -165,6 +193,7 @@ async function startGame() {
   }
 }
 
+// api fetch
 async function fetchDogs() {
   const url = 'https://dog-breeds2.p.rapidapi.com/dog_breeds';
   const options = {
@@ -178,6 +207,7 @@ async function fetchDogs() {
   return fetch(url, options)
     .then(response => response.json())
     .then(data => {
+      // take 8 random dogs and send to frontend
       const shuffledBreeds = data.slice().sort(() => Math.random() - 0.5);
       return shuffledBreeds.slice(0, 8);
     });
