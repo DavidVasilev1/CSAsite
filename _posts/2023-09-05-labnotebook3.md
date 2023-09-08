@@ -16,7 +16,7 @@ date: 2023-09-05 12:00:00 +0000
 
 For the pair programming project we decided to create a program that uses user inputs and outputs and also stores score and fastest time using cookies. It also pulls images from a RapidAPI to the game cards, which when matched stay flipped over.
 
-### ```addevenlistener()```
+### addEvenListener()
 
 instead of doing ```onclick()``` you can use the ```addeventlistener()``` function in order to detect a click and then trigger a series of actions. in our code we used it to start the game as well as trigger the visibility of certain elements. this allowed one button to trigger multiple functions at once.
 
@@ -36,7 +36,7 @@ start.addEventListener("click", function() {
 });
 ```
 
-### ```async function example()```
+### async function Example()
 
 using ```async``` functions allows us to run multiple functions at once without overloading the computational power of the computer. this is important when running the timer, game rule functions, and main game function for example. the timer and other game rule functions won't lag while the main game function dominates the computational power of the computer.
 
@@ -77,7 +77,7 @@ function setData() {
 // ... rest of code
 ```
 
-### ```queryselector()```
+### querySelector()
 
 This function takes the first element that meets the the selector requirements and assigns it to a variable.
 
@@ -86,7 +86,7 @@ This function takes the first element that meets the the selector requirements a
 const gameContainer = document.querySelector('.game-container');
 ```
 
-### ```this```
+### this.
 
 this is keyword that refers to the current execution of a code block. this allows for privately assigned variables when having instances of a program running. with this, we can have one variable hold data multiple different ways and be used multiple times. in this case we use it to add a tag ```flipped``` to the ```classlist``` of the card that is clicked in order to count up how many cards are flipped at once in the board that is generated through iteration rather than manually. this allows for simpler code rather than having a function for each card that checks if the card is flipped.
 
@@ -117,7 +117,7 @@ start.addEventListener("click", function() {
 });
 ```
 
-### ```foreach()```
+### forEach()
 
 we use the ```foreach()``` function many times throughout our code to simplify it using iteration. in this example, the ```foreach()``` function goes through each image that the api has pulled using another ```foreach()``` function, and it assigns an index to each card for later game rule checks and it also places the image onto each of the cards, so that each card has a different image.
 
@@ -142,7 +142,7 @@ images.forEach((img, index) => {
   });
 ```
 
-### ```date```
+### Date.
 
 This default object from Javascript that allows for easier time and date manipulation. In this case, we use it as a timer to count seconds so that we don't have to worry about the logic behind counting seconds.
 
@@ -195,4 +195,81 @@ function getCookie(name) {
 
 ## JQuery
 
+this is an example of a data table made using jquery. there is a runtime link instead of an output because there were errors in locating the ```datatable()``` function.
 
+
+```python
+%%html
+
+<head>
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+  <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+</head>
+
+<table id="table" class="table">
+  <thead id="head">
+      <tr>
+          <th>Category</th>
+          <th>Common Name</th>
+          <th>Climate</th>
+          <th>Family</th>
+          <th>Latin Name</th>
+          <th>Image</th>
+      </tr>
+  </thead>
+  <tbody id="body"></tbody>
+</table>
+
+
+<script>
+  const settings = {
+    async: true,
+    crossDomain: true,
+    url: 'https://house-plants2.p.rapidapi.com/all-lite',
+    method: 'GET',
+    headers: {
+      'X-RapidAPI-Key': '701410bf7emshbaf1fa99b2e4e5bp1c0ee6jsn8f8f51602e3f',
+      'X-RapidAPI-Host': 'house-plants2.p.rapidapi.com'
+    }
+  };
+  
+  $.ajax(settings).done(function (response) {
+    console.log(response);
+
+
+    for (const row of response) {
+
+const commonName = Array.isArray(row["Common name"]) ? row["Common name"].join(', ') : row["Common name"];
+const latinName = Array.isArray(row["Latin name"]) ? row["Latin name"].join(', ') : row["Latin name"];
+
+      $('#body').append('<tr><td>' + 
+          row.Categories + '</td><td>' + 
+          commonName + '</td><td>' + 
+          row.Climat + '</td><td>' +
+          row.Family + '</td><td>' + 
+          latinName + '</td><td>' + 
+          '<img src="' + row.Img +'">' + '</td></tr>');
+    }
+    $("#table").DataTable();
+  });
+
+    
+</script>
+```
+
+[Runtime]({{ site.baseurl }}/dataTable.html)
+
+### Why jQuery
+
+jQuery is a much better formatted table that iteratively generates when loading. This allows it to take large amounts of data, like from an API, and display it for everyone to see. This is very important when wanting to save time. It also allows for there to be search and also allows for sorting based on the categories provided. This is again useful for looking through data manually when the looking through a large database.
+
+### Why Not Markdown or HTML
+
+With HTML and Markdown, it is better to create such tables for smaller data sets. Although you can generate larger tables with Python and Javascript, you still don't get imbedded search and sort features like in jQuery and this leads to a worse UI for large data sets.
+
+### Some Interesting Things I DId
+
+- ```array.isarray()``` - this checks whether a given value is an array or not and then it can complete certain tasks
+- ```row["common name"].join(', ')``` - this joins the arrays if there is an array under this variable
+- ```: row["common name"]``` - if it is not an array, then the value is returned as it was initially found
