@@ -3,7 +3,7 @@ title: Pair Showcase
 author: david
 categories: ['Lesson']
 tags: ['HTML', 'CSS', 'Javascript']
-type: Lesson
+type: tangibles
 week: 3
 description: Pair Showcase Code and Output.
 toc: True
