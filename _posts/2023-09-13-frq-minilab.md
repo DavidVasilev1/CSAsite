@@ -4,7 +4,7 @@ author: david
 categories: ['Lab Notebook']
 tags: ['Java', 'Collegeboard']
 type: tangibles
-week: 0
+week: 4
 description: First CSA FRQ.
 toc: True
 comments: True
