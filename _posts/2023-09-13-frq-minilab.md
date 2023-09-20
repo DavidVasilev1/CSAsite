@@ -458,7 +458,7 @@ ArrayTester.main(null);
     doesn't contain all values in each array
 
 
-### Correct Latin Square
+## Correct Latin Square
 
 We can start by checking the Latin square: 
 
