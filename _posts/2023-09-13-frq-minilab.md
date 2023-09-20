@@ -135,7 +135,7 @@ Coming with this answer, I decided to being by storing the variable as an intege
 int[] result = new int[arr2D.length];
 ```
 
-I then created a for loop which would iterate through the rows of `arr2D` gathering the value from the column that was called in the `main()` object. The iteration follows a simple yet effective integer counting approach which would set `i = 0` and go through the number of rows `arr2D.length` while `i` was less than the total number of rows in `arr2D`. The result would then be stored based on the value that was pulled from the column number that was called and the row number that the value was in, column being defined as `c` and the row number being defined as `i`.
+I then created a for loop which would iterate through the rows of `arr2D` gathering the value from the column that was called in the `main()` method. The iteration follows a simple yet effective integer counting approach which would set `i = 0` and go through the number of rows `arr2D.length` while `i` was less than the total number of rows in `arr2D`. The result would then be stored based on the value that was pulled from the column number that was called and the row number that the value was in, column being defined as `c` and the row number being defined as `i`.
 
 
 ```java
@@ -151,7 +151,7 @@ The result would then be returned with a simple return statement.
 return result;
 ```
 
-In order to make the code work in Jupyter I had to add a `main()` object in order to call the object `GetColumn()` and return the `result`. I used a simple for loop to iterate through all of the values that were stored in the array `column` and print them as a result.
+In order to make the code work in Jupyter I had to add a `main()` method in order to call the method `GetColumn()` and return the `result`. I used a simple for loop to iterate through all of the values that were stored in the array `column` and print them as a result.
 
 
 ```java
@@ -226,24 +226,24 @@ public class ArrayTester {
   }
 
   public static boolean containsDuplicates(int[] arr) {
-    // loop to check every value in the array
-    for (int i = 0; i < arr.length - 1; i++) {
-      // second loop checking all value in the array
-      for (int j = i + 1; j < arr.length; j++) {
-        // checking to see if there are duplicates in the same array
-        if (arr[i] == arr[j]) {
-          // this means that a cuplicate is found
-          return true;
-        }
+  // loop to check every value in the array
+  for (int i = 0; i < arr.length - 1; i++) {
+    // second loop checking all value in the array
+    for (int j = i + 1; j < arr.length; j++) {
+      // checking to see if there are duplicates in the same array
+      if (arr[i] == arr[j]) {
+        // this means that a duplicate is found
+        return true;
       }
     }
-    // no duplicates are found in the array
-    return false;
   }
+  // no duplicates are found in the array
+  return false;
+}
 
   public static boolean isLatin(int[][] square){
     // checks for duplicate numbers
-    if (!containsDuplicates(square[0])) {
+    if (containsDuplicates(square[0])) {
       return false;
     }
 
@@ -278,16 +278,11 @@ ArrayTester.main(null);
     false
 
 
-
-```java
-
-```
-
 ### Explanation for Answer
 
-In this answer, I began with the same `getColumn()` object as before. I then added on the the two objects that were not required to be created for the Collegeboard FRQ but were required for operation of the program, `hassAllValues()` and `containsDuplicates()`. 
+In this answer, I began with the same `getColumn()` method as before. I then added on the the two methods that were not required to be created for the Collegeboard FRQ but were required for operation of the program, `hassAllValues()` and `containsDuplicates()`. 
 
-For the first object, `hasAllValues()`, I simply created a comparer that takes two arrays and compared the values within them using a for loop. This is similar to the loop in the `getColumn()` object but it just has different variables. The first loop goes through all values in the first array, one by one comparing them to all the other values in the second array with the if statement. A boolean is set to true or false depending on if matching values are found or not. This is done for every value in the first array.
+For the first method, `hasAllValues()`, I simply created a comparer that takes two arrays and compared the values within them using a for loop. This is similar to the loop in the `getColumn()` method but it just has different variables. The first loop goes through all values in the first array, one by one comparing them to all the other values in the second array with the if statement. A boolean is set to true or false depending on if matching values are found or not. This is done for every value in the first array.
 
 
 ```java
@@ -317,7 +312,7 @@ public static boolean hasAllValues(int[] arr1, int[] arr2) {
 }
 ```
 
-For the second object, `containsDuplicate()`, I created two loops once again similar to the loops in `getColumn()`, this time checking to see if there are duplicate values in the same array. There is a situation where there could be a duplicate value found because it checks itself but to avoid that, we set the second loop value to always be the next value in the array, not the same, with `in j = i + 1`. In summary, we check to see if the value chosen is the same as all other values in the array, and if it isn't, then we return a boolean that states there are no duplicate values in the array.
+For the second method, `containsDuplicate()`, I created two loops once again similar to the loops in `getColumn()`, this time checking to see if there are duplicate values in the other arrays. There is a situation where there could be a duplicate value found because it checks itself but to avoid that, we set the second loop value to always be the next value in the array, not the same, with `in j = i + 1`. In summary, we check to see if the value chosen is the same as all other values in the array, and if it isn't, then we return a boolean that states there are no duplicate values in the array.
 
 
 ```java
@@ -328,7 +323,7 @@ public static boolean containsDuplicates(int[] arr) {
     for (int j = i + 1; j < arr.length; j++) {
       // checking to see if there are duplicates in the same array
       if (arr[i] == arr[j]) {
-        // this means that a cuplicate is found
+        // this means that a duplicate is found
         return true;
       }
     }
@@ -338,17 +333,21 @@ public static boolean containsDuplicates(int[] arr) {
 }
 ```
 
-The assigned object we are supposed to create is `isLatin()`. This checks if the 2D array is a Latin square. This means that all of the number in the square have to be the same, but there can't be repeating squares in the same rows or columns, like this:
-`[1,2,3]
-[2,3,1]
-[3,1,2]`
+The assigned method we are supposed to create is `isLatin()`. This checks if the 2D array is a Latin square. This means that all of the number in the square have to be the same, but there can't be repeating squares in the same rows or columns, like this:
 
+```
+[1,2,3]
+[2,3,1]
+[3,1,2]
+```
+
+In order to do this, we set the array to be `square`. This allows us to go through each array in the 2D array and check the necessary qualities. We need to check three points for the square to be Latin: are there duplicate numbers in the arrays, do all arrays contain all values, and do all columns contain all values. First, we check if there are duplicates with `containsDuplicates()`. If there are duplicates then the statement will return a false statement and the array is a Latin square. Next, we check if all arrays have all values. We first do this for each row, having a loop that goes through the entire 2D array, checking if each row has the same or different values. We then do it for each column, this time using the `getColumn()` method to check and see as well. If there are none of the same values in each row and each column of the 2D array, then we pass all three tests and return a `true` boolean.
 
 
 ```java
 public static boolean isLatin(int[][] square){
     // checks for duplicate numbers
-    if (!containsDuplicates(square[0])) {
+    if (containsDuplicates(square[0])) {
       return false;
     }
 
@@ -370,3 +369,362 @@ public static boolean isLatin(int[][] square){
     return true;
   }
 ```
+
+To actually run the code, we need a `main()` method, which in this case prints the boolean result from the method `isLatin()`.
+
+
+```java
+public static void main(String[] args) {
+    boolean result = isLatin(arr2D);
+    System.out.println(result);
+  }
+```
+
+For this specific array, we can test and see which condition isn't met with strings. Here is a working example below:
+
+
+```java
+public class ArrayTester {
+  static int[][] arr2D = { { 0, 1, 2 },
+                          { 3, 4, 5 },
+                          { 6, 7, 8 },
+                          { 9, 5, 3 } };
+
+  public static int[] getColumn(int[][] arr2D, int c) {
+    int[] result = new int[arr2D.length];
+
+    for (int i = 0; i < arr2D.length; i++) {
+      result[i] = arr2D[i][c];
+    }
+    return result;
+  }
+
+  public static boolean hasAllValues(int[] arr1, int[] arr2) {
+    for (int i = 0; i < arr1.length; i++) {
+      boolean found = false;
+      for (int j = 0; j < arr2.length; j++) {
+        if (arr1[i] == arr2[j]) {
+          found = true;
+          break;
+        }
+      }
+      if (!found) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  public static boolean containsDuplicates(int[] arr) {
+    for (int i = 0; i < arr.length; i++) {
+      for (int j = i + 1; j < arr.length; j++) {
+        if (arr[i] == arr[j]) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  public static String isLatin(int[][] square){
+    if (containsDuplicates(square[0])) {
+      return "doesn't contain all values in each array";
+    }
+
+    for (int i = 1; i < square.length; i++) {
+      if (!hasAllValues(square[0], square[i])) {
+        return "has a duplicate value in the same row";
+      }
+    }
+
+    for (int c = 0; c < square[0].length; c++) {
+      if (!hasAllValues(square[0], getColumn(square, c))) {
+        return "has a duplicate value in the same column";
+      }
+    }
+
+    return "This is a Latin square";
+  }
+
+  public static void main(String[] args) {
+    String result = isLatin(arr2D);
+    System.out.println(result);
+  }
+}
+
+ArrayTester.main(null);
+```
+
+    doesn't contain all values in each array
+
+
+### Correct Latin Square
+
+We can start by checking the Latin square: 
+
+```
+{ 0, 1, 2 }
+{ 1, 2, 0 }
+{ 2, 0, 1 }
+```
+
+This is a Latin square because all rows and columns have the same numbers, and not row or column has the same repeating number. Overall, this will tell us if the code is working properly or not.
+
+
+```java
+public class ArrayTester {
+  static int[][] arr2D = { { 0, 1, 2 },
+                          { 1, 2, 0 },
+                          { 2, 0, 1 } };
+
+  public static int[] getColumn(int[][] arr2D, int c) {
+    int[] result = new int[arr2D.length];
+
+    for (int i = 0; i < arr2D.length; i++) {
+      result[i] = arr2D[i][c];
+    }
+    return result;
+  }
+
+  public static boolean containsDuplicates(int[] arr) {
+    for (int i = 0; i < arr.length; i++) {
+      for (int j = i + 1; j < arr.length; j++) {
+        if (arr[i] == arr[j]) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  public static boolean hasAllValues(int[] arr1, int[] arr2) {
+    for (int i = 0; i < arr1.length; i++) {
+      boolean found = false;
+      for (int j = 0; j < arr2.length; j++) {
+        if (arr1[i] == arr2[j]) {
+          found = true;
+          break;
+        }
+      }
+      if (!found) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  public static String isLatin(int[][] square){
+    if (containsDuplicates(square[0])) {
+      return "doesn't contain all values in each array";
+    }
+
+    for (int i = 1; i < square.length; i++) {
+      if (!hasAllValues(square[0], square[i])) {
+        return "has a duplicate value in the same row";
+      }
+    }
+
+    for (int c = 0; c < square[0].length; c++) {
+      if (!hasAllValues(square[0], getColumn(square, c))) {
+        return "has a duplicate value in the same column";
+      }
+    }
+
+    return "This is a Latin square";
+  }
+
+  public static void main(String[] args) {
+    String result = isLatin(arr2D);
+    System.out.println(result);
+  }
+}
+
+ArrayTester.main(null);
+```
+
+    This is a Latin square
+
+
+### Failure Points
+
+We can also test different fail cases where a square does not fulfill the parameters to be considered a Latin square.
+
+#### Repeating Value in Row
+
+The first instance is where there is a duplicate value in the same row. We can test this by setting a square up in the following way:
+
+```
+{ 0, 1, 2 }
+{ 1, 2, 0 }
+{ 2, 0, 1 }
+{ 1, 1, 0 }
+```
+
+Testing it we get:
+
+
+```java
+public class ArrayTester {
+  static int[][] arr2D = { { 0, 1, 2 },
+                          { 1, 2, 0 },
+                          { 2, 0, 1 },
+                          { 1, 1, 0 } };
+
+  public static int[] getColumn(int[][] arr2D, int c) {
+    int[] result = new int[arr2D.length];
+
+    for (int i = 0; i < arr2D.length; i++) {
+      result[i] = arr2D[i][c];
+    }
+    return result;
+  }
+
+  public static boolean containsDuplicates(int[] arr) {
+    for (int i = 0; i < arr.length; i++) {
+      for (int j = i + 1; j < arr.length; j++) {
+        if (arr[i] == arr[j]) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  public static boolean hasAllValues(int[] arr1, int[] arr2) {
+    for (int i = 0; i < arr1.length; i++) {
+      boolean found = false;
+      for (int j = 0; j < arr2.length; j++) {
+        if (arr1[i] == arr2[j]) {
+          found = true;
+          break;
+        }
+      }
+      if (!found) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  public static String isLatin(int[][] square){
+    if (containsDuplicates(square[0])) {
+      return "doesn't contain all values in each array";
+    }
+
+    for (int i = 1; i < square.length; i++) {
+      if (!hasAllValues(square[0], square[i])) {
+        return "has a duplicate value in the same row";
+      }
+    }
+
+    for (int c = 0; c < square[0].length; c++) {
+      if (!hasAllValues(square[0], getColumn(square, c))) {
+        return "has a duplicate value in the same column";
+      }
+    }
+
+    return "This is a Latin square";
+  }
+
+  public static void main(String[] args) {
+    String result = isLatin(arr2D);
+    System.out.println(result);
+  }
+}
+
+ArrayTester.main(null);
+```
+
+    has a duplicate value in the same row
+
+
+In this case the last row has duplicate numbers `1`, making this not a Latin square.
+
+#### Repeating Value in Column
+
+Another instance in which this code would return the array as not a Latin square is when the values of the column repeat. We can test this by setting the array up like so:
+
+```
+{ 1, 2, 0 }
+{ 0, 1, 2 }
+{ 1, 2, 0 }
+```
+
+Testing it we get:
+
+
+```java
+public class ArrayTester {
+  static int[][] arr2D = { { 1, 2, 0 },
+                          { 0, 1, 2 },
+                          { 1, 2, 0 } };
+
+  public static int[] getColumn(int[][] arr2D, int c) {
+    int[] result = new int[arr2D.length];
+
+    for (int i = 0; i < arr2D.length; i++) {
+      result[i] = arr2D[i][c];
+    }
+    return result;
+  }
+
+  public static boolean containsDuplicates(int[] arr) {
+    for (int i = 0; i < arr.length; i++) {
+      for (int j = i + 1; j < arr.length; j++) {
+        if (arr[i] == arr[j]) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  public static boolean hasAllValues(int[] arr1, int[] arr2) {
+    for (int i = 0; i < arr1.length; i++) {
+      boolean found = false;
+      for (int j = 0; j < arr2.length; j++) {
+        if (arr1[i] == arr2[j]) {
+          found = true;
+          break;
+        }
+      }
+      if (!found) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  public static String isLatin(int[][] square){
+    if (containsDuplicates(square[0])) {
+      return "doesn't contain all values in each array";
+    }
+
+    for (int i = 1; i < square.length; i++) {
+      if (!hasAllValues(square[0], square[i])) {
+        return "has a duplicate value in the same row";
+      }
+    }
+
+    for (int c = 0; c < square[0].length; c++) {
+      if (!hasAllValues(square[0], getColumn(square, c))) {
+        return "has a duplicate value in the same column";
+      }
+    }
+
+    return "This is a Latin square";
+  }
+
+  public static void main(String[] args) {
+    String result = isLatin(arr2D);
+    System.out.println(result);
+  }
+}
+
+ArrayTester.main(null);
+```
+
+    has a duplicate value in the same column
+
+
+In this case, the values in the first column have duplicates in the first and third row, this being `1`. This is also true for the rest of the values in the first and third rows.
