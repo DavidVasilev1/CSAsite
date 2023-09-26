@@ -1,7 +1,7 @@
 ---
 title: FRQ Mini-lab project
 author: mort
-categories: ['Lesson']
+categories: ['Lab Notebook']
 tags: ['Collegeboard', 'FRQS', 'Java']
 type: hacks
 week: 4
