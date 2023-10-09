@@ -9,7 +9,6 @@ description: First CSA FRQ.
 toc: True
 comments: True
 date: 2023-09-13 13:00:00 +0000
-pin: True
 ---
 
 # FRQ 2018 Number 4

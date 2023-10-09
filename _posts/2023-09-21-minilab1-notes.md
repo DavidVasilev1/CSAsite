@@ -9,7 +9,6 @@ description: Notes on Collegeboard FRQs and how to present.
 toc: True
 comments: True
 date: 2023-09-21 12:00:00 +0000
-pin: True
 ---
 
 ## Raw Collaboration Notes
