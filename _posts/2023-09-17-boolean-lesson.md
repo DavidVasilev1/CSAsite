@@ -9,6 +9,7 @@ description: Lesson on booleans and if statements.
 toc: True
 comments: True
 date: 2023-10-10 12:00:00 +0000
+pin: True
 ---
 
 # APCSA Unit 3: College Board Learning Objectives and Standards
@@ -263,4 +264,68 @@ Here is how the method should work:
 (3) Print the necessary dialogue (ex. [year] is/is not a leap year) AND return the value of any boolean(s) used
 
 
+
+```java
+import java.util.Scanner;
+
+class Year {
+    private int year;
+
+    public Year(int year) {
+        this.year = year;
+    }
+
+    public boolean LeapYear() {
+        return (year % 4 == 0);
+    }
+
+    public int compareTo(Year otherYear) {
+        return Integer.compare(this.year, otherYear.year);
+    }
+}
+
+public class LeapYear {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+
+        System.out.println("Enter year: ");
+        int yearValue = input.nextInt();
+        int yearValue2 = input.nextInt();
+
+        Year year1 = new Year(yearValue);
+        Year year2 = new Year(yearValue2);
+
+        boolean isLeapYear = year1.LeapYear();
+        boolean isLeapYear2 = year2.LeapYear();
+        int comparisonResult = year1.compareTo(year2);
+
+        if (isLeapYear) {
+            System.out.println(yearValue + " is a leap year.");
+        } else {
+            System.out.println(yearValue + " is not a leap year.");
+        }
+
+        if (isLeapYear2) {
+          System.out.println(yearValue2 + " is a leap year.");
+        } else {
+            System.out.println(yearValue2 + " is not a leap year.");
+        }
+
+        if (comparisonResult < 0) {
+            System.out.println(yearValue + " < " + yearValue2);
+        } else if (comparisonResult > 0) {
+            System.out.println(yearValue + " > " + yearValue2);
+        } else {
+            System.out.println(yearValue + " = " + yearValue2);
+        }
+    }
+}
+
+LeapYear.main(null);
+```
+
+    Enter year: 
+    1200 is a leap year.
+    2000 is a leap year.
+    1200 < 2000
 

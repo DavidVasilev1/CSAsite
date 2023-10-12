@@ -9,7 +9,6 @@ description: Lesson on object classes.
 toc: True
 comments: True
 date: 2023-10-05 12:00:00 +0000
-pin: True
 ---
 
 ### Java objects
