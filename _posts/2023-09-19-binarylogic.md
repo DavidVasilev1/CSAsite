@@ -9,7 +9,6 @@ description: Lesson on boolean logics!
 toc: True
 comments: True
 date: 2023-10-10 12:00:00 +0000
-pin: true
 ---
 
 

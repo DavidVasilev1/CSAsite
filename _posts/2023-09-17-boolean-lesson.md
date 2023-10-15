@@ -9,7 +9,6 @@ description: Lesson on booleans and if statements.
 toc: True
 comments: True
 date: 2023-10-10 12:00:00 +0000
-pin: True
 ---
 
 # APCSA Unit 3: College Board Learning Objectives and Standards
