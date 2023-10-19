@@ -128,12 +128,42 @@ class Even {
     int n = input.nextInt();
 
     while ( i < n ) {
-      System.out.println()
+      System.out.println();
     }
   }
 }
 Even.main(null);
 ```
+
+
+    |   
+
+    |   
+
+    |   class Even {
+
+    |     public static void main(String[] args) {
+
+    |       Scanner input = new Scanner(System.in);
+
+    |       int n = input.nextInt();
+
+    |   
+
+    |       while ( i < n ) {
+
+    |         System.out.println();
+
+    |       }
+
+    |     }
+
+    |   }
+
+    Unresolved dependencies:
+
+       - variable i
+
 
 - Three parts in for loop header: variable initialization, Boolean (conditional) expression, and increment/decrement statement
 
