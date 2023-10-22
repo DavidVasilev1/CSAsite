@@ -190,7 +190,7 @@ for (var animal of animals) {
 <br>
 ![Draw_io_example]({{site.baseurl}}/images/draw_io_example.png)
 
-![draw_io_example.png](attachment:draw_io_example.png)
+![draw_io_example.png](draw_io_example.png)
 
 - In this project we added multiple classes
 - This draw io board shows that a parent class can also extend a class 

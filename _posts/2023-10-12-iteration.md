@@ -9,7 +9,6 @@ description: while Loops, for Loops, Developing Algorithms Using Strings, Nested
 toc: True
 comments: True
 date: 2023-10-12 12:00:00 +0000
-pin: True
 ---
 
 # U4 | Iteration
@@ -127,49 +126,32 @@ class Even {
     Scanner input = new Scanner(System.in);
     int n = input.nextInt();
 
-    while ( i < n ) {
-      System.out.println();
+    int sum = 0;
+
+    for (int i = 2; i <= n; i += 2) {
+      System.out.println(i + " ");
+      sum += i;
     }
+
+    System.out.println("Sum = " + sum);
   }
 }
 Even.main(null);
 ```
 
-
-    |   
-
-    |   
-
-    |   class Even {
-
-    |     public static void main(String[] args) {
-
-    |       Scanner input = new Scanner(System.in);
-
-    |       int n = input.nextInt();
-
-    |   
-
-    |       while ( i < n ) {
-
-    |         System.out.println();
-
-    |       }
-
-    |     }
-
-    |   }
-
-    Unresolved dependencies:
-
-       - variable i
+    2 
+    4 
+    6 
+    8 
+    10 
+    12 
+    14 
+    Sum = 56
 
 
 - Three parts in for loop header: variable initialization, Boolean (conditional) expression, and increment/decrement statement
 
 Question: Which part is which?
-
-
 
 - variable initialization (int i=0): sets variable before loop starts
 - Boolean (conditional) expression (i < 5): defines condition for loop to run, in this case, the loop continues as long as i is less than 5, so loops 5 times i 05
@@ -633,19 +615,29 @@ public class IntChecker {
     System.out.println("Pick a number between 1-10");
     int choice = scan.nextInt();
     int i = 1;
-    while (choice != i) {
+    int count = 0;
+    while (count <= 10) {
       if (choice == i) {
         System.out.println("You guessed the number.");
         break;
       } else {
         System.out.println("Keep guessing.");
+        choice = scan.nextInt();
+        count++;
       }
-    } 
+    }
+    scan.close();
   }
 }
 
 IntChecker.main(null);
 ```
+
+    Pick a number between 1-10
+    Keep guessing.
+    Keep guessing.
+    You guessed the number.
+
 
 ---
 
@@ -655,9 +647,9 @@ IntChecker.main(null);
 
 <b>Essential Knowledge</b>: A statement execution count indicates the number of times a statement is executed by the program
 
-<h3> What IS informal code analysis? </h3>
+## What IS informal code analysis?
 
-Answer:
+Answer: It is analyzing code without actually running it.
 
 
 ```java
@@ -692,11 +684,11 @@ InformalCodeAnalysis.main(null);
 
 <b>How many times will statement 1 execute? </b>
 
-Answer:
+Answer: 10 times
 
 <b>How many times will statement 2 execute?</b>
 
-Answer:
+Answer: 10 times
 
 
 ```java
@@ -727,17 +719,14 @@ InformalCodeAnalysis.main(null);
 
 <b>How many times will statement 3 execute?</b>
 
-Answer: 9
+Answer: 9 times
 
 
 ```java
 // Rewrite the code segment below to have a faster run-time based on statement execution counts
-for (int k = 0; k < 135; k++)
+for (int k = 0; k < 135; k+=5)
 {
-    if (k % 5 == 0)
-    {
-        System.out.println(k);
-    }
+   System.out.println(k);
 }
 ```
 
@@ -782,12 +771,14 @@ while (num % 2 != 0)
 }
 ```
 
-    8
+    1
+    3
+    6
 
 
 <b>What is the min/max number of times statement 4 will execute?</b>
 
-Answer:
+Answer: Minimum - 1; Maximum - infinite
 
 
 ```java
@@ -799,28 +790,28 @@ for (int outer = 0; outer < 3; outer++)
     for (int inner = 0; inner < 4; inner++)
     {
         // statement #5
-        System.out.println(i++);
+        System.out.println(inner);
     }
 }
 ```
 
+    0
     1
     2
     3
-    4
-    5
-    6
-    7
-    8
-    9
-    10
-    11
-    12
+    0
+    1
+    2
+    3
+    0
+    1
+    2
+    3
 
 
 <b>How many times will statement #5 execute?</b>
 
-Answer:
+Answer: 12 times
 
 
 ```java
@@ -840,35 +831,37 @@ while (k < 5)
 }
 ```
 
-    1
-    5
-    3
-    3
-    6
-    5
-    2
-    1
-    5
-    2
-    1
-    1
-    2
-    3
     6
     2
     6
     5
+    2
+    4
+    5
+    1
+    2
+    2
+    3
+    5
+    6
+    1
+    3
+    3
+    4
     6
 
 
 <b>How many times will statement #6 execute?</b>
 
-Answer:
+Answer: random times, depends on random number generated
 
 # 4.5 Hacks
 
 
 <b>#1 How many times will statement #1 and statement #2 execute in the code segments below? </b>
+
+- Statement 1: 1000
+- Statement 2: 44
 
 
 ```java
@@ -887,6 +880,8 @@ for (int k = 6; k < 50; k++)
 ```
 
 <b>#2 How many times will statement #3 execute for the code segment below?</b>
+
+- Statement 3: 4 per iteration -> 28 total
 
 
 ```java
@@ -912,14 +907,67 @@ while (k <=7)
 
 ```java
 // 3a code
+for (int i = 0; i < 10; i++) {
+  System.out.println(i);
+}
 ```
+
+    0
+    1
+    2
+    3
+    4
+    5
+    6
+    7
+    8
+    9
+
 
 
 ```java
 // 3b code
+int i = 0;
+
+while (i < 10) {
+  i++;
+  System.out.println(i);
+}
 ```
+
+    1
+    2
+    3
+    4
+    5
+    6
+    7
+    8
+    9
+    10
+
 
 
 ```java
 // 3c code
+int i = 0;
+
+while (i < 10) {
+  for (int k = 0; k < 10; k++) {
+    System.out.println(k);
+    i++;
+  }
+}
 ```
+
+    0
+    1
+    2
+    3
+    4
+    5
+    6
+    7
+    8
+    9
+
