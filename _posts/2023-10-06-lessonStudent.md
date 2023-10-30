@@ -1,5 +1,5 @@
 ---
-title: Lesson 9.1 and 10.1 Student
+title: Lesson 9 Student
 author: david
 categories: ['Lesson']
 tags: ['Collegeboard', 'Java', 'Unit 10', 'Unit 9']
@@ -139,6 +139,382 @@ This example shows how the `Automobile` class is extended twice, with the `Truck
 
 A: No, you would need to encapsulate the private variable as shown above, through a method in the superclass and then inherit that var with `super()`, which will be explained later.
 
+## 9.2 Writing Constructors for Subclasses
+
+### Learning Objectives
+
+- Constructors are not inherited
+- When a subclass's constructor doesn't explicitly call a superclass's constructor using `super`, Java inserts a call to the superclass's no-argument constructor.
+- The actual parameters passed in the call to the superclass constructor provide values that the constructor can use to initialize the object's instance variables.
+- Regardless of whether the superclass constructor is called implicitly or explicitly, the process of calling superclass constructors continues until the Object constructor is called. At this point, all of the constructors within the hierarchy execute beginning with the Object constructor.
+
+**Important note:** Constructors are NOT inherited by the subclass. See this in action below.
+
+
+```java
+// TO BE INCLUDED EARLIER IN THE LESSON. IT IS NECESSARY FOR THE FUNCTIONALITY OF THIS SECTION.
+
+class Vehicle {
+    public int year;
+    public String manufacturer;
+
+    public Vehicle(int year, String manufacturer) { // constructor for parent class
+        this.year = year;
+        this.manufacturer = manufacturer;
+    }
+
+    public Vehicle() {
+        this.year = 2000;
+        this.manufacturer = "Unknown";
+    }
+
+    // method to be used later
+    public void drive() {
+        System.out.println("The driver is driving the car.");
+    }
+}
+```
+
+
+```java
+class Car extends Vehicle {
+    public String model;
+
+    public Car(String model) {
+        this.model = model;
+    }
+}
+
+public class VehicleDemonstration {
+    public static void main(String[] args) {
+        Car myCar = new Car("Altima");
+        System.out.println("Year: " + myCar.year);
+        System.out.println("Manufacturer: " + myCar.manufacturer);
+        System.out.println("Model: " + myCar.model);
+    }
+}
+
+VehicleDemonstration.main(null);
+```
+
+    Year: 2000
+    Manufacturer: Unknown
+    Model: Altima
+
+
+As you can see, the output uses the no-argument construction info from the base `Vehicle` constructor.
+
+The `super` keyword can be used to change parent constructor values.
+
+
+```java
+class NewCar extends Vehicle {
+    public String model;
+
+    public NewCar(int year, String manufacturer, String model) {
+        super(year, manufacturer); // see the use of super here
+        // what happens if you use no arguments with super()? see reminders below
+        this.model = model;
+    }
+}
+
+public class VehicleDemonstration2 {
+    public static void main(String[] args) {
+        NewCar myCar = new NewCar(2016, "Nissan", "Altima");
+        System.out.println("Year: " + myCar.year);
+        System.out.println("Manufacturer: " + myCar.manufacturer);
+        System.out.println("Model: " + myCar.model);
+    }
+}
+
+VehicleDemonstration2.main(null);
+```
+
+    Year: 2016
+    Manufacturer: Nissan
+    Model: Altima
+
+
+#### Key Reminders:
+
+1. If you do call `super()` in your constructor, it <mark>has to be the first line of the constructor</mark>.
+2. You <mark>cannot</mark> assign values to parent attributes/variables without using `super()`.
+3. If you call `super()` with no arguments, <mark>it will use the no-argument parent constructor</mark>. This also happens automatically if you don't include any `super()` call.
+
+## 9.3 Overriding Methods
+
+### Learning Objectives
+
+- Method overriding occurs when a public method in a subclass has the same method signature as a public method in the superclass.
+- Any method that is called must be defined within its own class or its superclass.
+- A subclass is usually designed to have modified (overwritten) or additional methods or instance variables.
+- A subclass will inherit all public methods from the superclass; these methods remain public in the subclass.
+
+There are three options for methods to be used by subclasses:
+
+1. Methods inherited from the parent class
+2. Unique methods written for the subclass
+3. Override parent methods to modify its implementation
+
+The first two should make sense. Let's see an example of overriding parent methods below.
+
+
+```java
+public class NuroCar extends Vehicle {
+    private String deliveryItem;
+
+    // unique constructor
+    public NuroCar(int year, String manufacturer, String deliveryItem) {
+        super(year, manufacturer); // another use of super
+        this.deliveryItem = deliveryItem;
+    }
+
+    // HERE is the overridden function
+    public void drive() {
+        System.out.println("This car is driving itself!");
+    }
+}
+
+public class VehicleDemonstration3 {
+    public static void main(String[] args) {
+        NuroCar pizzaCar = new NuroCar(2023, "Nuro", "Pizza");
+        // here's the call to the overridden function
+        pizzaCar.drive();
+    }
+}
+
+VehicleDemonstration3.main(null);
+```
+
+    This car is driving itself!
+
+
+This can be very helpful if you want a certain parent method to function slightly differently for a certain subclass.
+
+#### Popcorn Hack
+
+A parent class `Animal` is often used to show how subclasses can differ from their parent classes. An `Animal` parent class is provided in the cell below. Create a subclass of a certain species that <mark>overrides a parent method</mark> and <mark>uses `super` to call to the parent's constructor while adding its own unique attributes</mark>.
+
+Hint: <button id="but1" onclick="hint(1)">See Hint</button>
+<div id="hint1" style="display:none;">Not all animals "run" like the `move()` function says...</div>
+<script>
+    function hint(number) {
+        document.getElementById("but" + String(number)).style.display = "none";
+        document.getElementById("hint" + String(number)).style.display = "block";
+    }
+</script>
+
+
+```java
+// parent class
+public class Animal {
+    private String species;
+    private int milesPerHour;
+
+    // no argument constructor
+    public Animal() {
+        this.species = "Unknown";
+        this.milesPerHour = 10;
+    }
+
+    // constructor with arguments
+    public Animal(String species, int milesPerHour) {
+        this.species = species;
+        this.milesPerHour = milesPerHour;
+    }
+
+    // parent method
+    public void move() {
+        System.out.println("The " + this.species.toLowerCase() + " runs at " + this.milesPerHour + " miles per hour.");
+    }
+}
+
+// your subclass goes here
+```
+
+## 9.4 Super Keyword
+
+### Using the super keyword to call a superclass's method.
+
+
+```java
+public class Performer { //superclass
+    public void practice(){
+        System.out.println("Honing my craft!");
+    }
+    public void perform(){
+        System.out.println("Performing for an audience!");
+    }
+}
+
+public class Dancer extends Performer { //subclass
+    public void perform(){
+        System.out.println("Dancing on the stage!");
+    }
+}
+
+public class BalletDancer extends Dancer { //subclass
+    public void jete(){
+        System.out.println("Leaping...");
+    }
+    public void pirouette(){
+        System.out.println("Spinning...");
+    }
+    public void perform(){
+        jete();
+        pirouette();
+    }
+        public static void main(String[] args){
+            BalletDancer derrick = new BalletDancer();
+            derrick.practice();
+            derrick.perform();
+        }
+}
+
+System.out.println("BalletDancer class: ");
+BalletDancer.main(null);
+```
+
+    BalletDancer class: 
+    Honing my craft!
+    Leaping...
+    Spinning...
+
+
+
+```java
+public class Performer { //superclass of Dancer class
+    public void practice(){
+        System.out.println("Honing my craft!");
+    }
+    public void perform(){
+        System.out.println("Performing for an audience!");
+    }
+}
+
+public class Dancer extends Performer { //superclass of BalletDancer class
+    public void perform(){
+        System.out.println("Dancing on the stage!");
+    }
+}
+
+public class BalletDancer extends Dancer {
+    public void jete(){
+        System.out.println("Leaping...");
+    }
+    public void pirouette(){
+        System.out.println("Spinning...");
+    }
+    public void perform(){ 
+        perform();//Why is this wrong?
+        jete();
+        pirouette();
+    }
+        public static void main(String[] args){
+            BalletDancer derrick = new BalletDancer();
+            derrick.practice();
+            derrick.perform();
+        }
+}
+
+System.out.println("BalletDancer class: ");
+BalletDancer.main(null);
+```
+
+### Note:
+Super keyword can be placed in any order as it prints out chronologically. 
+
+
+```java
+public void perform(){ 
+    super.perform();
+    jete();
+    pirouette();
+}
+```
+
+
+```java
+"Honing my craft!
+Dancing on the stage!
+Leaping...
+Spinning..."
+```
+
+#### However, if we were to write:
+
+
+```java
+public void perform(){ 
+    jete();
+    pirouette();
+    super.perform();
+}
+```
+
+
+```java
+"Honing my craft!
+Leaping...
+Spinning...
+Dancing on the stage!"
+```
+
+### What if we use 2 super keywords?
+
+
+```java
+public class Performer { //superclass
+    public void practice(){
+        System.out.println("Honing my craft!");
+    }
+    public void perform(){
+        System.out.println("Performing for an audience!");
+    }
+}
+
+public class Dancer extends Performer { //subclass
+    public void perform(){
+        super.perform();
+        System.out.println("Dancing on the stage!");
+    }
+}
+
+public class BalletDancer extends Dancer { //subclass
+    public void jete(){
+        System.out.println("Leaping...");
+    }
+    public void pirouette(){
+        System.out.println("Spinning...");
+    }
+    public void perform(){
+        super.perform();
+        jete();
+        pirouette();
+    }
+        public static void main(String[] args){
+            BalletDancer derrick = new BalletDancer();
+            derrick.practice();
+            derrick.perform();
+        }
+}
+
+System.out.println("BalletDancer class: ");
+BalletDancer.main(null);
+```
+
+    BalletDancer class: 
+    Honing my craft!
+    Performing for an audience!
+    Dancing on the stage!
+    Leaping...
+    Spinning...
+
+
+### Popcorn Hack
+Create a subclass and a superclass by calling the methods from the superclass from the subclass using the keyword super.
+
+
 ## Hacks
 
 Create a superclass with at least 2 subclasses based on your own topic.
@@ -147,3 +523,5 @@ Create a superclass with at least 2 subclasses based on your own topic.
 - Create a superclass on your own topic
 - Create at least two subclasses
 - Each class must create at least two methods, one private and public variable, and examples of local, static, instance, and parameter variables
+- Override at least one method
+- Use the `super` keyword at least once
