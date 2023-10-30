@@ -9,7 +9,6 @@ description: Lesson on the College Board Unit 7 ArrayLists. This is the teacher 
 toc: True
 comments: True
 date: 2023-10-24 12:00:00 +0000
-pin: True
 ---
 
 ## 7.1 Intro to ArrayLists
