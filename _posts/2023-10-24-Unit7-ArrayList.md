@@ -4,7 +4,7 @@ author: mort
 categories: ['Lesson']
 tags: ['Collegeboard', 'Java', 'Unit 7']
 type: hacks
-week: 7
+week: 10
 description: Lesson on the College Board Unit 7 ArrayLists. This is the teacher notebook.
 toc: True
 comments: True

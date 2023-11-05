@@ -4,7 +4,7 @@ author: mort
 categories: ['Lesson']
 tags: ['Collegeboard', 'Java', 'Unit 3']
 type: hacks
-week: 6
+week: 8
 description: Lesson on booleans and if statements.
 toc: True
 comments: True

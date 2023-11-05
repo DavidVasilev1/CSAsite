@@ -4,7 +4,7 @@ author: mort
 categories: ['Lesson']
 tags: ['Collegeboard', 'Java', 'Unit 4']
 type: hacks
-week: 6
+week: 8
 description: while Loops, for Loops, Developing Algorithms Using Strings, Nested Iteration, Informal code analysis
 toc: True
 comments: True
