@@ -515,6 +515,11 @@ BalletDancer.main(null);
 Create a subclass and a superclass by calling the methods from the superclass from the subclass using the keyword super.
 
 
+
+```java
+// place code here
+```
+
 ## Hacks
 
 Create a superclass with at least 2 subclasses based on your own topic.
