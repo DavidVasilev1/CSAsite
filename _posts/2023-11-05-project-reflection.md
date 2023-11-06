@@ -9,6 +9,7 @@ description: Lesson learned throughout project.
 toc: True
 comments: True
 date: 2023-11-05 12:00:00 +0000
+pin: True
 ---
 
 ## Contributions
@@ -329,4 +330,36 @@ async function showPath() {
 
 ## Blog Usage
 
+[Time Table](https://davidvasilev1.github.io/CSAsite/calendar/)
 
+### Tests
+
+[Primary Canvas Test](https://davidvasilev1.github.io/CSAsite//posts/test-canvas/)
+
+This page mainly illustrates my initial ideas of the canvas, showing some testing with the vanilla HTML canvas and some circles that have numbers print as I place them.
+
+[JointJS Test](https://davidvasilev1.github.io/CSAsite//posts/JointJS-test/)
+
+This shows some primary testing with the node and link system in JointJS.
+
+[Class Structuring](https://davidvasilev1.github.io/CSAsite//posts/classes/)
+
+This is where I planned out my class structuring with how I would have the view and editing functionality on the program.
+
+[JS Promises](https://davidvasilev1.github.io/CSAsite//posts/promises/)
+
+This shows some testing I did with JS promises to see how I could solve the error I was getting due to the rapid calling of specific functions before data was received from the backend.
+
+## Overall Reflection
+
+| Glows | Grows |
+|-|-|
+| I think I did very well with the styling of the pages. Using Tailwind and DaisyUI really cut down on the time to style the pages and it also helped create a clean and comprehensible site. | I think that I could focus more on Java and how the backend works. Next trimester I plan on working more on the backend and familiarizing myself with that aspect of full stack programming. |
+| I think I organized my JS code really well, especially with the use of classes to control the different views within the program. | I want to focus more on creating a cleaner design, making it more similar to the Apple website design. This is with the goal of eventually incorporating this in a personal website. |
+| I think the choice of using libraries was really useful in terms of spending less time on the functionality of small details and actually making the program work well. | I think that I could use less libraries later on, as I become better at coding my own logic and integrating that into the program we aim to create |
+| Working with the backend team to figure out how we would send data between the two parts of the project I think went really well. Collaborating on creating an adjacency list was definitely a good thing. | I think that some team members were disconnected at times, especially with some of the group members not really working as quickly as the others. This could be solved with better collaboration and learning techniques. |
+| Overall I think the project looks really nice. | I think that there are still some small things that could be improved in terms of functionality with removing nodes and links. |
+
+### Memories and Learnings
+
+Learning to work with libraries and a more OOP structure was definitely something that I learned to do this trimester. This is something that aided in making the program look and feel smoother, as well as making the entire program more completed at the end. Our collaboration as a team was definitely very good and I think that it could be even better with people learning how to manage the Scrum Board and also how to read it (with all of it's tags and other features). In the future I want to work on making cleaner and more sophisticated designs, with more integrated pages and features.
