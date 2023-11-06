@@ -2,12 +2,12 @@
 title: Tri 1 Project Reflection
 author: david
 categories: ['Lesson']
-tags: ['Collegeboard', 'Java', 'Unit 10', 'Unit 9']
+tags: ['Project', 'Java']
 type: hacks
 week: 7
-description: Lesson on Java classes.
+description: Lesson learned throughout project.
 toc: True
 comments: True
-date: 2023-10-06 12:00:00 +0000
+date: 2023-11-05 12:00:00 +0000
 ---
 
