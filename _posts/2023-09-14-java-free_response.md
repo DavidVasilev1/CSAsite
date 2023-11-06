@@ -4,11 +4,11 @@ author: mort
 categories: ['Lab Notebook']
 tags: ['Collegeboard', 'FRQS', 'Java']
 type: hacks
-week: 5
+week: 4
 description: The focus of this mini-lab is preparing for the FRQ question types tested by College Board.  A great deal of energy should be spent on researching and preparing a lesson on each topic.
 toc: True
 comments: True
-date: 2023-09-13 12:00:00 +0000
+date: 2023-09-14 12:00:00 +0000
 ---
 
 ## Mini-Labs

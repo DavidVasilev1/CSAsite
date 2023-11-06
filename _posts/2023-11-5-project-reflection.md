@@ -3,8 +3,8 @@ title: Tri 1 Project Reflection
 author: david
 categories: ['Lesson']
 tags: ['Project', 'Java']
-type: hacks
-week: 7
+type: tangibles
+week: 12
 description: Lesson learned throughout project.
 toc: True
 comments: True

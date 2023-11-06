@@ -8,7 +8,7 @@ week: 6
 description: Tech talk going over object oriented progamming in javascript
 toc: True
 comments: True
-date: 2023-10-16 12:00:00 +0000
+date: 2023-09-26 12:00:00 +0000
 ---
 
 # Javascript class
