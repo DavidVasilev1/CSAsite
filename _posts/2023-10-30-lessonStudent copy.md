@@ -8,7 +8,7 @@ week: 11
 description: Lesson on Java class hierarchy.
 toc: True
 comments: True
-date: 2023-10-30 12:00:00 +0000
+date: 2023-10-30 13:00:00 +0000
 ---
 
 ## 9.1 Superclasses and Subclasses
