@@ -9,7 +9,6 @@ description: Lesson for SASS.
 toc: True
 comments: True
 date: 2023-12-05 12:00:00 +0000
-pin: True
 ---
 
 # Introduction to SASS

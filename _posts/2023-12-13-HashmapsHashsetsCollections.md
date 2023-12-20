@@ -9,7 +9,6 @@ description: by Tirth T, Haseeb B, Sreeja G, Ekam K, Drew R, Adan R
 toc: True
 comments: True
 date: 2023-12-14 12:00:00 +0000
-pin: True
 ---
 
 ## Collections

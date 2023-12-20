@@ -9,7 +9,6 @@ description: Hacks for CRUD and JQuery.
 toc: True
 comments: True
 date: 2023-12-07 12:00:00 +0000
-pin: True
 ---
 
 # Directions
