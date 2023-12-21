@@ -371,16 +371,16 @@ There are a few different options for storing a JWT in a JavaScript application:
 
 ## Postman 
 1. Trying to access /api/person/ without jwt token stored in Cookies
-- <img alt="nojwt" src="{{site.baseurl}}/images/nojwt.png">
+- <img alt="nojwt" src="https://aliyatang.github.io/LessonJWT/images/nojwt.png">
 
 2. Trying to access /api/person/ with a wrong jwt token stored in Cookies
-- <img alt="wrongjwt" src="{{site.baseurl}}/images/wrongjwt.png">
+- <img alt="wrongjwt" src="https://aliyatang.github.io/LessonJWT/images/wrongjwt.png">
 
 3. Trying to access /api/person/ with a jwt token that does not have the signature
-- <img alt="nosignature" src="{{site.baseurl}}/images/nosignature.png">
+- <img alt="nosignature" src="https://aliyatang.github.io/LessonJWT/images/nosignature.png">
 
 4. Accessing /api/person/ with generated jwt token stored in Cookies header
-- <img alt="yes" src="{{site.baseurl}}/images/yes.png">
+- <img alt="yes" src="https://aliyatang.github.io/LessonJWT/images/yes.png">
 
 ## Implementation Approaches and Security Considerations
 
