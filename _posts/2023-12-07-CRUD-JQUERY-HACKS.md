@@ -2,9 +2,9 @@
 title: JQuery and CRUD Hacks
 author: david
 categories: ['Lab Notebook']
-tags: ['Project', 'Java']
-type: tangibles
-week: 18
+tags: ['Java', 'jQuery', 'Frontend']
+type: hacks
+week: 15
 description: Hacks for CRUD and JQuery.
 toc: True
 comments: True

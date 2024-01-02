@@ -2,9 +2,9 @@
 title: HashMaps, HashSets, Collections, SQL Student Lessons
 author: david
 categories: ['Lab Notebook']
-tags: ['Java']
-type: tangibles
-week: 12
+tags: ['Java', 'Backend']
+type: hacks
+week: 16
 description: by Tirth T, Haseeb B, Sreeja G, Ekam K, Drew R, Adan R
 toc: True
 comments: True

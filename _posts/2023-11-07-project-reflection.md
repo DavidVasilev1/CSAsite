@@ -8,7 +8,7 @@ week: 12
 description: Lesson learned throughout project.
 toc: True
 comments: True
-date: 2023-11-05 12:00:00 +0000
+date: 2023-11-07 12:00:00 +0000
 pin: False
 ---
 

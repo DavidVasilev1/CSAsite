@@ -2,14 +2,13 @@
 title: JWT - Java, Security Lesson
 author: david
 categories: ['Lab Notebook']
-tags: ['Java']
-type: tangibles
+tags: ['Java', 'Backend']
+type: hacks
 week: 17
 description: JWTs Lesson
 toc: True
 comments: True
-date: 2023-12-18 12:00:00 +0000
-pin: True
+date: 2023-12-19 12:00:00 +0000
 ---
 
 ## What is JWT

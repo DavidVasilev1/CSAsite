@@ -2,9 +2,9 @@
 title: SASS Lesson
 author: david
 categories: ['Lab Notebook']
-tags: ['Project', 'SASS', 'CSS']
-type: tangibles
-week: 18
+tags: ['SASS', 'CSS', 'Frontend']
+type: hacks
+week: 15
 description: Lesson for SASS.
 toc: True
 comments: True

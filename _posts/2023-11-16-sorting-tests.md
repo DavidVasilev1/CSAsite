@@ -1,6 +1,62 @@
 ---
-
+title: Sorting Tests
+author: david
+categories: ['Lab Notebook']
+tags: ['Project', 'Java']
+type: tangibles
+week: 14
+description: Lesson for SASS.
+toc: True
+comments: True
+date: 2023-11-30 12:00:00 +0000
 ---
+
+```java
+class Sort {
+  public void insertion(int arr[]) {
+    int n = arr.length;
+    for (int i = 1; i < n; i++) {
+      int x = arr[i];
+      int j = i - 1;
+  
+      while (j >= 0 && arr[j] > x) {
+        arr[j + 1] = arr[j];
+        j = j - 1;
+      }
+      arr[j + 1] = x;
+    }
+  }
+
+  static void printArray(int arr[])
+    {
+        int n = arr.length;
+        for (int i = 0; i < n; ++i)
+            System.out.print(arr[i] + " ");
+ 
+        System.out.println();
+    }
+ 
+    // Driver method
+    public static void main(String args[])
+    {
+        int arr[] = { 12, 11, 13, 5, 6 };
+
+        printArray(arr);
+
+        Sort ob = new Sort();
+        ob.insertion(arr);
+ 
+        printArray(arr);
+    }
+}
+
+Sort.main(null);
+```
+
+    12 11 13 5 6 
+    5 6 11 12 13 
+
+
 
 ```java
 class GFG {
