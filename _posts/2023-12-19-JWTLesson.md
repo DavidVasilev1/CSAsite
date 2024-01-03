@@ -247,7 +247,7 @@ import javax.crypto.spec.SecretKeySpec;
 public class JwtGenerator {
 
     public static void main(String[] args) {
-        String secretKey = "yourSecretKey";
+        String secretKey = "yourSecretKey"; // secret key - encoding/decoding
         String subject = "userId123";
         long expirationTimeMillis = System.currentTimeMillis() + 3600000;
 
@@ -257,16 +257,23 @@ public class JwtGenerator {
     }
 
     private static String buildJwt(String secretKey, String subject, long expirationTimeMillis) {
+        // JWT header
         String header = "{\"alg\":\"HS256\",\"typ\":\"JWT\"}";
+        // JWT payload
         String payload = "{\"sub\":\"" + subject + "\",\"iat\":" + System.currentTimeMillis() / 1000 +
                 ",\"exp\":" + expirationTimeMillis / 1000 + "}";
 
+        // Base64Url encoding of the JWT header and payload
         String encodedHeader = base64UrlEncode(header);
         String encodedPayload = base64UrlEncode(payload);
 
+        // Concatenate the encoded JWT header and payload using dots
         String dataToSign = encodedHeader + "." + encodedPayload;
+        
+        // creating signature with HmacSHA256
         String signature = signData(dataToSign, secretKey);
 
+        // Concatenate JWT header and payload with the signature with a dot to form the final JWT
         return dataToSign + "." + signature;
     }
 
@@ -276,10 +283,15 @@ public class JwtGenerator {
 
     private static String signData(String data, String secretKey) {
         try {
+            // Initialize HmacSHA256 with the secret key
             Mac sha256Hmac = Mac.getInstance("HmacSHA256");
             SecretKeySpec secretKeySpec = new SecretKeySpec(secretKey.getBytes(StandardCharsets.UTF_8), "HmacSHA256");
             sha256Hmac.init(secretKeySpec);
+            
+            // Generate the signature by applying HmacSHA256 on the data
             byte[] signature = sha256Hmac.doFinal(data.getBytes(StandardCharsets.UTF_8));
+            
+            // Base64Url encoding of the signature that was generated
             return base64UrlEncode(new String(signature, StandardCharsets.UTF_8));
         } catch (Exception e) {
             throw new RuntimeException("Error signing JWT", e);
@@ -470,21 +482,21 @@ Additional Security Considerations
 2. MC Knowledge test (5) 
     - Which part of the JWT contains the actual data (claims)? 
         - Header
-        - Payload
+        - <mark>Payload<mark>
         - Signature
         - Encryption
     - What is the purpose of the header in a JWT?
         - It contains the signature for the JWT.
-        - It identifies the algorithm used to generate the signature. 
+        - <mark>It identifies the algorithm used to generate the signature.<mark>
         - It holds the encrypted data. 
         - It contains the user's information.
     - How are the parts of a JWT (header, payload, and signature) separated?
         - Comma
-        - Period
+        - <mark>Period<mark>
         - Colon
         - Semicolon
     - Which algorithm is commonly used for JWT signatures?
-        - HMAC (Hash-based Message Authentication Code)
+        - <mark>HMAC (Hash-based Message Authentication Code)<mark>
         - RSA (Rivest-Shamir-Adleman)
         - AES (Advanced Encryption Standard)
         - MD5 (Message Digest Algorithm 5)
@@ -492,4 +504,319 @@ Additional Security Considerations
         - Only via HTTP headers
         - Only as query parameters in the URL
         - In the request body as JSON
-        - Any of the above, depending on the application
+        - <mark>Any of the above, depending on the application<mark>
+
+## Implementation
+
+Person database with JWT encryption.
+
+![](/assets/img/post_images/jwt_db.png)
+![](/assets/img/post_images/jwt_request.png)
+
+### Extra
+
+You can see that both the ssn of the user and the password is stored with JWTs, however when requested the SSN does not return. This is intentional. When creating the SSN variable, I put `@JsonIgnore` to avoid sending this data to the frontend when requests are made for user data. This is because JWTs aren't very secure with the use of CSRF attacks, so when a user does login, the server doesn't always return the SSN of the user. This makes the server more secure to a degree, with SSN only needing to be entered in the very beginning when the user creates their account. When and if the SSN is needed to be used, it doesn't have to be called to the frontend for comparison. The user simply has to enter the last four digits and since these four digits are sent to the backend with the user name and password, verifications can be made with comparisons made in the backend only.
+
+### Person.java
+
+
+```java
+package com.nighthawk.spring_portfolio.mvc.person;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.vladmihalcea.hibernate.type.json.JsonType;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@Convert(attributeName ="person", converter = JsonType.class)
+public class Person {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+    @NotEmpty
+    @Size(min=5)
+    @Column(unique=true)
+    @JsonIgnore
+    private String ssn;
+
+    @NotEmpty
+    private String password;
+
+    @NonNull
+    @Size(min = 2, max = 30, message = "Name (2 to 30 chars)")
+    private String name;
+
+    public Person(String ssn, String password, String name) {
+        this.ssn = ssn;
+        this.password = password;
+        this.name = name;
+    }
+
+    public static Person[] init() {
+        Person p1 = new Person();
+        p1.setName("testName");
+        p1.setSsn("123-45-6789");
+        p1.setPassword("testPass123!");
+
+        Person persons[] = {p1};
+        return persons;
+    }
+
+    public static void main(String[] args) {
+        Person persons[] = init();
+        for (Person person : persons) {
+            System.out.println(person);
+        }
+    }
+}
+```
+
+### PersonApiController.java
+
+
+```java
+package com.nighthawk.spring_portfolio.mvc.person;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.*;
+
+@RestController
+@RequestMapping("/api/person")
+public class PersonApiController {
+
+    @Autowired
+    private PersonJpaRepository repository;
+
+    @Autowired
+    private PersonDetailsService personDetailsService;
+
+    @GetMapping("/")
+    public ResponseEntity<List<Person>> getPeople() {
+        return new ResponseEntity<>(repository.findAllByOrderByNameAsc(), HttpStatus.OK);
+    }
+
+    @PostMapping("/post")
+    public ResponseEntity<Object> postPerson(@RequestParam("ssn") String ssn,
+                                             @RequestParam("password") String password,
+                                             @RequestParam("name") String name) {
+
+        Person person = new Person(ssn, password, name);
+        personDetailsService.save(person);
+        return new ResponseEntity<>(name + " is created successfully", HttpStatus.CREATED);
+    }
+}
+```
+
+### PersonDetailsService.java
+
+
+```java
+package com.nighthawk.spring_portfolio.mvc.person;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+@Service
+@Transactional
+public class PersonDetailsService implements UserDetailsService {
+    
+    @Autowired
+    private PersonJpaRepository personJpaRepository;
+
+    PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String ssn) throws UsernameNotFoundException {
+        Person person = personJpaRepository.findBySsn(ssn);
+        if (person == null) {
+            throw new UsernameNotFoundException("User not found with SSN: " + ssn);
+        }
+
+        Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
+
+        return new org.springframework.security.core.userdetails.User(
+                person.getSsn(),
+                person.getPassword(),
+                authorities
+        );
+    }
+
+    public List<Person> listAll() {
+        return personJpaRepository.findAllByOrderByNameAsc();
+    }
+
+    public List<Person> list(String name, String ssn) {
+        return personJpaRepository.findByNameContainingIgnoreCaseOrSsnContainingIgnoreCase(name, ssn);
+    }
+
+    public List<Person> listLike(String term) {
+        return personJpaRepository.findByNameContainingIgnoreCaseOrSsnContainingIgnoreCase(term, term);
+    }
+
+    public List<Person> listLikeNative(String term) {
+        String likeTerm = String.format("%%%s%%", term);
+        return personJpaRepository.findByLikeTermNative(likeTerm);
+    }
+
+    public void save(Person person) {
+        person.setPassword(passwordEncoder().encode(person.getPassword()));
+        person.setSsn(passwordEncoder().encode(person.getSsn()));
+        personJpaRepository.save(person);
+    }
+
+    public Person get(long id) {
+        return (personJpaRepository.findById(id).isPresent())
+                ? personJpaRepository.findById(id).get()
+                : null;
+    }
+
+    public Person getBySsn(String ssn) {
+        return personJpaRepository.findBySsn(ssn);
+    }
+
+    public void delete(long id) {
+        personJpaRepository.deleteById(id);
+    }
+
+    public void defaults(String password, String ssn, String roleName) {
+        for (Person person : listAll()) {
+            if (person.getPassword() == null || person.getPassword().isEmpty() || person.getPassword().isBlank()) {
+                person.setPassword(passwordEncoder().encode(password));
+            }
+            if (person.getSsn() == null || person.getSsn().isEmpty() || person.getSsn().isBlank()) {
+                person.setSsn(passwordEncoder().encode(ssn));
+            }
+        }
+    }
+}
+```
+
+### PersonJpaRepository.java
+
+
+```java
+package com.nighthawk.spring_portfolio.mvc.person;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import java.util.List;
+
+public interface PersonJpaRepository extends JpaRepository<Person, Long> {
+    List<Person> findAllByOrderByNameAsc();
+
+    Person findBySsn(String ssn);
+
+    List<Person> findByNameContainingIgnoreCaseOrSsnContainingIgnoreCase(String name, String ssn);
+
+    @Query(
+            value = "SELECT * FROM Person p WHERE p.name LIKE ?1 or p.ssn LIKE ?1",
+            nativeQuery = true)
+    List<Person> findByLikeTermNative(String term);
+}
+```
+
+### JwtApiController.java
+
+
+```java
+package com.nighthawk.spring_portfolio.mvc.jwt;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseCookie;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.DisabledException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.nighthawk.spring_portfolio.mvc.person.Person;
+import com.nighthawk.spring_portfolio.mvc.person.PersonDetailsService;
+
+@RestController
+@CrossOrigin
+public class JwtApiController {
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private JwtTokenUtil jwtTokenUtil;
+
+    @Autowired
+    private PersonDetailsService personDetailsService;
+
+    @PostMapping("/authenticate")
+    public ResponseEntity<?> createAuthenticationToken(@RequestBody Person authenticationRequest) throws Exception {
+        String encryptedSsn = authenticationRequest.getSsn();
+
+        authenticate(encryptedSsn, authenticationRequest.getPassword());
+
+        final UserDetails userDetails = personDetailsService.loadUserByUsername(encryptedSsn);
+
+        final String token = jwtTokenUtil.generateToken(userDetails);
+
+        final ResponseCookie tokenCookie = ResponseCookie.from("jwt", token)
+            .httpOnly(true)
+            .secure(true)
+            .path("/")
+            .maxAge(3600)
+            .sameSite("None; Secure")
+            .build();
+
+        return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, tokenCookie.toString()).build();
+    }
+
+    private void authenticate(String ssn, String password) throws Exception {
+        try {
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(ssn, password));
+        } catch (DisabledException e) {
+            throw new Exception("USER_DISABLED", e);
+        } catch (BadCredentialsException e) {
+            throw new Exception("INVALID_CREDENTIALS", e);
+        } catch (Exception e) {
+            throw new Exception(e);
+        }
+    }
+}
+```
