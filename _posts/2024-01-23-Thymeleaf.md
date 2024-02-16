@@ -506,24 +506,26 @@ HTML templates (usually residing in the src/main/resources/templates directory) 
 
 Annotations for JPA and Hibernate:
 
-@Entity: Indicates that this class is a JPA entity and should be persisted in the database.
-@Id: Marks the primary key field.
-@GeneratedValue: Specifies the generation strategy for the primary key values.
-@Column: Specifies the mapping between the entity attribute and the database column.
-@ManyToMany: Defines a many-to-many relationship between entities.
+- @Entity: Indicates that this class is a JPA entity and should be persisted in the database.
+- @Id: Marks the primary key field.
+- @GeneratedValue: Specifies the generation strategy for the primary key values.
+- @Column: Specifies the mapping between the entity attribute and the database column.
+- @ManyToMany: Defines a many-to-many relationship between entities.
 
 Lombok Annotations:
 
-@Data: Lombok annotation that generates boilerplate code for getters, setters, toString(), and other common methods.
-@AllArgsConstructor: Lombok annotation for generating a constructor with all fields.
-@NoArgsConstructor: Lombok annotation for generating a no-argument constructor.
-@NonNull: Lombok annotation to generate null checks and constructor parameters.
+- @Data: Lombok annotation that generates boilerplate code for getters, setters, toString(), and other common methods.
+- @AllArgsConstructor: Lombok annotation for generating a constructor with all fields.
+- @NoArgsConstructor: Lombok annotation for generating a no-argument constructor.
+- @NonNull: Lombok annotation to generate null checks and constructor parameters.
+
 Other Annotations and Types:
 
-@Convert: Specifies a converter for a persistent attribute.
-@JdbcTypeCode and @Column(columnDefinition = "jsonb"): Used for handling JSON data types in the database.
-@DateTimeFormat: Specifies the format for a Date attribute.
-Static Test Data Initialization: The init() method is used to create static test data (an array of Person objects).
+- @Convert: Specifies a converter for a persistent attribute.
+- @JdbcTypeCode and @Column(columnDefinition = "jsonb"): Used for handling JSON data types in the database.
+- @DateTimeFormat: Specifies the format for a Date attribute.
+- Static Test Data Initialization: The init() method is used to create static test data (an array of Person objects).
+
 Main Method:
 
 The main method demonstrates the initialization of test data and prints the objects using an enhanced for loop.
