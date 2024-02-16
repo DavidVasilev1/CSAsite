@@ -4,7 +4,7 @@ author: david
 categories: ['Lab Notebook']
 tags: ['Java']
 type: tangibles
-week: 18
+week: 19
 description: Lesson on updating/deleting user info through HTML/JS and adding user stats.
 toc: True
 comments: True
@@ -27,27 +27,54 @@ First, make sure you have this repository cloned so that you can see the code wo
 - JPA set functions, modifying the parts of the things we want
 - creates a new person object (person), searches for the object that has the same email in the database, then edit the specific values in the db and saves it 
 
+![Image](https://github.com/CSA-AI/CSA_AI/assets/111480448/277b757c-8879-4b17-9ea5-bc94aace2b21)
+
+- putmapping then we put the url that we wantt to go to thru response entity
+- we use the things that we wanna modify
+- findbyEmail, how we find the person (thru JPA repo)
+- JPA set functions, modifying the parts of the things we want
+- creates a new person object (person), searches for the object that has the same email in the database, then edit the specific values in the db and saves it 
+
+
+```python
+
+```
+
+
+```python
 <body>
+
     <h2>Password Update</h2>
+
     <label for="email">Email:</label>
     <input type="email" id="email" name="email" value="toby@gmail.com" readonly><br>
+
     <label for="password">New Password:</label>
     <input type="password" id="password" name="password" value="test@123"><br>
+
     <label for="name">New Name:</label>
     <input type="text" id="name" name="name" value="Test Test"><br>
+
     <button onclick="updatePassword()">Update</button>
+
     <p id="updateMessage"></p>
+
     <script>
+        console.log("test");
+
         function updatePassword() {
             const url = 'http://localhost:8085/api/person/update';
             const email = document.getElementById("email").value;
             const newPassword = document.getElementById("password").value;
             const newName = document.getElementById("name").value;
-            const params = new URLSearchParams();
-            params.append('email', email);
-            params.append('password', newPassword);
-            params.append('name', newName);
-            fetch(url, {
+
+            const params = {
+                email: email,
+                password: newPassword,
+                name: newName
+            };
+
+            fetch(`${url}?${new URLSearchParams(params)}`, {
                 method: 'PUT',
                 body: params, // Use URLSearchParams as the body
             })
@@ -60,7 +87,9 @@ First, make sure you have this repository cloned so that you can see the code wo
                 .catch(error => console.error('Error:', error));
         }
     </script>
+
 </body>
+```
 
 ### Delete
 
