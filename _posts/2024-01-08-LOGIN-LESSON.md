@@ -9,7 +9,6 @@ description: SASS + JavaScript Login/Signup pages
 toc: True
 comments: True
 date: 2024-01-16 12:00:00 +0000
-pin: True
 ---
 
 # Login and Sign up Page Lesson
