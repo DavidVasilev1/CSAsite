@@ -8,7 +8,7 @@ week: 26
 description: Reflection so far
 toc: True
 comments: True
-date: 2024-03-08 12:00:00 +0000
+date: 2024-03-07 12:00:00 +0000
 ---
 
 ## 100% Seed
