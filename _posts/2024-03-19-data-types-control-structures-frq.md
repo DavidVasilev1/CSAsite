@@ -1,14 +1,14 @@
 ---
-title: The difference between Value and Reference Types
+title: Primitive Types vs Reference Types
 author: david
 categories: ['Lab Notebook']
 tags: ['Java', 'Collegeboard']
 type: tangibles
 week: 28
-description: The difference in the application and use of Value and Reference types in Java.
+description: practice frqs
 toc: True
 comments: True
-date: 2024-03-12 12:00:00 +0000
+date: 2024-03-19 12:00:00 +0000
 ---
 
 ## Question 1: Primitive Types vs Reference Types (Unit 1)
