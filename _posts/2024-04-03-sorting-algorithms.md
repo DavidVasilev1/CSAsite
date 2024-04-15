@@ -324,191 +324,191 @@ In this sort, there is a pivot which is used to sort so that the two values that
 
 
 ```java
-public class LinkedList {
-    private Object object;
-    private LinkedList nextNode;
-    private LinkedList prevNode;
+// public class LinkedList {
+//     private Object object;
+//     private LinkedList nextNode;
+//     private LinkedList prevNode;
 
-    public LinkedList(Object object, LinkedList prevNode) {
-        this.object = object;
-        this.nextNode = null;
-        this.prevNode = prevNode;
-    }
+//     public LinkedList(Object object, LinkedList prevNode) {
+//         this.object = object;
+//         this.nextNode = null;
+//         this.prevNode = prevNode;
+//     }
 
-    public Object getObject() {
-        return object;
-    }
+//     public Object getObject() {
+//         return object;
+//     }
 
-    public LinkedList getNext() {
-        return nextNode;
-    }
+//     public LinkedList getNext() {
+//         return nextNode;
+//     }
 
-    public void setNextNode(LinkedList nextNode) {
-        this.nextNode = nextNode;
-    }
+//     public void setNextNode(LinkedList nextNode) {
+//         this.nextNode = nextNode;
+//     }
 
-    public LinkedList getPrevious() {
-        return prevNode;
-    }
+//     public LinkedList getPrevious() {
+//         return prevNode;
+//     }
 
-    public void setPrevNode(LinkedList prevNode) {
-        this.prevNode = prevNode;
-    }
-}
+//     public void setPrevNode(LinkedList prevNode) {
+//         this.prevNode = prevNode;
+//     }
+// }
 
-public class CircleQueue {
-    private LinkedList headNode;
-    private LinkedList tailNode;
-    private LinkedList currentNode;
+// public class CircleQueue {
+//     private LinkedList headNode;
+//     private LinkedList tailNode;
+//     private LinkedList currentNode;
 
-    public CircleQueue() {
-        headNode = null;
-        tailNode = null;
-        currentNode = null;
-    }
+//     public CircleQueue() {
+//         headNode = null;
+//         tailNode = null;
+//         currentNode = null;
+//     }
 
-    // getters
-    public Object getFirstObject() {
-        currentNode = headNode;
-        if (headNode == null)
-            return null;
-        else
-            return headNode.getObject();
-    }
+//     // getters
+//     public Object getFirstObject() {
+//         currentNode = headNode;
+//         if (headNode == null)
+//             return null;
+//         else
+//             return headNode.getObject();
+//     }
 
-    public Object getLastObject() {
-        currentNode = tailNode;
-        if (tailNode == null)
-            return null;
-        else
-            return tailNode.getObject();
-    }
+//     public Object getLastObject() {
+//         currentNode = tailNode;
+//         if (tailNode == null)
+//             return null;
+//         else
+//             return tailNode.getObject();
+//     }
 
-    public Object getObject() {
-        if (currentNode == null)
-            return null;
-        else
-            return currentNode.getObject();
-    }
+//     public Object getObject() {
+//         if (currentNode == null)
+//             return null;
+//         else
+//             return currentNode.getObject();
+//     }
 
-    // setters
-    public Object setNext() {
-        currentNode = currentNode.getNext();
-        if (currentNode == null)
-            currentNode = headNode;
-        return currentNode.getObject();
-    }
+//     // setters
+//     public Object setNext() {
+//         currentNode = currentNode.getNext();
+//         if (currentNode == null)
+//             currentNode = headNode;
+//         return currentNode.getObject();
+//     }
 
-    public void setPrevious() {
-        currentNode = currentNode.getPrevious();
-        if (currentNode == null)
-            currentNode = tailNode;
-    }
+//     public void setPrevious() {
+//         currentNode = currentNode.getPrevious();
+//         if (currentNode == null)
+//             currentNode = tailNode;
+//     }
 
-    public void add(Object opaqueObject) {
-        tailNode = new LinkedList(opaqueObject, currentNode);
-        if (currentNode != null)
-            currentNode.setNextNode(tailNode);
-        currentNode = tailNode;
-        if (headNode == null) {
-            headNode = tailNode;
-        }
-    }
+//     public void add(Object opaqueObject) {
+//         tailNode = new LinkedList(opaqueObject, currentNode);
+//         if (currentNode != null)
+//             currentNode.setNextNode(tailNode);
+//         currentNode = tailNode;
+//         if (headNode == null) {
+//             headNode = tailNode;
+//         }
+//     }
 
-    public Object delete() {
-        Object opaqueObject = null;
-        if (headNode != null) {
-            opaqueObject = headNode.getObject();
-            headNode = headNode.getNext();
-            if (headNode == null)
-                tailNode = headNode;
-            else
-                headNode.setPrevNode(null);
-        }
-        return opaqueObject;
-    }
+//     public Object delete() {
+//         Object opaqueObject = null;
+//         if (headNode != null) {
+//             opaqueObject = headNode.getObject();
+//             headNode = headNode.getNext();
+//             if (headNode == null)
+//                 tailNode = headNode;
+//             else
+//                 headNode.setPrevNode(null);
+//         }
+//         return opaqueObject;
+//     }
 
-    public String toString() {
-        StringBuilder queueToString = new StringBuilder("[");
-        LinkedList node = headNode;
-        while (node != null) {
-            queueToString.append("(").append(node.getObject()).append(")");
-            node = node.getNext();
-            if (node != null)
-                queueToString.append(", ");
-        }
-        queueToString.append("]");
-        return queueToString.toString();
-    }
-}
+//     public String toString() {
+//         StringBuilder queueToString = new StringBuilder("[");
+//         LinkedList node = headNode;
+//         while (node != null) {
+//             queueToString.append("(").append(node.getObject()).append(")");
+//             node = node.getNext();
+//             if (node != null)
+//                 queueToString.append(", ");
+//         }
+//         queueToString.append("]");
+//         return queueToString.toString();
+//     }
+// }
 
-public class FlowerGarden {
-    private FlowerNode head;
-    private int size;
+// public class FlowerGarden {
+//     private FlowerNode head;
+//     private int size;
 
-    public FlowerGarden() {
-        head = null;
-        size = 0;
-    }
+//     public FlowerGarden() {
+//         head = null;
+//         size = 0;
+//     }
 
-    // creating LinkedList
-    public void add(Flower flower) {
-        FlowerNode newNode = new FlowerNode(flower);
-        if (head == null) {
-            head = newNode;
-        } else {
-            FlowerNode current = head;
-            while (current.next != null) {
-                current = current.next;
-            }
-            current.next = newNode;
-        }
-        size++;
-    }
+//     // creating LinkedList
+//     public void add(Flower flower) {
+//         FlowerNode newNode = new FlowerNode(flower);
+//         if (head == null) {
+//             head = newNode;
+//         } else {
+//             FlowerNode current = head;
+//             while (current.next != null) {
+//                 current = current.next;
+//             }
+//             current.next = newNode;
+//         }
+//         size++;
+//     }
 
-    @Override
-    public String toString() {
-        FlowerNode current = head;
-        StringBuilder res = new StringBuilder();
-        while (current != null) {
-            res.append("(Breed: ").append(current.flower.getBreed()).append(", Petals: ").append(current.flower.getPetalNumber()).append(", Color: ").append(current.flower.getColor()).append("), ");
-            current = current.next;
-        }
-        res.append("null");
-        return res.toString();
-    }
+//     @Override
+//     public String toString() {
+//         FlowerNode current = head;
+//         StringBuilder res = new StringBuilder();
+//         while (current != null) {
+//             res.append("(Breed: ").append(current.flower.getBreed()).append(", Petals: ").append(current.flower.getPetalNumber()).append(", Color: ").append(current.flower.getColor()).append("), ");
+//             current = current.next;
+//         }
+//         res.append("null");
+//         return res.toString();
+//     }
 
-    public int size() {
-        return size;
-    }
+//     public int size() {
+//         return size;
+//     }
 
-    public FlowerNode getHead() {
-        return head;
-    }
+//     public FlowerNode getHead() {
+//         return head;
+//     }
 
-    public void setHead(FlowerNode head) {
-        this.head = head;
-    }
-}
+//     public void setHead(FlowerNode head) {
+//         this.head = head;
+//     }
+// }
 
-public class LinkedGarden {
-    public static FlowerGarden generate() {
-        FlowerGarden flowerGarden = new FlowerGarden();
-        flowerGarden.add(new Flower("Lotus", 5, "White"));
-        flowerGarden.add(new Flower("Camellia", 3, "Yellow"));
-        flowerGarden.add(new Flower("Ghost Orchid", 7, "Grey"));
-        flowerGarden.add(new Flower("Chocolate Cosmos", 2, "Brown"));
-        flowerGarden.add(new Flower("Corpse Flower", 4, "Orange"));
-        flowerGarden.add(new Flower("Jade Vine", 9, "Green"));
-        flowerGarden.add(new Flower("Juliet Rose", 6, "Red"));
-        flowerGarden.add(new Flower("Pasqueflower", 8, "Blue"));
-        flowerGarden.add(new Flower("Campion", 1, "Pink"));
-        flowerGarden.add(new Flower("Franklin Tree", 9, "Purple"));
-        return flowerGarden;
-    }
-}
+// public class LinkedGarden {
+//     public static FlowerGarden generate() {
+//         FlowerGarden flowerGarden = new FlowerGarden();
+//         flowerGarden.add(new Flower("Lotus", 5, "White"));
+//         flowerGarden.add(new Flower("Camellia", 3, "Yellow"));
+//         flowerGarden.add(new Flower("Ghost Orchid", 7, "Grey"));
+//         flowerGarden.add(new Flower("Chocolate Cosmos", 2, "Brown"));
+//         flowerGarden.add(new Flower("Corpse Flower", 4, "Orange"));
+//         flowerGarden.add(new Flower("Jade Vine", 9, "Green"));
+//         flowerGarden.add(new Flower("Juliet Rose", 6, "Red"));
+//         flowerGarden.add(new Flower("Pasqueflower", 8, "Blue"));
+//         flowerGarden.add(new Flower("Campion", 1, "Pink"));
+//         flowerGarden.add(new Flower("Franklin Tree", 9, "Purple"));
+//         return flowerGarden;
+//     }
+// }
 
-LinkedGarden.generate();
+// LinkedGarden.generate();
 ```
 
 
@@ -520,83 +520,83 @@ LinkedGarden.generate();
 
 
 ```java
-public class MergeSortFlowerGarden {
-    // method for merge
-    public static void mergeSort(FlowerGarden garden) {
-        garden.setHead(mergeSort(garden.getHead()));
-    }
+// public class MergeSortFlowerGarden {
+//     // method for merge
+//     public static void mergeSort(FlowerGarden garden) {
+//         garden.setHead(mergeSort(garden.getHead()));
+//     }
 
-    // using LinkedList for merge
-    private static FlowerNode mergeSort(FlowerNode head) {
-        // if no or one element, list is sorted
-        if (head == null || head.next == null) {
-            return head;
-        }
+//     // using LinkedList for merge
+//     private static FlowerNode mergeSort(FlowerNode head) {
+//         // if no or one element, list is sorted
+//         if (head == null || head.next == null) {
+//             return head;
+//         }
 
-        // finding middle node
-        FlowerNode middle = getMiddle(head);
-        FlowerNode nextOfMiddle = middle.next;
-        middle.next = null;
+//         // finding middle node
+//         FlowerNode middle = getMiddle(head);
+//         FlowerNode nextOfMiddle = middle.next;
+//         middle.next = null;
 
-        // sort to left and right
-        FlowerNode left = mergeSort(head);
-        FlowerNode right = mergeSort(nextOfMiddle);
+//         // sort to left and right
+//         FlowerNode left = mergeSort(head);
+//         FlowerNode right = mergeSort(nextOfMiddle);
 
-        // merge
-        return merge(left, right);
-    }
+//         // merge
+//         return merge(left, right);
+//     }
 
-    // how to merge
-    private static FlowerNode merge(FlowerNode left, FlowerNode right) {
-        FlowerNode dummy = new FlowerNode(null);
-        FlowerNode tail = dummy;
+//     // how to merge
+//     private static FlowerNode merge(FlowerNode left, FlowerNode right) {
+//         FlowerNode dummy = new FlowerNode(null);
+//         FlowerNode tail = dummy;
 
-        // compare values of nodes and merge together
-        while (left != null && right != null) {
-            if (left.flower.compareTo(right.flower) <= 0) {
-                tail.next = left;
-                left = left.next;
-            } else {
-                tail.next = right;
-                right = right.next;
-            }
-            tail = tail.next;
-        }
+//         // compare values of nodes and merge together
+//         while (left != null && right != null) {
+//             if (left.flower.compareTo(right.flower) <= 0) {
+//                 tail.next = left;
+//                 left = left.next;
+//             } else {
+//                 tail.next = right;
+//                 right = right.next;
+//             }
+//             tail = tail.next;
+//         }
 
-        // remaining elements to left and right
-        if (left != null) {
-            tail.next = left;
-        } else {
-            tail.next = right;
-        }
+//         // remaining elements to left and right
+//         if (left != null) {
+//             tail.next = left;
+//         } else {
+//             tail.next = right;
+//         }
 
-        // return head of merged list
-        return dummy.next;
-    }
+//         // return head of merged list
+//         return dummy.next;
+//     }
 
-    //find the middle node of the linked list
-    private static FlowerNode getMiddle(FlowerNode head) {
-        if (head == null) {
-            return head;
-        }
-        FlowerNode slow = head;
-        FlowerNode fast = head;
-        while (fast.next != null && fast.next.next != null) {
-            slow = slow.next;
-            fast = fast.next.next;
-        }
-        return slow;
-    }
+//     //find the middle node of the linked list
+//     private static FlowerNode getMiddle(FlowerNode head) {
+//         if (head == null) {
+//             return head;
+//         }
+//         FlowerNode slow = head;
+//         FlowerNode fast = head;
+//         while (fast.next != null && fast.next.next != null) {
+//             slow = slow.next;
+//             fast = fast.next.next;
+//         }
+//         return slow;
+//     }
 
-    public static void main(String[] args) {
-        FlowerGarden garden = LinkedGarden.generate();
-        System.out.println("Flower Garden before sort: " + garden);
-        mergeSort(garden);
-        System.out.println("Flower Garden after sort: " + garden);
-    }
-}
+//     public static void main(String[] args) {
+//         FlowerGarden garden = LinkedGarden.generate();
+//         System.out.println("Flower Garden before sort: " + garden);
+//         mergeSort(garden);
+//         System.out.println("Flower Garden after sort: " + garden);
+//     }
+// }
 
-MergeSortFlowerGarden.main(null);
+// MergeSortFlowerGarden.main(null);
 ```
 
     Flower Garden before sort: (Breed: Lotus, Petals: 5, Color: White), (Breed: Camellia, Petals: 3, Color: Yellow), (Breed: Ghost Orchid, Petals: 7, Color: Grey), (Breed: Chocolate Cosmos, Petals: 2, Color: Brown), (Breed: Corpse Flower, Petals: 4, Color: Orange), (Breed: Jade Vine, Petals: 9, Color: Green), (Breed: Juliet Rose, Petals: 6, Color: Red), (Breed: Pasqueflower, Petals: 8, Color: Blue), (Breed: Campion, Petals: 1, Color: Pink), (Breed: Franklin Tree, Petals: 9, Color: Purple), null
