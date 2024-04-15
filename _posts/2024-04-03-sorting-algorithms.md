@@ -102,14 +102,14 @@ Here is my implementation of bubble sort:
 
 
 ```java
-import java.util.Arrays;
+import java.util.ArrayList;
 
 public class BubbleSort {
     public static void bubbleSort(ArrayList<Comparable> list) {
         int n = list.size();
         // moving through all elements of the array
         for (int i = 0; i < n - 1; i++) {
-            // the last element is in place sop we start at the next one
+            // the last element is in place so we start at the next one
             for (int j = 0; j < n - i - 1; j++) {
                 // check and swap if the values are not sorted
                 if (list.get(j).compareTo(list.get(j + 1)) > 0) {
@@ -120,16 +120,42 @@ public class BubbleSort {
             }
         }
     }
+
+    public static void main(String[] args) {
+        ArrayList<Comparable> flowerGarden = Garden.generate(); 
+        System.out.println("Garden before: " + flowerGarden);
+        
+        bubbleSort(flowerGarden);
+        
+        System.out.println("Garden after: " + flowerGarden);
+        
+        // convert JSON
+        StringBuilder jsonBuilder = new StringBuilder("[");
+        for (Comparable flower : flowerGarden) {
+            Flower currentFlower = (Flower) flower;
+            jsonBuilder.append("{")
+                       .append("\"name\": \"").append(currentFlower.getBreed()).append("\", ")
+                       .append("\"petals\": ").append(currentFlower.getPetalNumber())
+                       .append("},");
+        }
+        if (flowerGarden.size() > 0) {
+            jsonBuilder.deleteCharAt(jsonBuilder.length() - 1);
+        }
+        jsonBuilder.append("]");
+
+        System.out.println("Garden in JSON format: ");
+        System.out.println(jsonBuilder.toString());
+    }
 }
 
-ArrayList<Comparable> FlowerGarden = Garden.generate(); 
-System.out.println("Garden before: " + flowerGarden);
-BubbleSort.bubbleSort(flowerGarden);
-System.out.println("Garden after: " + flowerGarden);
+
+BubbleSort.main(null);
 ```
 
     Garden before: [Lotus, Camellia, Ghost Orchid, Chocolate Cosmos, Corpse Flower, Jade Vine, Juliet Rose, Pasqueflower, Campion, Franklin Tree]
     Garden after: [Camellia, Campion, Chocolate Cosmos, Corpse Flower, Franklin Tree, Ghost Orchid, Jade Vine, Juliet Rose, Lotus, Pasqueflower]
+    Garden in JSON format: 
+    [{"name": "Camellia", "petals": 3},{"name": "Campion", "petals": 1},{"name": "Chocolate Cosmos", "petals": 2},{"name": "Corpse Flower", "petals": 4},{"name": "Franklin Tree", "petals": 9},{"name": "Ghost Orchid", "petals": 7},{"name": "Jade Vine", "petals": 9},{"name": "Juliet Rose", "petals": 6},{"name": "Lotus", "petals": 5},{"name": "Pasqueflower", "petals": 8}]
 
 
 With this sort, we essentially iterate through the list and compare the breeds that are next to each other and this goes on until the list is sorted.
@@ -140,7 +166,7 @@ This is my implementation of selection sort:
 
 
 ```java
-import java.util.Arrays;
+import java.util.ArrayList;
 
 public class SelectionSort {
     public static void selectionSort(ArrayList<Comparable> list) {
@@ -160,16 +186,41 @@ public class SelectionSort {
             list.set(i, temp);
         }
     }
+
+    public static void main(String[] args) {
+        ArrayList<Comparable> flowerGarden = Garden.generate(); 
+        System.out.println("Garden before: " + flowerGarden);
+        
+        selectionSort(flowerGarden);
+        
+        System.out.println("Garden after: " + flowerGarden);
+        
+        // convert JSON
+        StringBuilder jsonBuilder = new StringBuilder("[");
+        for (Comparable flower : flowerGarden) {
+            Flower currentFlower = (Flower) flower;
+            jsonBuilder.append("{")
+                       .append("\"name\": \"").append(currentFlower.getBreed()).append("\", ")
+                       .append("\"petals\": ").append(currentFlower.getPetalNumber())
+                       .append("},");
+        }
+        if (flowerGarden.size() > 0) {
+            jsonBuilder.deleteCharAt(jsonBuilder.length() - 1);
+        }
+        jsonBuilder.append("]");
+
+        System.out.println("Garden in JSON format: ");
+        System.out.println(jsonBuilder.toString());
+    }
 }
 
-ArrayList<Comparable> FlowerGarden = Garden.generate(); 
-System.out.println("Garden before: " + flowerGarden);
-BubbleSort.bubbleSort(flowerGarden);
-System.out.println("Garden after: " + flowerGarden);
+SelectionSort.main(null);
 ```
 
     Garden before: [Lotus, Camellia, Ghost Orchid, Chocolate Cosmos, Corpse Flower, Jade Vine, Juliet Rose, Pasqueflower, Campion, Franklin Tree]
     Garden after: [Camellia, Campion, Chocolate Cosmos, Corpse Flower, Franklin Tree, Ghost Orchid, Jade Vine, Juliet Rose, Lotus, Pasqueflower]
+    Garden in JSON format: 
+    [{"name": "Camellia", "petals": 3},{"name": "Campion", "petals": 1},{"name": "Chocolate Cosmos", "petals": 2},{"name": "Corpse Flower", "petals": 4},{"name": "Franklin Tree", "petals": 9},{"name": "Ghost Orchid", "petals": 7},{"name": "Jade Vine", "petals": 9},{"name": "Juliet Rose", "petals": 6},{"name": "Lotus", "petals": 5},{"name": "Pasqueflower", "petals": 8}]
 
 
 This sort breaks the sort into a subarray and then based on that finds the minimum of that subarray and moves it to the front of the subarray, shifting the boundary and going on and on until the boundary reaches the end of the array.
@@ -180,7 +231,7 @@ This is insertion sort:
 
 
 ```java
-import java.util.Arrays;
+import java.util.ArrayList;
 
 public class InsertionSort {
     public static void insertionSort(ArrayList<Comparable> list) {
@@ -199,16 +250,41 @@ public class InsertionSort {
             list.set(j + 1, key);
         }
     }
+
+    public static void main(String[] args) {
+        ArrayList<Comparable> flowerGarden = Garden.generate(); 
+        System.out.println("Garden before: " + flowerGarden);
+        
+        insertionSort(flowerGarden);
+        
+        System.out.println("Garden after: " + flowerGarden);
+        
+        // convert JSON
+        StringBuilder jsonBuilder = new StringBuilder("[");
+        for (Comparable flower : flowerGarden) {
+            Flower currentFlower = (Flower) flower;
+            jsonBuilder.append("{")
+                       .append("\"name\": \"").append(currentFlower.getBreed()).append("\", ")
+                       .append("\"petals\": ").append(currentFlower.getPetalNumber())
+                       .append("},");
+        }
+        if (flowerGarden.size() > 0) {
+            jsonBuilder.deleteCharAt(jsonBuilder.length() - 1);
+        }
+        jsonBuilder.append("]");
+
+        System.out.println("Garden in JSON format: ");
+        System.out.println(jsonBuilder.toString());
+    }
 }
 
-ArrayList<Comparable> FlowerGarden = Garden.generate(); 
-System.out.println("Garden before: " + flowerGarden);
-BubbleSort.bubbleSort(flowerGarden);
-System.out.println("Garden after: " + flowerGarden);
+InsertionSort.main(null);
 ```
 
     Garden before: [Lotus, Camellia, Ghost Orchid, Chocolate Cosmos, Corpse Flower, Jade Vine, Juliet Rose, Pasqueflower, Campion, Franklin Tree]
     Garden after: [Camellia, Campion, Chocolate Cosmos, Corpse Flower, Franklin Tree, Ghost Orchid, Jade Vine, Juliet Rose, Lotus, Pasqueflower]
+    Garden in JSON format: 
+    [{"name": "Camellia", "petals": 3},{"name": "Campion", "petals": 1},{"name": "Chocolate Cosmos", "petals": 2},{"name": "Corpse Flower", "petals": 4},{"name": "Franklin Tree", "petals": 9},{"name": "Ghost Orchid", "petals": 7},{"name": "Jade Vine", "petals": 9},{"name": "Juliet Rose", "petals": 6},{"name": "Lotus", "petals": 5},{"name": "Pasqueflower", "petals": 8}]
 
 
 How this one works is that the values that are before the key and greater than the key are moved to after the key and the rest of the values stay before the key and as the key moves through the array, the array sorts.
@@ -219,7 +295,7 @@ This is merge:
 
 
 ```java
-import java.util.Arrays;
+import java.util.ArrayList;
 
 public class MergeSort {
     public static void mergeSort(ArrayList<Comparable> list) {
@@ -231,7 +307,7 @@ public class MergeSort {
             mergeSort(left); // sort the left with recursion
             mergeSort(right); // sort the right with recursion
 
-            merge(arr, left, right); // merge the sorted halves
+            merge(list, left, right); // merge the sorted halves
         }
     }
 
@@ -254,16 +330,41 @@ public class MergeSort {
             list.set(k++, right.get(j++));
         }
     }
+
+    public static void main(String[] args) {
+        ArrayList<Comparable> flowerGarden = Garden.generate(); 
+        System.out.println("Garden before: " + flowerGarden);
+        
+        mergeSort(flowerGarden);
+        
+        System.out.println("Garden after: " + flowerGarden);
+        
+        // convert JSON
+        StringBuilder jsonBuilder = new StringBuilder("[");
+        for (Comparable flower : flowerGarden) {
+            Flower currentFlower = (Flower) flower;
+            jsonBuilder.append("{")
+                       .append("\"name\": \"").append(currentFlower.getBreed()).append("\", ")
+                       .append("\"petals\": ").append(currentFlower.getPetalNumber())
+                       .append("},");
+        }
+        if (flowerGarden.size() > 0) {
+            jsonBuilder.deleteCharAt(jsonBuilder.length() - 1);
+        }
+        jsonBuilder.append("]");
+
+        System.out.println("Garden in JSON format: ");
+        System.out.println(jsonBuilder.toString());
+    }
 }
 
-ArrayList<Comparable> FlowerGarden = Garden.generate(); 
-System.out.println("Garden before: " + flowerGarden);
-BubbleSort.bubbleSort(flowerGarden);
-System.out.println("Garden after: " + flowerGarden);
+MergeSort.main(null);
 ```
 
     Garden before: [Lotus, Camellia, Ghost Orchid, Chocolate Cosmos, Corpse Flower, Jade Vine, Juliet Rose, Pasqueflower, Campion, Franklin Tree]
     Garden after: [Camellia, Campion, Chocolate Cosmos, Corpse Flower, Franklin Tree, Ghost Orchid, Jade Vine, Juliet Rose, Lotus, Pasqueflower]
+    Garden in JSON format: 
+    [{"name": "Camellia", "petals": 3},{"name": "Campion", "petals": 1},{"name": "Chocolate Cosmos", "petals": 2},{"name": "Corpse Flower", "petals": 4},{"name": "Franklin Tree", "petals": 9},{"name": "Ghost Orchid", "petals": 7},{"name": "Jade Vine", "petals": 9},{"name": "Juliet Rose", "petals": 6},{"name": "Lotus", "petals": 5},{"name": "Pasqueflower", "petals": 8}]
 
 
 This algorithm takes the array and splits it into halves an infinite number of times until there are only pairs. From there the values are broken down and compared to the other value around them to see if they are greater than or less than and then they are moved respectively. If the values are the same, they are not moved.
@@ -274,7 +375,7 @@ This is quick sort:
 
 
 ```java
-import java.util.Arrays;
+import java.util.ArrayList;
 
 public class QuickSort {
     public static void quickSort(ArrayList<Comparable> list, int low, int high) {        
@@ -306,299 +407,41 @@ public class QuickSort {
         list.set(high, temp);
         return i + 1;
     }
+
+    public static void main(String[] args) {
+        ArrayList<Comparable> flowerGarden = Garden.generate(); 
+        System.out.println("Garden before: " + flowerGarden);
+        
+        quickSort(flowerGarden, 0, flowerGarden.size() - 1);
+        
+        System.out.println("Garden after: " + flowerGarden);
+        
+        // convert JSON
+        StringBuilder jsonBuilder = new StringBuilder("[");
+        for (Comparable flower : flowerGarden) {
+            Flower currentFlower = (Flower) flower;
+            jsonBuilder.append("{")
+                       .append("\"name\": \"").append(currentFlower.getBreed()).append("\", ")
+                       .append("\"petals\": ").append(currentFlower.getPetalNumber())
+                       .append("},");
+        }
+        if (flowerGarden.size() > 0) {
+            jsonBuilder.deleteCharAt(jsonBuilder.length() - 1);
+        }
+        jsonBuilder.append("]");
+
+        System.out.println("Garden in JSON format: ");
+        System.out.println(jsonBuilder.toString());
+    }
 }
 
-ArrayList<Comparable> FlowerGarden = Garden.generate(); 
-System.out.println("Garden before: " + flowerGarden);
-BubbleSort.bubbleSort(flowerGarden);
-System.out.println("Garden after: " + flowerGarden);
+QuickSort.main(null);
 ```
 
     Garden before: [Lotus, Camellia, Ghost Orchid, Chocolate Cosmos, Corpse Flower, Jade Vine, Juliet Rose, Pasqueflower, Campion, Franklin Tree]
     Garden after: [Camellia, Campion, Chocolate Cosmos, Corpse Flower, Franklin Tree, Ghost Orchid, Jade Vine, Juliet Rose, Lotus, Pasqueflower]
+    Garden in JSON format: 
+    [{"name": "Camellia", "petals": 3},{"name": "Campion", "petals": 1},{"name": "Chocolate Cosmos", "petals": 2},{"name": "Corpse Flower", "petals": 4},{"name": "Franklin Tree", "petals": 9},{"name": "Ghost Orchid", "petals": 7},{"name": "Jade Vine", "petals": 9},{"name": "Juliet Rose", "petals": 6},{"name": "Lotus", "petals": 5},{"name": "Pasqueflower", "petals": 8}]
 
 
 In this sort, there is a pivot which is used to sort so that the two values that are next to each other are compared and then sorted out and this occurs until the entire array is sorted.
-
-## Merge Sort with Linked Lists
-
-
-```java
-// public class LinkedList {
-//     private Object object;
-//     private LinkedList nextNode;
-//     private LinkedList prevNode;
-
-//     public LinkedList(Object object, LinkedList prevNode) {
-//         this.object = object;
-//         this.nextNode = null;
-//         this.prevNode = prevNode;
-//     }
-
-//     public Object getObject() {
-//         return object;
-//     }
-
-//     public LinkedList getNext() {
-//         return nextNode;
-//     }
-
-//     public void setNextNode(LinkedList nextNode) {
-//         this.nextNode = nextNode;
-//     }
-
-//     public LinkedList getPrevious() {
-//         return prevNode;
-//     }
-
-//     public void setPrevNode(LinkedList prevNode) {
-//         this.prevNode = prevNode;
-//     }
-// }
-
-// public class CircleQueue {
-//     private LinkedList headNode;
-//     private LinkedList tailNode;
-//     private LinkedList currentNode;
-
-//     public CircleQueue() {
-//         headNode = null;
-//         tailNode = null;
-//         currentNode = null;
-//     }
-
-//     // getters
-//     public Object getFirstObject() {
-//         currentNode = headNode;
-//         if (headNode == null)
-//             return null;
-//         else
-//             return headNode.getObject();
-//     }
-
-//     public Object getLastObject() {
-//         currentNode = tailNode;
-//         if (tailNode == null)
-//             return null;
-//         else
-//             return tailNode.getObject();
-//     }
-
-//     public Object getObject() {
-//         if (currentNode == null)
-//             return null;
-//         else
-//             return currentNode.getObject();
-//     }
-
-//     // setters
-//     public Object setNext() {
-//         currentNode = currentNode.getNext();
-//         if (currentNode == null)
-//             currentNode = headNode;
-//         return currentNode.getObject();
-//     }
-
-//     public void setPrevious() {
-//         currentNode = currentNode.getPrevious();
-//         if (currentNode == null)
-//             currentNode = tailNode;
-//     }
-
-//     public void add(Object opaqueObject) {
-//         tailNode = new LinkedList(opaqueObject, currentNode);
-//         if (currentNode != null)
-//             currentNode.setNextNode(tailNode);
-//         currentNode = tailNode;
-//         if (headNode == null) {
-//             headNode = tailNode;
-//         }
-//     }
-
-//     public Object delete() {
-//         Object opaqueObject = null;
-//         if (headNode != null) {
-//             opaqueObject = headNode.getObject();
-//             headNode = headNode.getNext();
-//             if (headNode == null)
-//                 tailNode = headNode;
-//             else
-//                 headNode.setPrevNode(null);
-//         }
-//         return opaqueObject;
-//     }
-
-//     public String toString() {
-//         StringBuilder queueToString = new StringBuilder("[");
-//         LinkedList node = headNode;
-//         while (node != null) {
-//             queueToString.append("(").append(node.getObject()).append(")");
-//             node = node.getNext();
-//             if (node != null)
-//                 queueToString.append(", ");
-//         }
-//         queueToString.append("]");
-//         return queueToString.toString();
-//     }
-// }
-
-// public class FlowerGarden {
-//     private FlowerNode head;
-//     private int size;
-
-//     public FlowerGarden() {
-//         head = null;
-//         size = 0;
-//     }
-
-//     // creating LinkedList
-//     public void add(Flower flower) {
-//         FlowerNode newNode = new FlowerNode(flower);
-//         if (head == null) {
-//             head = newNode;
-//         } else {
-//             FlowerNode current = head;
-//             while (current.next != null) {
-//                 current = current.next;
-//             }
-//             current.next = newNode;
-//         }
-//         size++;
-//     }
-
-//     @Override
-//     public String toString() {
-//         FlowerNode current = head;
-//         StringBuilder res = new StringBuilder();
-//         while (current != null) {
-//             res.append("(Breed: ").append(current.flower.getBreed()).append(", Petals: ").append(current.flower.getPetalNumber()).append(", Color: ").append(current.flower.getColor()).append("), ");
-//             current = current.next;
-//         }
-//         res.append("null");
-//         return res.toString();
-//     }
-
-//     public int size() {
-//         return size;
-//     }
-
-//     public FlowerNode getHead() {
-//         return head;
-//     }
-
-//     public void setHead(FlowerNode head) {
-//         this.head = head;
-//     }
-// }
-
-// public class LinkedGarden {
-//     public static FlowerGarden generate() {
-//         FlowerGarden flowerGarden = new FlowerGarden();
-//         flowerGarden.add(new Flower("Lotus", 5, "White"));
-//         flowerGarden.add(new Flower("Camellia", 3, "Yellow"));
-//         flowerGarden.add(new Flower("Ghost Orchid", 7, "Grey"));
-//         flowerGarden.add(new Flower("Chocolate Cosmos", 2, "Brown"));
-//         flowerGarden.add(new Flower("Corpse Flower", 4, "Orange"));
-//         flowerGarden.add(new Flower("Jade Vine", 9, "Green"));
-//         flowerGarden.add(new Flower("Juliet Rose", 6, "Red"));
-//         flowerGarden.add(new Flower("Pasqueflower", 8, "Blue"));
-//         flowerGarden.add(new Flower("Campion", 1, "Pink"));
-//         flowerGarden.add(new Flower("Franklin Tree", 9, "Purple"));
-//         return flowerGarden;
-//     }
-// }
-
-// LinkedGarden.generate();
-```
-
-
-
-
-    (Breed: Lotus, Petals: 5, Color: White), (Breed: Camellia, Petals: 3, Color: Yellow), (Breed: Ghost Orchid, Petals: 7, Color: Grey), (Breed: Chocolate Cosmos, Petals: 2, Color: Brown), (Breed: Corpse Flower, Petals: 4, Color: Orange), (Breed: Jade Vine, Petals: 9, Color: Green), (Breed: Juliet Rose, Petals: 6, Color: Red), (Breed: Pasqueflower, Petals: 8, Color: Blue), (Breed: Campion, Petals: 1, Color: Pink), (Breed: Franklin Tree, Petals: 9, Color: Purple), null
-
-
-
-
-```java
-// public class MergeSortFlowerGarden {
-//     // method for merge
-//     public static void mergeSort(FlowerGarden garden) {
-//         garden.setHead(mergeSort(garden.getHead()));
-//     }
-
-//     // using LinkedList for merge
-//     private static FlowerNode mergeSort(FlowerNode head) {
-//         // if no or one element, list is sorted
-//         if (head == null || head.next == null) {
-//             return head;
-//         }
-
-//         // finding middle node
-//         FlowerNode middle = getMiddle(head);
-//         FlowerNode nextOfMiddle = middle.next;
-//         middle.next = null;
-
-//         // sort to left and right
-//         FlowerNode left = mergeSort(head);
-//         FlowerNode right = mergeSort(nextOfMiddle);
-
-//         // merge
-//         return merge(left, right);
-//     }
-
-//     // how to merge
-//     private static FlowerNode merge(FlowerNode left, FlowerNode right) {
-//         FlowerNode dummy = new FlowerNode(null);
-//         FlowerNode tail = dummy;
-
-//         // compare values of nodes and merge together
-//         while (left != null && right != null) {
-//             if (left.flower.compareTo(right.flower) <= 0) {
-//                 tail.next = left;
-//                 left = left.next;
-//             } else {
-//                 tail.next = right;
-//                 right = right.next;
-//             }
-//             tail = tail.next;
-//         }
-
-//         // remaining elements to left and right
-//         if (left != null) {
-//             tail.next = left;
-//         } else {
-//             tail.next = right;
-//         }
-
-//         // return head of merged list
-//         return dummy.next;
-//     }
-
-//     //find the middle node of the linked list
-//     private static FlowerNode getMiddle(FlowerNode head) {
-//         if (head == null) {
-//             return head;
-//         }
-//         FlowerNode slow = head;
-//         FlowerNode fast = head;
-//         while (fast.next != null && fast.next.next != null) {
-//             slow = slow.next;
-//             fast = fast.next.next;
-//         }
-//         return slow;
-//     }
-
-//     public static void main(String[] args) {
-//         FlowerGarden garden = LinkedGarden.generate();
-//         System.out.println("Flower Garden before sort: " + garden);
-//         mergeSort(garden);
-//         System.out.println("Flower Garden after sort: " + garden);
-//     }
-// }
-
-// MergeSortFlowerGarden.main(null);
-```
-
-    Flower Garden before sort: (Breed: Lotus, Petals: 5, Color: White), (Breed: Camellia, Petals: 3, Color: Yellow), (Breed: Ghost Orchid, Petals: 7, Color: Grey), (Breed: Chocolate Cosmos, Petals: 2, Color: Brown), (Breed: Corpse Flower, Petals: 4, Color: Orange), (Breed: Jade Vine, Petals: 9, Color: Green), (Breed: Juliet Rose, Petals: 6, Color: Red), (Breed: Pasqueflower, Petals: 8, Color: Blue), (Breed: Campion, Petals: 1, Color: Pink), (Breed: Franklin Tree, Petals: 9, Color: Purple), null
-    Flower Garden after sort: (Breed: Camellia, Petals: 3, Color: Yellow), (Breed: Campion, Petals: 1, Color: Pink), (Breed: Chocolate Cosmos, Petals: 2, Color: Brown), (Breed: Corpse Flower, Petals: 4, Color: Orange), (Breed: Franklin Tree, Petals: 9, Color: Purple), (Breed: Ghost Orchid, Petals: 7, Color: Grey), (Breed: Jade Vine, Petals: 9, Color: Green), (Breed: Juliet Rose, Petals: 6, Color: Red), (Breed: Lotus, Petals: 5, Color: White), (Breed: Pasqueflower, Petals: 8, Color: Blue), null
-
