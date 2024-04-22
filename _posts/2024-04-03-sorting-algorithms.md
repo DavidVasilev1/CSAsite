@@ -15,6 +15,8 @@ date: 2024-04-03 12:00:00 +0000
 
 Before the performance we advertised our performance a lot on Instagram. Here are the results from that:
 
+[Instagram Account](https://www.instagram.com/flower_mergers?igsh=MWQ1ZGUxMzBkMA==)
+
 ![](/assets/img/post_images/IMG_0838.jpg)
 ![](/assets/img/post_images/IMG_0839.jpg)
 ![](/assets/img/post_images/IMG_0840.jpg)
@@ -141,9 +143,50 @@ public class Flower extends Collectable {
                 new Flower("Franklin Tree", 9, "Purple"),
         };
     }
+
+    public static void bubbleSort(Collectable[] array) {
+        int n = array.length;
+        // moving through all elements of the array
+        for (int i = 0; i < n - 1; i++) {
+            // the last element is in place so we start at the next one
+            for (int j = 0; j < n - i - 1; j++) {
+                // check and swap if the values are not sorted
+                if (array[j].compareTo(array[j + 1]) > 0) {
+                    Collectable temp = array[j];
+                    array[j] = array[j + 1];
+                    array[j + 1] = temp;
+                }
+            }
+        }
+    }
 }
 
+Flower[] flowerArray = Flower.flowers();
+Flower.setOrder(Flower.KeyType.breed);
+System.out.println("Original: " + Arrays.toString(flowerArray));
+
+// breed
+Flower.setOrder(Flower.KeyType.breed);
+Flower.bubbleSort(flowerArray);
+System.out.println("Sorted by Breed: " + Arrays.toString(flowerArray));
+
+// petals
+Flower.setOrder(Flower.KeyType.petals);
+Flower.bubbleSort(flowerArray);
+System.out.println("Sorted by Petals: " + Arrays.toString(flowerArray));
+
+// color
+Flower.setOrder(Flower.KeyType.color);
+Flower.bubbleSort(flowerArray);
+System.out.println("Sorted by Color: " + Arrays.toString(flowerArray));
+
 ```
+
+    Original: [{"breed": "Lotus", "type": "Flower", "masterType": "Collectable"}, {"breed": "Camellia", "type": "Flower", "masterType": "Collectable"}, {"breed": "Ghost Orchid", "type": "Flower", "masterType": "Collectable"}, {"breed": "Chocolate Cosmos", "type": "Flower", "masterType": "Collectable"}, {"breed": "Corpse Flower", "type": "Flower", "masterType": "Collectable"}, {"breed": "Jade Vine", "type": "Flower", "masterType": "Collectable"}, {"breed": "Juliet Rose", "type": "Flower", "masterType": "Collectable"}, {"breed": "Pasqueflower", "type": "Flower", "masterType": "Collectable"}, {"breed": "Campion", "type": "Flower", "masterType": "Collectable"}, {"breed": "Franklin Tree", "type": "Flower", "masterType": "Collectable"}]
+    Sorted by Breed: [{"breed": "Camellia", "type": "Flower", "masterType": "Collectable"}, {"breed": "Campion", "type": "Flower", "masterType": "Collectable"}, {"breed": "Chocolate Cosmos", "type": "Flower", "masterType": "Collectable"}, {"breed": "Corpse Flower", "type": "Flower", "masterType": "Collectable"}, {"breed": "Franklin Tree", "type": "Flower", "masterType": "Collectable"}, {"breed": "Ghost Orchid", "type": "Flower", "masterType": "Collectable"}, {"breed": "Jade Vine", "type": "Flower", "masterType": "Collectable"}, {"breed": "Juliet Rose", "type": "Flower", "masterType": "Collectable"}, {"breed": "Lotus", "type": "Flower", "masterType": "Collectable"}, {"breed": "Pasqueflower", "type": "Flower", "masterType": "Collectable"}]
+    Sorted by Petals: [{"petals": 1, "type": "Flower", "masterType": "Collectable"}, {"petals": 2, "type": "Flower", "masterType": "Collectable"}, {"petals": 3, "type": "Flower", "masterType": "Collectable"}, {"petals": 4, "type": "Flower", "masterType": "Collectable"}, {"petals": 5, "type": "Flower", "masterType": "Collectable"}, {"petals": 6, "type": "Flower", "masterType": "Collectable"}, {"petals": 7, "type": "Flower", "masterType": "Collectable"}, {"petals": 8, "type": "Flower", "masterType": "Collectable"}, {"petals": 9, "type": "Flower", "masterType": "Collectable"}, {"petals": 9, "type": "Flower", "masterType": "Collectable"}]
+    Sorted by Color: [{"color": "Blue", "type": "Flower", "masterType": "Collectable"}, {"color": "Brown", "type": "Flower", "masterType": "Collectable"}, {"color": "Green", "type": "Flower", "masterType": "Collectable"}, {"color": "Grey", "type": "Flower", "masterType": "Collectable"}, {"color": "Orange", "type": "Flower", "masterType": "Collectable"}, {"color": "Pink", "type": "Flower", "masterType": "Collectable"}, {"color": "Purple", "type": "Flower", "masterType": "Collectable"}, {"color": "Red", "type": "Flower", "masterType": "Collectable"}, {"color": "White", "type": "Flower", "masterType": "Collectable"}, {"color": "Yellow", "type": "Flower", "masterType": "Collectable"}]
+
 
 ## Bubble Sort
 
