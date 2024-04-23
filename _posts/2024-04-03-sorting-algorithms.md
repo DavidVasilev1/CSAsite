@@ -11,22 +11,6 @@ comments: True
 date: 2024-04-03 12:00:00 +0000
 ---
 
-## Performance Experience
-
-Before the performance we advertised our performance a lot on Instagram. Here are the results from that:
-
-[Instagram Account](https://www.instagram.com/flower_mergers?igsh=MWQ1ZGUxMzBkMA==)
-
-![](/assets/img/post_images/IMG_0838.jpg)
-![](/assets/img/post_images/IMG_0839.jpg)
-![](/assets/img/post_images/IMG_0840.jpg)
-![](/assets/img/post_images/IMG_0841.jpg)
-![](/assets/img/post_images/IMG_0842.jpg)
-
-On our instagram we documented the progress of our practices and this gained traction as people saw it. We also practiced web safety by disallowing comments in order to protect our privacy. Overall we practiced a total of five times, two times Heritage park and two times during school, and once before the performance.
-
-Other groups also had interesting performances, such as Rachelina's performance in which she got carried away at the end of the performance. The sorts were interesting to see being performed and made them somewhat easier to understand.
-
 ## Flower Class
 
 
