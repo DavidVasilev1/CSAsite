@@ -31,12 +31,4 @@ Before the performance we advertised our performance a lot on Instagram. Here ar
 
 On our instagram we documented the progress of our practices and this gained traction as people saw it. We also practiced web safety by disallowing comments in order to protect our privacy. Overall we practiced a total of five times, two times Heritage park and two times during school, and once before the performance.
 
-We also did some fooling around:
-
-<video width="320" height="240" controls>
-  <source src="/assets/img/post_images/Duke_of_Flowers_.mp4" type="video/mp4">
-</video>
-
-![](/assets/img/post_images/Duke_of_Flowers_.mp4)
-
 Other groups also had interesting performances, such as Rachelina's performance in which she got carried away at the end of the performance. The sorts were interesting to see being performed and made them somewhat easier to understand.

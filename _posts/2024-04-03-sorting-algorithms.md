@@ -16,8 +16,6 @@ date: 2024-04-03 12:00:00 +0000
 
 ```java
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public abstract class Collectable implements Comparable<Collectable> {
@@ -68,9 +66,12 @@ public abstract class Collectable implements Comparable<Collectable> {
         System.out.println();
     }
 }
+```
 
+
+```java
 public class Flower extends Collectable {
-    // Class data
+    // class data
     public static KeyTypes key = KeyType.breed; // static initializer
     public static void setOrder(KeyTypes key) { Flower.key = key; }
     public enum KeyType implements KeyTypes { breed, petals, color }
@@ -87,6 +88,7 @@ public class Flower extends Collectable {
         this.color = color;
     }
 
+    // can only be accessed within class
     @Override
     protected KeyTypes getKey() {
         return Flower.key;
@@ -112,64 +114,153 @@ public class Flower extends Collectable {
         return jsonBuilder.toString();
     }
 
-    // test data
-    public static Flower[] flowers() {
-        return new Flower[]{
-                new Flower("Lotus", 5, "White"),
-                new Flower("Camellia", 3, "Yellow"),
-                new Flower("Ghost Orchid", 7, "Grey"),
-                new Flower("Chocolate Cosmos", 2, "Brown"),
-                new Flower("Corpse Flower", 4, "Orange"),
-                new Flower("Jade Vine", 9, "Green"),
-                new Flower("Juliet Rose", 6, "Red"),
-                new Flower("Pasqueflower", 8, "Blue"),
-                new Flower("Campion", 1, "Pink"),
-                new Flower("Franklin Tree", 9, "Purple"),
-        };
-    }
-
-    public static void bubbleSort(Collectable[] array) {
-        int n = array.length;
+    public void bubbleSort(List<Collectable> list) {
+        int n = list.size();
         // moving through all elements of the array
         for (int i = 0; i < n - 1; i++) {
             // the last element is in place so we start at the next one
             for (int j = 0; j < n - i - 1; j++) {
                 // check and swap if the values are not sorted
-                if (array[j].compareTo(array[j + 1]) > 0) {
-                    Collectable temp = array[j];
-                    array[j] = array[j + 1];
-                    array[j + 1] = temp;
+                if (list.get(j).compareTo(list.get(j + 1)) > 0) {
+                    Collectable temp = list.get(j);
+                    list.set(j, list.get(j + 1));
+                    list.set(j + 1, temp);
                 }
             }
         }
     }
+
+    public void selectionSort(List<Collectable> list) {
+        int n = list.size();
+        // shifting boundary of unsorted array
+        for (int i = 0; i < n - 1; i++) {
+            // find minimum of the subarray
+            int minIndex = i;
+            for (int j = i + 1; j < n; j++) {
+                if (list.get(j).compareTo(list.get(minIndex)) < 0) {
+                    minIndex = j;
+                }
+            }
+            // swapping the minimum with the value at index i
+            Collectable temp = list.get(minIndex);
+            list.set(minIndex, list.get(i));
+            list.set(i, temp);
+        }
+    }
+
+    public void insertionSort(List<Collectable> list) {
+        int n = list.size();
+        // iterating through the array
+        for (int i = 1; i < n; ++i) {
+            // finding the key of the array
+            Collectable key = list.get(i);
+            // finding compare value
+            int j = i - 1;
+            // moving values that are before the key and greater than the key after the key
+            while (j >= 0 && list.get(j).compareTo(key) > 0) {
+                list.set(j + 1, list.get(j));
+                j--;
+            }
+            list.set(j + 1, key);
+        }
+    }
+
+    public void mergeSort(List<Collectable> list) {
+        if (list.size() > 1) {
+            int mid = list.size() / 2;
+            List<Collectable> left = new ArrayList<>(list.subList(0, mid)); // split array in halves
+            List<Collectable> right = new ArrayList<>(list.subList(mid, list.size()));
+    
+            mergeSort(left); // sort the left with recursion
+            mergeSort(right); // sort the right with recursion
+    
+            merge(list, left, right); // merge the sorted halves
+        }
+    }
+    
+    private void merge(List<Collectable> list, List<Collectable> left, List<Collectable> right) {
+        int i = 0, j = 0, k = 0;
+        // merging the left and right arrays
+        while (i < left.size() && j < right.size()) {
+            if (left.get(i).compareTo(right.get(j)) <= 0) {
+                list.set(k++, left.get(i++));
+            } else {
+                list.set(k++, right.get(j++));
+            }
+        }
+        // moving any remaining elements in the left array
+        while (i < left.size()) {
+            list.set(k++, left.get(i++));
+        }
+        // moving any remaining elements in the right array
+        while (j < right.size()) {
+            list.set(k++, right.get(j++));
+        }
+    }
+
+    public void quickSort(List<Collectable> list, int low, int high) {
+        if (low < high) {
+            // this is where the list is partitioned
+            int pi = partition(list, low, high);
+            // sorts the elements before and after the partition
+            quickSort(list, low, pi - 1);
+            quickSort(list, pi + 1, high);
+        }
+    }
+    
+    private int partition(List<Collectable> list, int low, int high) {
+        Collectable pivot = list.get(high); // pivot defined
+        int i = low - 1; // index of the smaller element
+        for (int j = low; j < high; j++) {
+            // if the element is smaller than the pivot, it is moved to the left
+            if (list.get(j).compareTo(pivot) < 0) {
+                i++;
+                // swapping the elements
+                Collectable temp = list.get(i);
+                list.set(i, list.get(j));
+                list.set(j, temp);
+            }
+        }
+        // swapping the pivot with the element at i + 1
+        Collectable temp = list.get(i + 1);
+        list.set(i + 1, list.get(high));
+        list.set(high, temp);
+        return i + 1;
+    }    
 }
-
-Flower[] flowerArray = Flower.flowers();
-Flower.setOrder(Flower.KeyType.breed);
-System.out.println("Original: " + Arrays.toString(flowerArray));
-
-// breed
-Flower.setOrder(Flower.KeyType.breed);
-Flower.bubbleSort(flowerArray);
-System.out.println("Sorted by Breed: " + Arrays.toString(flowerArray));
-
-// petals
-Flower.setOrder(Flower.KeyType.petals);
-Flower.bubbleSort(flowerArray);
-System.out.println("Sorted by Petals: " + Arrays.toString(flowerArray));
-
-// color
-Flower.setOrder(Flower.KeyType.color);
-Flower.bubbleSort(flowerArray);
-System.out.println("Sorted by Color: " + Arrays.toString(flowerArray));
-
 ```
 
-    Original: [{"breed": "Lotus", "type": "Flower", "masterType": "Collectable"}, {"breed": "Camellia", "type": "Flower", "masterType": "Collectable"}, {"breed": "Ghost Orchid", "type": "Flower", "masterType": "Collectable"}, {"breed": "Chocolate Cosmos", "type": "Flower", "masterType": "Collectable"}, {"breed": "Corpse Flower", "type": "Flower", "masterType": "Collectable"}, {"breed": "Jade Vine", "type": "Flower", "masterType": "Collectable"}, {"breed": "Juliet Rose", "type": "Flower", "masterType": "Collectable"}, {"breed": "Pasqueflower", "type": "Flower", "masterType": "Collectable"}, {"breed": "Campion", "type": "Flower", "masterType": "Collectable"}, {"breed": "Franklin Tree", "type": "Flower", "masterType": "Collectable"}]
-    Sorted by Breed: [{"breed": "Camellia", "type": "Flower", "masterType": "Collectable"}, {"breed": "Campion", "type": "Flower", "masterType": "Collectable"}, {"breed": "Chocolate Cosmos", "type": "Flower", "masterType": "Collectable"}, {"breed": "Corpse Flower", "type": "Flower", "masterType": "Collectable"}, {"breed": "Franklin Tree", "type": "Flower", "masterType": "Collectable"}, {"breed": "Ghost Orchid", "type": "Flower", "masterType": "Collectable"}, {"breed": "Jade Vine", "type": "Flower", "masterType": "Collectable"}, {"breed": "Juliet Rose", "type": "Flower", "masterType": "Collectable"}, {"breed": "Lotus", "type": "Flower", "masterType": "Collectable"}, {"breed": "Pasqueflower", "type": "Flower", "masterType": "Collectable"}]
-    Sorted by Petals: [{"petals": 1, "type": "Flower", "masterType": "Collectable"}, {"petals": 2, "type": "Flower", "masterType": "Collectable"}, {"petals": 3, "type": "Flower", "masterType": "Collectable"}, {"petals": 4, "type": "Flower", "masterType": "Collectable"}, {"petals": 5, "type": "Flower", "masterType": "Collectable"}, {"petals": 6, "type": "Flower", "masterType": "Collectable"}, {"petals": 7, "type": "Flower", "masterType": "Collectable"}, {"petals": 8, "type": "Flower", "masterType": "Collectable"}, {"petals": 9, "type": "Flower", "masterType": "Collectable"}, {"petals": 9, "type": "Flower", "masterType": "Collectable"}]
-    Sorted by Color: [{"color": "Blue", "type": "Flower", "masterType": "Collectable"}, {"color": "Brown", "type": "Flower", "masterType": "Collectable"}, {"color": "Green", "type": "Flower", "masterType": "Collectable"}, {"color": "Grey", "type": "Flower", "masterType": "Collectable"}, {"color": "Orange", "type": "Flower", "masterType": "Collectable"}, {"color": "Pink", "type": "Flower", "masterType": "Collectable"}, {"color": "Purple", "type": "Flower", "masterType": "Collectable"}, {"color": "Red", "type": "Flower", "masterType": "Collectable"}, {"color": "White", "type": "Flower", "masterType": "Collectable"}, {"color": "Yellow", "type": "Flower", "masterType": "Collectable"}]
+
+```java
+import java.util.ArrayList;
+import java.util.List;
+
+public class CreateGarden {
+    // test data
+    public static List<Collectable> flowers() {
+        List<Collectable> flowerList = new ArrayList<>();
+        flowerList.add(new Flower("Lotus", 5, "White"));
+        flowerList.add(new Flower("Camellia", 3, "Yellow"));
+        flowerList.add(new Flower("Ghost Orchid", 7, "Grey"));
+        flowerList.add(new Flower("Chocolate Cosmos", 2, "Brown"));
+        flowerList.add(new Flower("Corpse Flower", 4, "Orange"));
+        flowerList.add(new Flower("Jade Vine", 9, "Green"));
+        flowerList.add(new Flower("Juliet Rose", 6, "Red"));
+        flowerList.add(new Flower("Pasqueflower", 8, "Blue"));
+        flowerList.add(new Flower("Campion", 1, "Pink"));
+        flowerList.add(new Flower("Franklin Tree", 9, "Purple"));
+        return flowerList;
+    }
+}
+
+CreateGarden.flowers();
+```
+
+
+
+
+    [{"breed": "Lotus", "type": "Flower", "masterType": "Collectable"}, {"breed": "Camellia", "type": "Flower", "masterType": "Collectable"}, {"breed": "Ghost Orchid", "type": "Flower", "masterType": "Collectable"}, {"breed": "Chocolate Cosmos", "type": "Flower", "masterType": "Collectable"}, {"breed": "Corpse Flower", "type": "Flower", "masterType": "Collectable"}, {"breed": "Jade Vine", "type": "Flower", "masterType": "Collectable"}, {"breed": "Juliet Rose", "type": "Flower", "masterType": "Collectable"}, {"breed": "Pasqueflower", "type": "Flower", "masterType": "Collectable"}, {"breed": "Campion", "type": "Flower", "masterType": "Collectable"}, {"breed": "Franklin Tree", "type": "Flower", "masterType": "Collectable"}]
+
 
 
 ## Bubble Sort
@@ -178,42 +269,24 @@ Here is my implementation of bubble sort:
 
 
 ```java
-public class BubbleSort {
-    public static void bubbleSort(Collectable[] array) {
-        int n = array.length;
-        // moving through all elements of the array
-        for (int i = 0; i < n - 1; i++) {
-            // the last element is in place so we start at the next one
-            for (int j = 0; j < n - i - 1; j++) {
-                // check and swap if the values are not sorted
-                if (array[j].compareTo(array[j + 1]) > 0) {
-                    Collectable temp = array[j];
-                    array[j] = array[j + 1];
-                    array[j + 1] = temp;
-                }
-            }
-        }
-    }
-}
-
-Flower[] flowerArray = Flower.flowers();
+List<Collectable> flowerList = CreateGarden.flowers();
 Flower.setOrder(Flower.KeyType.breed);
-System.out.println("Original: " + Arrays.toString(flowerArray));
+System.out.println("Original: " + flowerList);
 
 // breed
-Flower.setOrder(Flower.KeyType.breed);
-BubbleSort.bubbleSort(flowerArray);
-System.out.println("Sorted by Breed: " + Arrays.toString(flowerArray));
+Flower flower = new Flower("", 0, "");
+flower.bubbleSort(flowerList);
+System.out.println("Sorted by Breed: " + flowerList);
 
 // petals
 Flower.setOrder(Flower.KeyType.petals);
-BubbleSort.bubbleSort(flowerArray);
-System.out.println("Sorted by Petals: " + Arrays.toString(flowerArray));
+flower.bubbleSort(flowerList);
+System.out.println("Sorted by Petals: " + flowerList);
 
 // color
 Flower.setOrder(Flower.KeyType.color);
-BubbleSort.bubbleSort(flowerArray);
-System.out.println("Sorted by Color: " + Arrays.toString(flowerArray));
+flower.bubbleSort(flowerList);
+System.out.println("Sorted by Color: " + flowerList);
 ```
 
     Original: [{"breed": "Lotus", "type": "Flower", "masterType": "Collectable"}, {"breed": "Camellia", "type": "Flower", "masterType": "Collectable"}, {"breed": "Ghost Orchid", "type": "Flower", "masterType": "Collectable"}, {"breed": "Chocolate Cosmos", "type": "Flower", "masterType": "Collectable"}, {"breed": "Corpse Flower", "type": "Flower", "masterType": "Collectable"}, {"breed": "Jade Vine", "type": "Flower", "masterType": "Collectable"}, {"breed": "Juliet Rose", "type": "Flower", "masterType": "Collectable"}, {"breed": "Pasqueflower", "type": "Flower", "masterType": "Collectable"}, {"breed": "Campion", "type": "Flower", "masterType": "Collectable"}, {"breed": "Franklin Tree", "type": "Flower", "masterType": "Collectable"}]
@@ -230,44 +303,24 @@ This is my implementation of selection sort:
 
 
 ```java
-public class SelectionSort {
-    public static void selectionSort(Collectable[] array) {
-        int n = array.length;
-        // shifting boundary of unsorted array
-        for (int i = 0; i < n - 1; i++) {
-            // find minimum of the subarray
-            int minIndex = i;
-            for (int j = i + 1; j < n; j++) {
-                if (array[j].compareTo(array[minIndex]) < 0) {
-                    minIndex = j;
-                }
-            }
-            // swapping the minimum with the value at index i
-            Collectable temp = array[minIndex];
-            array[minIndex] = array[i];
-            array[i] = temp;
-        }
-    }
-}
-
-Flower[] flowerArray = Flower.flowers();
+List<Collectable> flowerList = CreateGarden.flowers();
 Flower.setOrder(Flower.KeyType.breed);
-System.out.println("Original: " + Arrays.toString(flowerArray));
+System.out.println("Original: " + flowerList);
 
 // breed
-Flower.setOrder(Flower.KeyType.breed);
-SelectionSort.selectionSort(flowerArray);
-System.out.println("Sorted by Breed: " + Arrays.toString(flowerArray));
+Flower flower = new Flower("", 0, "");
+flower.selectionSort(flowerList);
+System.out.println("Sorted by Breed: " + flowerList);
 
 // petals
 Flower.setOrder(Flower.KeyType.petals);
-SelectionSort.selectionSort(flowerArray);
-System.out.println("Sorted by Petals: " + Arrays.toString(flowerArray));
+flower.selectionSort(flowerList);
+System.out.println("Sorted by Petals: " + flowerList);
 
 // color
 Flower.setOrder(Flower.KeyType.color);
-SelectionSort.selectionSort(flowerArray);
-System.out.println("Sorted by Color: " + Arrays.toString(flowerArray));
+flower.selectionSort(flowerList);
+System.out.println("Sorted by Color: " + flowerList);
 ```
 
     Original: [{"breed": "Lotus", "type": "Flower", "masterType": "Collectable"}, {"breed": "Camellia", "type": "Flower", "masterType": "Collectable"}, {"breed": "Ghost Orchid", "type": "Flower", "masterType": "Collectable"}, {"breed": "Chocolate Cosmos", "type": "Flower", "masterType": "Collectable"}, {"breed": "Corpse Flower", "type": "Flower", "masterType": "Collectable"}, {"breed": "Jade Vine", "type": "Flower", "masterType": "Collectable"}, {"breed": "Juliet Rose", "type": "Flower", "masterType": "Collectable"}, {"breed": "Pasqueflower", "type": "Flower", "masterType": "Collectable"}, {"breed": "Campion", "type": "Flower", "masterType": "Collectable"}, {"breed": "Franklin Tree", "type": "Flower", "masterType": "Collectable"}]
@@ -284,43 +337,24 @@ This is insertion sort:
 
 
 ```java
-public class InsertionSort {
-    public static void insertionSort(Collectable[] array) {
-        int n = array.length;
-        // iterating through the array
-        for (int i = 1; i < n; ++i) {
-            // finding the key of the array
-            Collectable key = array[i];
-            // finding compare value
-            int j = i - 1;
-            // moving values that are before the key and greater than the key after the key
-            while (j >= 0 && array[j].compareTo(key) > 0) {
-                array[j + 1] = array[j];
-                j--;
-            }
-            array[j + 1] = key;
-        }
-    }
-}
-
-Flower[] flowerArray = Flower.flowers();
+List<Collectable> flowerList = CreateGarden.flowers();
 Flower.setOrder(Flower.KeyType.breed);
-System.out.println("Original: " + Arrays.toString(flowerArray));
+System.out.println("Original: " + flowerList);
 
 // breed
-Flower.setOrder(Flower.KeyType.breed);
-InsertionSort.insertionSort(flowerArray);
-System.out.println("Sorted by Breed: " + Arrays.toString(flowerArray));
+Flower flower = new Flower("", 0, "");
+flower.insertionSort(flowerList);
+System.out.println("Sorted by Breed: " + flowerList);
 
 // petals
 Flower.setOrder(Flower.KeyType.petals);
-InsertionSort.insertionSort(flowerArray);
-System.out.println("Sorted by Petals: " + Arrays.toString(flowerArray));
+flower.insertionSort(flowerList);
+System.out.println("Sorted by Petals: " + flowerList);
 
 // color
 Flower.setOrder(Flower.KeyType.color);
-InsertionSort.insertionSort(flowerArray);
-System.out.println("Sorted by Color: " + Arrays.toString(flowerArray));
+flower.insertionSort(flowerList);
+System.out.println("Sorted by Color: " + flowerList);
 ```
 
     Original: [{"breed": "Lotus", "type": "Flower", "masterType": "Collectable"}, {"breed": "Camellia", "type": "Flower", "masterType": "Collectable"}, {"breed": "Ghost Orchid", "type": "Flower", "masterType": "Collectable"}, {"breed": "Chocolate Cosmos", "type": "Flower", "masterType": "Collectable"}, {"breed": "Corpse Flower", "type": "Flower", "masterType": "Collectable"}, {"breed": "Jade Vine", "type": "Flower", "masterType": "Collectable"}, {"breed": "Juliet Rose", "type": "Flower", "masterType": "Collectable"}, {"breed": "Pasqueflower", "type": "Flower", "masterType": "Collectable"}, {"breed": "Campion", "type": "Flower", "masterType": "Collectable"}, {"breed": "Franklin Tree", "type": "Flower", "masterType": "Collectable"}]
@@ -337,58 +371,24 @@ This is merge:
 
 
 ```java
-public class MergeSort {
-    public static void mergeSort(Collectable[] array) {
-        if (array.length > 1) {
-            int mid = array.length / 2;
-            Collectable[] left = Arrays.copyOfRange(array, 0, mid); // split array in halves
-            Collectable[] right = Arrays.copyOfRange(array, mid, array.length);
-    
-            mergeSort(left); // sort the left with recursion
-            mergeSort(right); // sort the right with recursion
-    
-            merge(array, left, right); // merge the sorted halves
-        }
-    }
-    private static void merge(Collectable[] array, Collectable[] left, Collectable[] right) {
-        int i = 0, j = 0, k = 0;
-        // merging the left and right arrays
-        while (i < left.length && j < right.length) {
-            if (left[i].compareTo(right[j]) <= 0) {
-                array[k++] = left[i++];
-            } else {
-                array[k++] = right[j++];
-            }
-        }
-        // moving any remaining elements in the left array
-        while (i < left.length) {
-            array[k++] = left[i++];
-        }
-        // moving any remaining elements in the right array
-        while (j < right.length) {
-            array[k++] = right[j++];
-        }
-    }
-}
-
-Flower[] flowerArray = Flower.flowers();
+List<Collectable> flowerList = CreateGarden.flowers();
 Flower.setOrder(Flower.KeyType.breed);
-System.out.println("Original: " + Arrays.toString(flowerArray));
+System.out.println("Original: " + flowerList);
 
 // breed
-Flower.setOrder(Flower.KeyType.breed);
-MergeSort.mergeSort(flowerArray);
-System.out.println("Sorted by Breed: " + Arrays.toString(flowerArray));
+Flower flower = new Flower("", 0, "");
+flower.mergeSort(flowerList);
+System.out.println("Sorted by Breed: " + flowerList);
 
 // petals
 Flower.setOrder(Flower.KeyType.petals);
-MergeSort.mergeSort(flowerArray);
-System.out.println("Sorted by Petals: " + Arrays.toString(flowerArray));
+flower.mergeSort(flowerList);
+System.out.println("Sorted by Petals: " + flowerList);
 
 // color
 Flower.setOrder(Flower.KeyType.color);
-MergeSort.mergeSort(flowerArray);
-System.out.println("Sorted by Color: " + Arrays.toString(flowerArray));
+flower.mergeSort(flowerList);
+System.out.println("Sorted by Color: " + flowerList);
 ```
 
     Original: [{"breed": "Lotus", "type": "Flower", "masterType": "Collectable"}, {"breed": "Camellia", "type": "Flower", "masterType": "Collectable"}, {"breed": "Ghost Orchid", "type": "Flower", "masterType": "Collectable"}, {"breed": "Chocolate Cosmos", "type": "Flower", "masterType": "Collectable"}, {"breed": "Corpse Flower", "type": "Flower", "masterType": "Collectable"}, {"breed": "Jade Vine", "type": "Flower", "masterType": "Collectable"}, {"breed": "Juliet Rose", "type": "Flower", "masterType": "Collectable"}, {"breed": "Pasqueflower", "type": "Flower", "masterType": "Collectable"}, {"breed": "Campion", "type": "Flower", "masterType": "Collectable"}, {"breed": "Franklin Tree", "type": "Flower", "masterType": "Collectable"}]
@@ -405,56 +405,25 @@ This is quick sort:
 
 
 ```java
-public class QuickSort {
-    public static void quickSort(Collectable[] array, int low, int high) {
-        if (low < high) {
-            // this is where the array is partitioned
-            int pi = partition(array, low, high);
-            // sorts the elements before and after the partition
-            quickSort(array, low, pi - 1);
-            quickSort(array, pi + 1, high);
-        }
-    }
-    
-    private static int partition(Collectable[] array, int low, int high) {
-        Collectable pivot = array[high]; // pivot defined
-        int i = low - 1; // index of the smaller element
-        for (int j = low; j < high; j++) {
-            // if the element is smaller than the pivot, it is moved to the left
-            if (array[j].compareTo(pivot) < 0) {
-                i++;
-                // swapping the array
-                Collectable temp = array[i];
-                array[i] = array[j];
-                array[j] = temp;
-            }
-        }
-        // swapping the higher value with the pivot
-        Collectable temp = array[i + 1];
-        array[i + 1] = array[high];
-        array[high] = temp;
-        return i + 1;
-    }
-}
-
-Flower[] flowerArray = Flower.flowers();
+List<Collectable> flowerList = CreateGarden.flowers();
 Flower.setOrder(Flower.KeyType.breed);
-System.out.println("Original: " + Arrays.toString(flowerArray));
+System.out.println("Original: " + flowerList);
 
 // breed
-Flower.setOrder(Flower.KeyType.breed);
-QuickSort.quickSort((Collectable[])flowerArray, 0, flowerArray.length - 1);
-System.out.println("Sorted by Breed: " + Arrays.toString(flowerArray));
+Flower flower = new Flower("", 0, "");
+flower.quickSort(flowerList, 0, flowerList.size() - 1);
+System.out.println("Sorted by Breed: " + flowerList);
 
 // petals
 Flower.setOrder(Flower.KeyType.petals);
-QuickSort.quickSort((Collectable[])flowerArray, 0, flowerArray.length - 1);
-System.out.println("Sorted by Petals: " + Arrays.toString(flowerArray));
+flower.quickSort(flowerList, 0, flowerList.size() - 1);
+System.out.println("Sorted by Petals: " + flowerList);
 
 // color
 Flower.setOrder(Flower.KeyType.color);
-QuickSort.quickSort((Collectable[])flowerArray, 0, flowerArray.length - 1);
-System.out.println("Sorted by Color: " + Arrays.toString(flowerArray));
+flower.quickSort(flowerList, 0, flowerList.size() - 1);
+System.out.println("Sorted by Color: " + flowerList);
+
 ```
 
     Original: [{"breed": "Lotus", "type": "Flower", "masterType": "Collectable"}, {"breed": "Camellia", "type": "Flower", "masterType": "Collectable"}, {"breed": "Ghost Orchid", "type": "Flower", "masterType": "Collectable"}, {"breed": "Chocolate Cosmos", "type": "Flower", "masterType": "Collectable"}, {"breed": "Corpse Flower", "type": "Flower", "masterType": "Collectable"}, {"breed": "Jade Vine", "type": "Flower", "masterType": "Collectable"}, {"breed": "Juliet Rose", "type": "Flower", "masterType": "Collectable"}, {"breed": "Pasqueflower", "type": "Flower", "masterType": "Collectable"}, {"breed": "Campion", "type": "Flower", "masterType": "Collectable"}, {"breed": "Franklin Tree", "type": "Flower", "masterType": "Collectable"}]
