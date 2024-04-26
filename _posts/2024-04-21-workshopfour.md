@@ -48,11 +48,11 @@ This is a rectangular 2D array. Non-rectangular 2D arrays are not a part of the 
 
 2D Arrays can be declared like this: 
 
-``` datatype[][] nameofarray; ```
+`dataType[][] nameOfArray;`
 
 <h3> Initializing a 2D array </h3>
 
-``` new datatype[r][c]; ```
+`new dataType[r][c];`
 
 r: number of rows (number of arrays)
 <br>
@@ -84,13 +84,13 @@ The size of the 2D array is classified by number of rows by number of columns
 
 Number of rows can be found like this: 
 
-``` r = trimestercourses.length ```
+`r = trimesterCourses.length`
 
 This would give the number of arrays within the 2D array, since each array is an element
 
 For number of columns: 
 
-``` c = trimestercourses[0].length ```
+`c = trimesterCourses[0].length`
 
 This finds the number of elements of the first array within the 2D array.
 
@@ -99,7 +99,7 @@ This finds the number of elements of the first array within the 2D array.
 
 The elements of a 2D array can be accessed using index
 
-``` seasons[0][2] ```
+`Seasons[0][2]`
 
 
 **Output: February**
@@ -151,7 +151,7 @@ Seasons.main(null);
 ```java
 public class TrimesterGrades {
 
-    private int[][] trimesterGrades = {
+    private static int[][] trimesterGrades = {
         {85, 90, 78, 92, 99}, // tri 1
         {92, 88, 91, 97, 80}, // tri 2
         {79, 85, 83, 95, 67}  // tri 3
@@ -167,23 +167,49 @@ public class TrimesterGrades {
 
     public static void main(String args[]) {
         printArray(trimesterGrades);
-        trimesterGrades[2][2] = 90;
+        
+        int newGrade = 90;
+        trimesterGrades[2][2] = newGrade;
+        
+        System.out.println("Updated:");
+        printArray(trimesterGrades);
     }
 }
+
+TrimesterGrades.main(null);
 ```
 
-
-    |           printArray(trimesterGrades);
-
-    non-static variable trimesterGrades cannot be referenced from a static context
-
-    
-
-    |           trimesterGrades[2][2] = 90;
-
-    non-static variable trimesterGrades cannot be referenced from a static context
-
-    
+    85
+    90
+    78
+    92
+    99
+    92
+    88
+    91
+    97
+    80
+    79
+    85
+    83
+    95
+    67
+    Updated:
+    85
+    90
+    78
+    92
+    99
+    92
+    88
+    91
+    97
+    80
+    79
+    85
+    90
+    95
+    67
 
 
 The 2D array keeps track of a students grade, grouped by each trimester. 
@@ -294,4 +320,107 @@ ColumnMajorIndexing.main(null)
     - Use nested loops and in the inner loop make an if statement that returns True if a certain value is found
 - Finding the max/min
     - Save the index of the extrema and in the inner loop have a comparison statement that determines that value
+
+
+<img width="667" alt="image" src="https://github.com/AniCricKet/musical-guacamole/assets/91163802/84cb12be-b868-441a-96d0-51b12ff0d697">
+
+(b) Write a static method rowSums that calculates the sums of each of the rows in a given twodimensional array and returns these sums in a one-dimensional array. The method has one parameter, a twodimensional array arr2D of int values. The array is in row-major order: arr2D[r][c] is the entry at row r and column c. The method returns a one-dimensional array with one entry for each row of arr2D such that each entry is the sum of the corresponding row in arr2D. As a reminder, each row of a two-dimensional array is a one-dimensional array. For example, if mat1 is the array represented by the following table, the call rowSums(mat1) returns the array {16, 32, 28, 20}. Assume that arraySum works as specified, regardless of what you wrote in part (a). You must use arraySum appropriately to receive full credit. Complete method rowSums below.
+
+
+```java
+class DiverseArray { // class mentioned in FRQ
+    public static int arraySum(int[] arr) { // same method as previous part reused
+        int sum = 0;
+        for (int i = 0; i < arr.length; i++) {
+            sum += arr[i];
+        }
+        return sum;
+    }
+
+    public static int[] rowSums (int[][] arr2D) { // new rowSum method
+        int [] rowSums = new int[arr2D.length]; // initializing the array for the row sums
+        for (int j = 0; j < arr2D.length; j++) { // for loop going through each array to find the sum
+            rowSums[j] = arraySum(arr2D[j]); // placing the resulting sum from the arraySum method into the rowSums array
+        }
+        return rowSums; // returning array of values for the rowSums
+    }
+}
+
+int[][] mat1 = { {1, 3, 2, 7, 3}, {10, 10, 4, 6, 2}, {5, 3, 5, 9, 6}, {7, 6, 4, 2, 1} }; // example matrix from frq
+int [] rowSumsJava = DiverseArray.rowSums(mat1);
+System.out.println("Row Sums: " + rowSumsJava); // printing out array, printed bad because of ipynb
+for (int k = 0; k < rowSumsJava.length; k++) { // fixed by iterating through each value in the row and printing out
+    System.out.println("Row " + k + " Sum: " + rowSumsJava[k]);
+}
+```
+
+    Row Sums: [I@7a4e0073
+    Row 0 Sum: 16
+    Row 1 Sum: 32
+    Row 2 Sum: 28
+    Row 3 Sum: 20
+
+
+![image](https://github.com/AniCricKet/musical-guacamole/assets/91163802/40654587-a7af-4918-ab01-5000ba097a9b)
+
+(c) A two-dimensional array is diverse if no two of its rows have entries that sum to the same value. In the following examples, the array mat1 is diverse because each row sum is different, but the array mat2 is not diverse because the first and last rows have the same sum.Assume that arraySum and rowSums work as specified, regardless of what you wrote in parts (a) and (b). You must use rowSums appropriately to receive full credit. Complete method isDiverse below.
+
+
+```java
+class DiverseArray { // class mentioned in FRQ
+    public static int arraySum(int[] arr) { 
+        int sum = 0;
+        for (int i = 0; i < arr.length; i++) {
+            sum += arr[i];
+        }
+        return sum;
+    }
+
+    public static int[] rowSums (int[][] arr2D) { // same method as previous part reused
+        int [] rowSums = new int[arr2D.length];
+        for (int j = 0; j < arr2D.length; j++) {
+            rowSums[j] = arraySum(arr2D[j]);
+        }
+        return rowSums;
+    }
+
+    public static boolean isDiverse(int[][] arr2D) { // new isDiverse method
+        int[] sums = rowSums(arr2D); // makes array of the row sums from the matrix
+        for (int k = 0; k < sums.length; k++) { // iterates through each value of the sums array
+            for (int l = k + 1; l < sums.length; l++) { // looks through each other value to the current value it's on
+                if (sums[k] == sums[l]) { // compares the two 
+                    return false; // when the condition is false
+                }
+            }
+        }
+        return true; // if no values are equal, return true
+    }
+}
+
+int[][] mat1 = { {1, 3, 2, 7, 3}, {10, 10, 4, 6, 2}, {5, 3, 5, 9, 6}, {7, 6, 4, 2, 1} }; // matrix that would return true
+int[][] mat2 = { {1, 1, 5, 3, 4}, {12, 7, 6, 1, 9}, {8, 11, 10, 2, 5}, {3, 2, 3, 0, 6} }; // matrix that would return false
+
+// printing out all data as before
+int [] rowSumsJava1 = DiverseArray.rowSums(mat1);
+for (int m = 0; m < rowSumsJava1.length; m++) {
+    System.out.println("Row " + m + " Sum: " + rowSumsJava1[m]);
+}
+System.out.println("Array 1 Diversity: " + DiverseArray.isDiverse(mat1));
+int [] rowSumsJava2 = DiverseArray.rowSums(mat2);
+for (int n = 0; n < rowSumsJava2.length; n++) {
+    System.out.println("Row " + n + " Sum: " + rowSumsJava2[n]);
+}
+System.out.println("Array 2 Diversity: " + DiverseArray.isDiverse(mat2));
+```
+
+    Row 0 Sum: 16
+    Row 1 Sum: 32
+    Row 2 Sum: 28
+    Row 3 Sum: 20
+    Array 1 Diversity: true
+    Row 0 Sum: 14
+    Row 1 Sum: 35
+    Row 2 Sum: 36
+    Row 3 Sum: 14
+    Array 2 Diversity: false
 

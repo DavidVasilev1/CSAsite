@@ -65,7 +65,6 @@ public class Student
 {
     public static void main(String[] args)
     {
-        // Needs to define on left side, right side optional
         ArrayList studentName = new ArrayList();
         ArrayList studentAge = new ArrayList();
     }
@@ -303,17 +302,43 @@ System.out.println(result);
 
 
 ```java
+import java.util.ArrayList;
+
 public class HackHelper {
-    private String manipulateList(ArrayList<Integer> array) {
-        return null;
+    private static String manipulateList(ArrayList<Integer> array) {
+        array.add(5);
+        array.add(3);
+
+        // remove index 0
+        if (!array.isEmpty()) {
+            array.remove(0);
+        }
+
+        // set index 1 to 8
+        if (array.size() >= 2) {
+            array.set(1, 8);
+        }
+
+        // getting first and last elements
+        Integer first = array.isEmpty() ? null : array.get(0);
+        Integer last = array.isEmpty() ? null : array.get(array.size() - 1);
+
+        // string
+        return "Added: 5, 3 | Removed: (at index 0) | Replaced: (at index 1 with 8) | Size: " + array.size() +
+                " | First: " + first + " | Last: " + last;
     }
 
     public static void main(String[] args) {
+        ArrayList<Integer> list = new ArrayList<>();
+        System.out.println(manipulateList(list));
     }
 }
 
 HackHelper.main(null);
 ```
+
+    Added: 5, 3 | Removed: (at index 0) | Replaced: (at index 1 with 8) | Size: 1 | First: 3 | Last: 3
+
 
 # 7.3: Traversing Arraylists
 
@@ -448,6 +473,8 @@ In the realm of algorithms, within the context of specific requirements that dem
 
 Before you uncomment the code and run it, guess what the code will do based on what you've learned.
 
+The code will find the max val in the array as it iterates through the array and compares each value to the currently set max value.
+
 ### Let's Look at an Example (Example 1)
 
 
@@ -473,7 +500,7 @@ public class ArrayListExample {
     }
 }
 
-// ArrayListExample.main(null);
+ArrayListExample.main(null);
 ```
 
     Maximum value: 69.0
@@ -585,9 +612,11 @@ ArrayListExample.main(null);
 - Answer the questions: 
     * Look back at the examples. What's similar? What's different?
 
+    The two different functions find either the max or min of the array. Also, one of them uses array while the other uses arrayList. Despite this, they both iterate through a collection.
+
     * Why do we use `ArrayList`? Why not just regular lists?
 
-    Regular lists have fixed size in Java.
+    ArrayLists are used because of their dynamic memory allocation, making it possible to add more elements. Regular lists have fixed size in Java.
 
 - Demonstrate at least two `ArrayList` methods that aren't `ArrayList<>.size()` and `ArrayList<>.get()`.
 
@@ -597,9 +626,15 @@ ArrayListExample.main(null);
 
 
 ```java
+import java.util.ArrayList;
+
 public class ArrayListHacks {
     private int findSum(ArrayList<Integer> values) {
-        return 0;
+        int sum = 0;
+        for (Integer value : values) {
+            sum += value;
+        }
+        return sum;
     }
 
     public static void main(String[] args) {
@@ -611,15 +646,22 @@ public class ArrayListHacks {
         nums.add(5);
         nums.add(8);
 
+        nums.add(100);
+
+        Integer removedElement = nums.remove(3); // Removes the element at index 3 (300)
+
         ArrayListHacks hacks = new ArrayListHacks();
-        System.out.println(hacks.findSum(nums));
+        System.out.println("Sum of the elements: " + hacks.findSum(nums));
+
+        System.out.println("Removed element: " + removedElement);
     }
 }
 
 ArrayListHacks.main(null);
 ```
 
-    0
+    Sum of the elements: 116
+    Removed element: 300
 
 
 # 7.5 Searching
@@ -858,3 +900,62 @@ for (int outer = 1; outer < randomList.size(); outer++)
 
 
 ## Complete the hacks in the cell below
+
+
+```java
+import java.util.ArrayList;
+import java.util.Iterator;
+
+public class ArrayListManipulation {
+
+    private static void removeAllOccurrences(ArrayList<Integer> list, int value) {
+        Iterator<Integer> iterator = list.iterator();
+        while (iterator.hasNext()) {
+            if (iterator.next() == value) {
+                iterator.remove();
+            }
+        }
+    }
+
+    private static void insertionSort(ArrayList<Integer> list) {
+        int n = list.size();
+        for (int i = 1; i < n; ++i) {
+            int key = list.get(i);
+            int j = i - 1;
+            
+            while (j >= 0 && list.get(j) > key) {
+                list.set(j + 1, list.get(j));
+                j = j - 1;
+            }
+            list.set(j + 1, key);
+        }
+    }
+
+    public static void main(String[] args) {
+        ArrayList<Integer> numbers = new ArrayList<>();
+        numbers.add(5);
+        numbers.add(3);
+        numbers.add(8);
+        numbers.add(1);
+        numbers.add(10);
+        numbers.add(6);
+        numbers.add(10);
+        numbers.add(10);
+
+        System.out.println("Original: " + numbers);
+
+        removeAllOccurrences(numbers, 10);
+        System.out.println("Removing 10s: " + numbers);
+
+        insertionSort(numbers);
+        System.out.println("Sorting: " + numbers);
+    }
+}
+
+ArrayListManipulation.main(null);
+```
+
+    Original: [5, 3, 8, 1, 10, 6, 10, 10]
+    Removing 10s: [5, 3, 8, 1, 6]
+    Sorting: [1, 3, 5, 6, 8]
+

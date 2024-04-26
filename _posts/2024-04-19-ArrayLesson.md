@@ -304,28 +304,124 @@ Remember, choosing between a traditional for-loop and a for-each loop depends on
 Complete method arraySum below. 
 
 
-```python
-/** Returns the sum of the entries in the one-dimensional array arr.
- */ 
-public static int arraySum(int[] arr) 
+```java
+class DiverseArray { // class mentioned in FRQ
+    public static int arraySum(int[] arr) {
+        int sum = 0; // setting sum equal to 0 so that it only counts for this array
+        for (int i = 0; i < arr.length; i++) { // iterating through array, on integer at a time
+            sum += arr[i]; // adding the value of each index to the sum of the array
+        }
+        return sum; // returning the array for printing
+    }
+}
+
+
+int[] arr1 = {1, 3, 2, 7, 3}; // array mentioned in FRQ
+System.out.println("Sum: " + DiverseArray.arraySum(arr1)); // printing array
 ```
+
+    Sum: 16
+
 
 <img width="667" alt="image" src="https://github.com/AniCricKet/musical-guacamole/assets/91163802/84cb12be-b868-441a-96d0-51b12ff0d697">
 
 (b) Write a static method rowSums that calculates the sums of each of the rows in a given twodimensional array and returns these sums in a one-dimensional array. The method has one parameter, a twodimensional array arr2D of int values. The array is in row-major order: arr2D[r][c] is the entry at row r and column c. The method returns a one-dimensional array with one entry for each row of arr2D such that each entry is the sum of the corresponding row in arr2D. As a reminder, each row of a two-dimensional array is a one-dimensional array. For example, if mat1 is the array represented by the following table, the call rowSums(mat1) returns the array {16, 32, 28, 20}. Assume that arraySum works as specified, regardless of what you wrote in part (a). You must use arraySum appropriately to receive full credit. Complete method rowSums below.
 
 
-```python
-/** Returns a one-dimensional array in which the entry at index k is the sum of * the entries of row k of the two-dimensional array arr2D. */ 
-public static int[] rowSums(int[][] arr2D)
+```java
+class DiverseArray { // class mentioned in FRQ
+    public static int arraySum(int[] arr) { // same method as previous part reused
+        int sum = 0;
+        for (int i = 0; i < arr.length; i++) {
+            sum += arr[i];
+        }
+        return sum;
+    }
+
+    public static int[] rowSums (int[][] arr2D) { // new rowSum method
+        int [] rowSums = new int[arr2D.length]; // initializing the array for the row sums
+        for (int j = 0; j < arr2D.length; j++) { // for loop going through each array to find the sum
+            rowSums[j] = arraySum(arr2D[j]); // placing the resulting sum from the arraySum method into the rowSums array
+        }
+        return rowSums; // returning array of values for the rowSums
+    }
+}
+
+int[][] mat1 = { {1, 3, 2, 7, 3}, {10, 10, 4, 6, 2}, {5, 3, 5, 9, 6}, {7, 6, 4, 2, 1} }; // example matrix from frq
+int [] rowSumsJava = DiverseArray.rowSums(mat1);
+System.out.println("Row Sums: " + rowSumsJava); // printing out array, printed bad because of ipynb
+for (int k = 0; k < rowSumsJava.length; k++) { // fixed by iterating through each value in the row and printing out
+    System.out.println("Row " + k + " Sum: " + rowSumsJava[k]);
+}
 ```
+
+    Row Sums: [I@7a4e0073
+    Row 0 Sum: 16
+    Row 1 Sum: 32
+    Row 2 Sum: 28
+    Row 3 Sum: 20
+
 
 ![image](https://github.com/AniCricKet/musical-guacamole/assets/91163802/40654587-a7af-4918-ab01-5000ba097a9b)
 
 (c) A two-dimensional array is diverse if no two of its rows have entries that sum to the same value. In the following examples, the array mat1 is diverse because each row sum is different, but the array mat2 is not diverse because the first and last rows have the same sum.Assume that arraySum and rowSums work as specified, regardless of what you wrote in parts (a) and (b). You must use rowSums appropriately to receive full credit. Complete method isDiverse below.
 
 
-```python
-/** Returns true if all rows in arr2D have different row sums; * false otherwise. */ 
-public static boolean isDiverse(int[][] arr2D)
+```java
+class DiverseArray { // class mentioned in FRQ
+    public static int arraySum(int[] arr) { 
+        int sum = 0;
+        for (int i = 0; i < arr.length; i++) {
+            sum += arr[i];
+        }
+        return sum;
+    }
+
+    public static int[] rowSums (int[][] arr2D) { // same method as previous part reused
+        int [] rowSums = new int[arr2D.length];
+        for (int j = 0; j < arr2D.length; j++) {
+            rowSums[j] = arraySum(arr2D[j]);
+        }
+        return rowSums;
+    }
+
+    public static boolean isDiverse(int[][] arr2D) { // new isDiverse method
+        int[] sums = rowSums(arr2D); // makes array of the row sums from the matrix
+        for (int k = 0; k < sums.length; k++) { // iterates through each value of the sums array
+            for (int l = k + 1; l < sums.length; l++) { // looks through each other value to the current value it's on
+                if (sums[k] == sums[l]) { // compares the two 
+                    return false; // when the condition is false
+                }
+            }
+        }
+        return true; // if no values are equal, return true
+    }
+}
+
+int[][] mat1 = { {1, 3, 2, 7, 3}, {10, 10, 4, 6, 2}, {5, 3, 5, 9, 6}, {7, 6, 4, 2, 1} }; // matrix that would return true
+int[][] mat2 = { {1, 1, 5, 3, 4}, {12, 7, 6, 1, 9}, {8, 11, 10, 2, 5}, {3, 2, 3, 0, 6} }; // matrix that would return false
+
+// printing out all data as before
+int [] rowSumsJava1 = DiverseArray.rowSums(mat1);
+for (int m = 0; m < rowSumsJava1.length; m++) {
+    System.out.println("Row " + m + " Sum: " + rowSumsJava1[m]);
+}
+System.out.println("Array 1 Diversity: " + DiverseArray.isDiverse(mat1));
+int [] rowSumsJava2 = DiverseArray.rowSums(mat2);
+for (int n = 0; n < rowSumsJava2.length; n++) {
+    System.out.println("Row " + n + " Sum: " + rowSumsJava2[n]);
+}
+System.out.println("Array 2 Diversity: " + DiverseArray.isDiverse(mat2));
 ```
+
+    Row 0 Sum: 16
+    Row 1 Sum: 32
+    Row 2 Sum: 28
+    Row 3 Sum: 20
+    Array 1 Diversity: true
+    Row 0 Sum: 14
+    Row 1 Sum: 35
+    Row 2 Sum: 36
+    Row 3 Sum: 14
+    Array 2 Diversity: false
+
